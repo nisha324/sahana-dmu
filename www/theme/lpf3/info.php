@@ -15,6 +15,6 @@
 // Theme Information File
 
 $shortname = "lpf3";
-$longname  = "Lost Person Finder v3";
-$siteTitle = "People Locator";
+$longname  = "Sahana for the Disaster Management Unit, Ministry of Health, Sri Lanka";
+$siteTitle = "DMU Sahana";
 
