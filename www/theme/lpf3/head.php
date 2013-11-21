@@ -4,9 +4,10 @@
  * @version      1.0
  * @package      framework
  * @author       Greg Miernicki <g@miernicki.com> <gregory.miernicki@nih.gov>
- * @about        Developed in whole or part by the U.S. National Library of Medicine
+ * @about        Developed in whole or part by the U.S. National Library of Medicine and Virtusa Corporation
  * @link         https://pl.nlm.nih.gov/about
  * @link         http://sahanafoundation.org
+ * @link         http://www.virtusa.com
  * @license	 http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
  * @lastModified 2011.0420
  */
