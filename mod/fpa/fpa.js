@@ -1,16 +1,17 @@
 /**
- * @name         Hospital Administration
- * @version      23
- * @package      ha
- * @author       Greg Miernicki <g@miernicki.com> <gregory.miernicki@nih.gov>
- * @about        Developed in whole or part by the U.S. National Library of Medicine and the Sahana Foundation
+ * @name         Focal Point Administration
+ * @version      01
+ * @package      fpa
+ * @author       Thilina Mendis <thilina.mendi@gmail.com>
+ * @about        Developed in whole or part by the U.S. National Library of Medicine,the Sahana Foundation and Virtusa Corporation
  * @link         https://pl.nlm.nih.gov/about
  * @link         http://sahanafoundation.org
- * @license	 http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
- * @lastModified 2011.1205
+ * @link		 http://www.virtusa.com
+ * @license	 	 http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
+ * @lastModified 2013.11.21
  */
 
-ha_show_hospitals();
+fpa_show_hospitals();
 
 // Google Maps junx
 var latitude = '';
@@ -36,7 +37,7 @@ function getLocation(pos) {
 
 
 function unknownLocation() {
-	alert('Could not find location');
+	alert('Could not find the location');
 }
 
 
@@ -102,7 +103,7 @@ function load_map(latitude, longitude, street) {
 		});
 	});
 
-	// Add listener to marker for reverse geocoding
+	// Add listener to the marker for reverse geocoding
 	google.maps.event.addListener(marker, 'drag', function() {
 		geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
@@ -127,14 +128,14 @@ function load_map(latitude, longitude, street) {
 
 
 
-function ha_delete(incident_id) {
-	ha_append_log('Removing Hospital #<b>' + incident_id + '</b> ...<br>');
-	setTimeout('ha_perform_delete('+incident_id+', confirm(\'Are you sure you want to remove this Hospital? Removing this Hospital will orphan all data that was attached to it. If you are certain that you have removed all related data then you may proceeed; otherwise press CANCEL to abort this operation.\'));', 100);
+function fpa_delete(incident_id) {
+	fpa_append_log('Removing Hospital #<b>' + incident_id + '</b> ...<br>');
+	setTimeout('fpa_perform_delete('+incident_id+', confirm(\'Are you sure you want to remove this Hospital? Removing this Hospital will orphan all data that was attached to it. If you are certain that you have removed all related data then you may proceeed; otherwise press CANCEL to abort this operation.\'));', 100);
 }
 
 
 
-function ha_get_data() {
+function fpa_get_data() {
 	var r = new Object();
 	r.hospital_uuid                  = $("#hospital_uuid").val();
 	r.name                           = $("#name").val();

@@ -1,14 +1,15 @@
 <?php
 /**
- * @name         Hospital Administration
- * @version      23
- * @package      ha
- * @author       Greg Miernicki <g@miernicki.com> <gregory.miernicki@nih.gov>
- * @about        Developed in whole or part by the U.S. National Library of Medicine and the Sahana Foundation
+ * @name         Focal Point Administration
+ * @version      01
+ * @package      fpa
+ * @author       Thilina Mendis <thilina.mendi@gmail.com>
+ * @about        Developed in whole or part by the U.S. National Library of Medicine,the Shana Foundation and Virtusa Corporation
  * @link         https://pl.nlm.nih.gov/about
  * @link         http://sahanafoundation.org
- * @license	 http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
- * @lastModified 2011.1205
+ * @link		 http://www.virtusa.com
+ * @license	 	 http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
+ * @lastModified 2013.11.21
  */
 
 
@@ -19,18 +20,18 @@ global $global;
 $global['xajax_functions'] = array();
 
 // publicly register accessible xajax funtions
-array_push($global['xajax_functions'],'ha_append_log');
-array_push($global['xajax_functions'],'ha_prepend_log');
-array_push($global['xajax_functions'],'ha_show_message');
-array_push($global['xajax_functions'],'ha_show_hospitals');
-array_push($global['xajax_functions'],'ha_perform_edit');
-array_push($global['xajax_functions'],'ha_perform_delete');
-array_push($global['xajax_functions'],'ha_perform_insert');
-array_push($global['xajax_functions'],'ha_perform_save');
-array_push($global['xajax_functions'],'ha_perform_help');
+array_push($global['xajax_functions'],'fpa_append_log');
+array_push($global['xajax_functions'],'fpa_prepend_log');
+array_push($global['xajax_functions'],'fpa_show_message');
+array_push($global['xajax_functions'],'fpa_show_hospitals');
+array_push($global['xajax_functions'],'fpa_perform_edit');
+array_push($global['xajax_functions'],'fpa_perform_delete');
+array_push($global['xajax_functions'],'fpa_perform_insert');
+array_push($global['xajax_functions'],'fpa_perform_save');
+array_push($global['xajax_functions'],'fpa_perform_help');
 
 // adds a message to the log div @ tail
-function ha_append_log($message = "no message specified?") {
+function fpa_append_log($message = "no message specified?") {
 
 	global $global;
 	$global['xajax_res']->addAppend('rezLog', 'innerHTML', $message);
@@ -41,7 +42,7 @@ function ha_append_log($message = "no message specified?") {
 
 
 // adds a message to the log div @ head
-function ha_prepend_log($message = "no message specified?") {
+function fpa_prepend_log($message = "no message specified?") {
 
 	global $global;
 	$global['xajax_res']->addPrepend('rezLog','innerHTML',$message);
@@ -50,7 +51,7 @@ function ha_prepend_log($message = "no message specified?") {
 
 
 // shows a status message before another ajax function is executed
-function ha_show_message($message = "no message specified?") {
+function fpa_show_message($message = "no message specified?") {
 
 	global $global;
 	$global['xajax_res']->addAssign('rezMain','innerHTML','<div class="loadingMessage"><center><blink>'.$message.'</blink></center></div>');
@@ -59,7 +60,7 @@ function ha_show_message($message = "no message specified?") {
 
 
 // reloads the mainArea div with information of what pages we have
-function ha_show_hospitals($internal = FALSE) {
+function fpa_show_hospitals($internal = FALSE) {
 
 	global $conf;
 	global $global;
@@ -97,7 +98,7 @@ function ha_show_hospitals($internal = FALSE) {
 	}
 	$total = $hcount;
 
-	$i = 1; // we start with the 2nd row of teh table (header?) :)
+	$i = 1; // we start with the 2nd row of the table (header?) :D
 	$eo = 0; // 2nd row is odd ~ of course u knew that computers start counting at 0 :P
 	while($i <= $hcount) {
 		$row           = $hospitals[$i-1];
@@ -116,8 +117,8 @@ function ha_show_hospitals($internal = FALSE) {
 
 		$htmlMain .= "
 			<tr>
-				<td style=\"padding-left: 8px;\" class=\"".$evenOddClass."\">".$type."<a href=\"#\" onclick=\"javascript: ha_append_log('Editing Hospital <b>#".$uuid." </b>...<br>'); ha_perform_edit(".$uuid.");\">".$name."<a/></td>
-				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\"><input class=\"styleTehButton\" type=\"button\" onclick=\"javascript: ha_append_log('Editing Hospital <b>#".$uuid." </b>...<br>'); ha_perform_edit(".$uuid.");\" value=\"Edit\"></td>
+				<td style=\"padding-left: 8px;\" class=\"".$evenOddClass."\">".$type."<a href=\"#\" onclick=\"javascript: fpa_append_log('Editing Hospital <b>#".$uuid." </b>...<br>'); fpa_perform_edit(".$uuid.");\">".$name."<a/></td>
+				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\"><input class=\"styleTehButton\" type=\"button\" onclick=\"javascript: fpa_append_log('Editing Hospital <b>#".$uuid." </b>...<br>'); fpa_perform_edit(".$uuid.");\" value=\"Edit\"></td>
 				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\">".$shortname."</td>
 				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\">".$uuid."</td>
 				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\">".$npi."</td>
@@ -136,9 +137,10 @@ function ha_show_hospitals($internal = FALSE) {
 	$htmlMain .= "</table>";
 
 	$pageControlHtml = '
-		<input class="styleTehButton" type="button" onclick="javascript: ha_perform_edit(0);" value="'._t('Hospitals-Add-Button|Add a new Hospital').'">
+		<input class="styleTehButton" type="button" onclick="javascript: fpa_perform_edit(0);" value="'._t('Hospitals-Add-Button|Add a new Hospital').'">
 		&nbsp; &nbsp; &nbsp; &nbsp;
-		<input class="styleTehButton red" type="button" onclick="javascript: ha_append_log(\''._t('Hospitals-Help-Message|Opening Help...').'<br>\'); ha_perform_help();" value="'._t('Hospitals-Help-Button|Help').'">
+				
+		<input class="styleTehButton red" type="button" onclick="javascript: fpa_append_log(\''._t('Hospitals-Help-Message|Opening Help...').'<br>\'); fpa_perform_help();" value="'._t('Hospitals-Help-Button|Help').'">
 	';
 
 	//---- internally, no ajax, just pass back data
@@ -161,7 +163,7 @@ function ha_show_hospitals($internal = FALSE) {
 
 
 // shows help
-function ha_perform_help() {
+function fpa_perform_help() {
 
 	global $global;
 
@@ -172,7 +174,7 @@ function ha_perform_help() {
 
 	// update log/ui
 	$pageControlHtml = '
-		<input class="styleTehButton" type="button" onclick="javascript: ha_append_log(\''._t('Hospitals-Log-Message|Closing Help...').'<br>\'); setTimeout(\'ha_show_hospitals();\', 250);" value="'._t('Hospitals-Help-Button|Close Help').'">
+		<input class="styleTehButton" type="button" onclick="javascript: fpa_append_log(\''._t('Hospitals-Log-Message|Closing Help...').'<br>\'); setTimeout(\'fpa_show_hospitals();\', 250);" value="'._t('Hospitals-Help-Button|Close Help').'">
 	';
 
 	$global['xajax_res']->addAssign('rezMain', 'innerHTML', $pageMainHtml);
@@ -184,7 +186,7 @@ function ha_perform_help() {
 
 
 // saves the event attributes to the database
-function ha_perform_save($hospital_uuid, $rj) {
+function fpa_perform_save($hospital_uuid, $rj) {
 
 	global $global;
 	$r = json_decode($rj, true);
@@ -284,12 +286,12 @@ function ha_perform_save($hospital_uuid, $rj) {
 
 	// update log/ui
 	$pageControlHtml = '
-		<input class="styleTehButton" type="button" onclick="javascript: ha_append_log(\''._t('Hospitals-Log-Message|Add a new Hospital...').'<br>\'); ha_perform_edit(0);" value="'._t("Hospitals-Add-Button|Add a new Hospital").'">
+		<input class="styleTehButton" type="button" onclick="javascript: fpa_append_log(\''._t('Hospitals-Log-Message|Add a new Hospital...').'<br>\'); fpa_perform_edit(0);" value="'._t("Hospitals-Add-Button|Add a new Hospital").'">
 		&nbsp; &nbsp; &nbsp; &nbsp;
-		<input class="styleTehButton red" type="button" onclick="javascript: ha_append_log(\''._t('Hospitals-Log-Message|Opening Help...').'<br>\'); ha_perform_help();" value="'._t("Hospitals-Help-Button|Help").'">
+		<input class="styleTehButton red" type="button" onclick="javascript: fpa_append_log(\''._t('Hospitals-Log-Message|Opening Help...').'<br>\'); fpa_perform_help();" value="'._t("Hospitals-Help-Button|Help").'">
 	';
 	$global['xajax_res']->addAssign('rezControl','innerHTML',$pageControlHtml);
-	$global['xajax_res']->addAssign('rezMain', 'innerHTML', ha_show_hospitals(TRUE));
+	$global['xajax_res']->addAssign('rezMain', 'innerHTML', fpa_show_hospitals(TRUE));
 	$global['xajax_res']->addAppend('rezLog', 'innerHTML', $log);
 	$global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'rezLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
 	return $global['xajax_res']->getXML();
@@ -298,7 +300,7 @@ function ha_perform_save($hospital_uuid, $rj) {
 
 
 // delete a page
-function ha_perform_delete($hospital_uuid, $confirm) {
+function fpa_perform_delete($hospital_uuid, $confirm) {
 
 	global $global;
 
@@ -319,14 +321,14 @@ function ha_perform_delete($hospital_uuid, $confirm) {
 
 	// update UI
 	$pageControlHtml = '
-		<input class="styleTehButton" type="button" onclick="javascript: ha_append_log(\''._t('Hospitals-Log-Message|Adding a new Hospital...').'<br>\'); ha_perform_edit(0);" value="'._t('Hospitals-Add-Button|Add a new Hospital').'">
+		<input class="styleTehButton" type="button" onclick="javascript: fpa_append_log(\''._t('Hospitals-Log-Message|Adding a new Hospital...').'<br>\'); fpa_perform_edit(0);" value="'._t('Hospitals-Add-Button|Add a new Hospital').'">
 		&nbsp; &nbsp; &nbsp; &nbsp;
-		<input class="styleTehButton red" type="button" onclick="javascript: ha_append_log(\''._t('Hospitals-Log-Message|Opening Help...').'<br>\'); ha_perform_help();" value="'._t('Hospitals-Help-Button|Help').'">
+		<input class="styleTehButton red" type="button" onclick="javascript: fpa_append_log(\''._t('Hospitals-Log-Message|Opening Help...').'<br>\'); fpa_perform_help();" value="'._t('Hospitals-Help-Button|Help').'">
 	';
 	$global['xajax_res']->addAssign('rezControl','style.opacity','1.0');
 	$global['xajax_res']->addAssign('rezControl','innerHTML',$pageControlHtml);
 
-	$global['xajax_res']->addAssign('rezMain', 'innerHTML', ha_show_hospitals(TRUE));
+	$global['xajax_res']->addAssign('rezMain', 'innerHTML', fpa_show_hospitals(TRUE));
 	$global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'rezLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
 	return $global['xajax_res']->getXML();
 }
@@ -334,7 +336,7 @@ function ha_perform_delete($hospital_uuid, $confirm) {
 
 
 // add a new hospital with default atributes and return uuid
-function ha_perform_new() {
+function fpa_perform_new() {
 
 	global $global;
 
@@ -364,7 +366,7 @@ function ha_perform_new() {
 
 
 // presents a gui to edit a hospital and its corresponding fields
-function ha_perform_edit($hospital_uuid) {
+function fpa_perform_edit($hospital_uuid) {
 
 	global $global;
 	$new = false;
@@ -373,7 +375,7 @@ function ha_perform_edit($hospital_uuid) {
 
 	// if hospital_uuid = 0, must add a new hospital and then continue to edit it
 	if($hospital_uuid == 0) {
-		$hospital_uuid = ha_perform_new();
+		$hospital_uuid = fpa_perform_new();
 		$new = true;
 	}
 
@@ -536,10 +538,10 @@ function ha_perform_edit($hospital_uuid) {
 	// control HTML
 	$editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: ha_append_log(\''._t('Hospitals-Log-Message|Canceling Changes...').'<br>\'); setTimeout(\'ha_show_hospitals();\', 250);" value="'._t('Hospitals-Edit-Button|Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: ha_append_log(\''._t('Hospitals-Log-Message|Saving Changes...').'<br>\'); setTimeout(\'ha_perform_save('.$hospital_uuid.', ha_get_data());\', 250);" value="'._t('Hospitals-Edit-Button|Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: ha_append_log(\''._t('Hospitals-Log-Message|Saving Changes...<br>').'\'); setTimeout(\'ha_perform_save('.$hospital_uuid.', ha_get_data());\', 250);" value="'._t('Hospitals-Edit-Button|Save Changes and Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: ha_append_log(\''._t('Hospitals-Log-Message|Canceling Changes...<br>').'\'); setTimeout(\'ha_show_hospitals();\', 250);" value="'._t('Hospitals-Edit-Button|Cancel Editing and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: fpa_append_log(\''._t('Hospitals-Log-Message|Canceling Changes...').'<br>\'); setTimeout(\'fpa_show_hospitals();\', 250);" value="'._t('Hospitals-Edit-Button|Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: fpa_append_log(\''._t('Hospitals-Log-Message|Saving Changes...').'<br>\'); setTimeout(\'fpa_perform_save('.$hospital_uuid.', fpa_get_data());\', 250);" value="'._t('Hospitals-Edit-Button|Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: fpa_append_log(\''._t('Hospitals-Log-Message|Saving Changes...<br>').'\'); setTimeout(\'fpa_perform_save('.$hospital_uuid.', fpa_get_data());\', 250);" value="'._t('Hospitals-Edit-Button|Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: fpa_append_log(\''._t('Hospitals-Log-Message|Canceling Changes...<br>').'\'); setTimeout(\'fpa_show_hospitals();\', 250);" value="'._t('Hospitals-Edit-Button|Cancel Editing and Close').'">
 	';
 
 	// if Admin... show delete button
@@ -551,7 +553,7 @@ function ha_perform_edit($hospital_uuid) {
 		}
 		$editControlHtml .= '
 			&nbsp; &nbsp; &nbsp; &nbsp;
-			<input class="styleTehButton red" type="button" onclick="javascript: ha_delete('.$hospital_uuid.');" value="'._t('Hospitals-Remove-Button|Remove this Hospital').'" '.$disabled.' >
+			<input class="styleTehButton red" type="button" onclick="javascript: fpa_delete('.$hospital_uuid.');" value="'._t('Hospitals-Remove-Button|Remove this Hospital').'" '.$disabled.' >
 		';
 	}
 
