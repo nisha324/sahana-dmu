@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b5354082-f916-4760-a680-40f5255f1425" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mod/rat/main.inc" afterPath="$PROJECT_DIR$/mod/rat/main.inc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mod/rat/rat.js" afterPath="$PROJECT_DIR$/mod/rat/rat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mod/rat/xajax.inc" afterPath="$PROJECT_DIR$/mod/rat/xajax.inc" />
     </list>
     <ignored path="sahana-dmu.iws" />
@@ -48,10 +46,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.inc" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/rat/main.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="86" selection-start="1956" selection-end="1956" vertical-scroll-proportion="0.5889047" vertical-offset="360" max-vertical-offset="1656">
+            <state line="24" column="44" selection-start="994" selection-end="994" vertical-scroll-proportion="-10.666667" vertical-offset="144" max-vertical-offset="1692">
               <folding>
                 <element signature="e#6#537#0" expanded="true" />
               </folding>
@@ -122,10 +120,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="xajax.inc" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="xajax.inc" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mod/rat/xajax.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="83" column="79" selection-start="3659" selection-end="3659" vertical-scroll-proportion="-14.888889" vertical-offset="894" max-vertical-offset="1584">
+            <state line="24" column="56" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.33913043" vertical-offset="0" max-vertical-offset="1602">
               <folding />
             </state>
           </provider>
@@ -156,9 +154,9 @@
         <option value="$PROJECT_DIR$/www/theme/lpf3/header.php" />
         <option value="$PROJECT_DIR$/www/.htaccess" />
         <option value="$PROJECT_DIR$/mod/rat/conf.inc" />
-        <option value="$PROJECT_DIR$/mod/rat/xajax.inc" />
         <option value="$PROJECT_DIR$/mod/rat/rat.js" />
         <option value="$PROJECT_DIR$/mod/rat/main.inc" />
+        <option value="$PROJECT_DIR$/mod/rat/xajax.inc" />
       </list>
     </option>
   </component>
@@ -530,13 +528,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mod/rat/xajax.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="79" selection-start="3659" selection-end="3659" vertical-scroll-proportion="-14.888889" vertical-offset="894" max-vertical-offset="1584">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mod/rat/rat.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="1" selection-start="625" selection-end="625" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="216">
@@ -562,10 +553,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/rat/main.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="86" selection-start="1956" selection-end="1956" vertical-scroll-proportion="0.5889047" vertical-offset="360" max-vertical-offset="1656">
+        <state line="24" column="44" selection-start="994" selection-end="994" vertical-scroll-proportion="-10.666667" vertical-offset="144" max-vertical-offset="1692">
           <folding>
             <element signature="e#6#537#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/rat/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="56" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.33913043" vertical-offset="0" max-vertical-offset="1602">
+          <folding />
         </state>
       </provider>
     </entry>

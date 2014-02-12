@@ -22,6 +22,7 @@ $global['xajax_functions'] = array();
 array_push($global['xajax_functions'], 'rat_append_log');
 array_push($global['xajax_functions'], 'rat_prepend_log');
 array_push($global['xajax_functions'], 'rat_show_message');
+array_push($global['xajax_functions'], 'rat_load_general');
 
 
 // adds a message to the log div @ tail

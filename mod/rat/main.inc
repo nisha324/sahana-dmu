@@ -21,6 +21,8 @@ require_once($global['approot'].'/mod/rat/xajax.inc');
 shn_xajax_registerFunction('rat_append_log');
 shn_xajax_registerFunction('rat_prepend_log');
 shn_xajax_registerFunction('rat_show_message');
+shn_xajax_registerFunction('rat_store_values');
+shn_xajax_registerFunction('rat_load_general');
 
 
 
