@@ -11,3 +11,7 @@
  * @lastModified 2013.11.21
  */
 
+function initCalendar() {
+    $("#monitoringDate").datepicker({ dateFormat: 'yy-mm-dd' });
+}
+

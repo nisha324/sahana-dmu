@@ -27,16 +27,45 @@ shn_xajax_registerFunction('rat_show_message');
 function shn_rat_default() {
 
 	global $global;
+    shn_tabmenu_open();
+    shn_tabmenu_item("general", _t("Rat-Menu|General Info"),                 "Rat");
+    shn_tabmenu_item("popRes",  _t("Rat-Menu|Population and Resource Data"), "Rat");
+    shn_tabmenu_item("indicators", _t("Rat-Menu|Indicators"),                "Rat");
+    shn_tabmenu_item("wash", _t("Rat-Menu|WASH Indicators"),                 "Rat");
+    shn_tabmenu_item("food",   _t("Rat-Menu|Food security and nutrition"),   "Rat");
+    shn_tabmenu_item("shelter",  _t("Rat-Menu|Shelter Indicators"),          "Rat");
+    shn_tabmenu_close();
 	shn_xajax_printJavascript();
 	echo "
-		<div id=\"rezLog\" class=\"logArea\">Loading RAT Data...<br><noscript>THIS MODULE REQUIRES THAT YOU ACTIVATE JAVASCRIPT!</noscript></div>
-		<div id=\"rezControl\" class=\"controlArea\">&nbsp;</div>
-		<div id=\"rezMain\" class=\"mainArea\"><p>RAT Module under construction</p></div>
-		<script>".file_get_contents($global['approot']."/mod/fpa/fpa.js")."</script>
+		<div id=\"ratLog\" class=\"logArea\">Loading RAT Data...<br><noscript>THIS MODULE REQUIRES THAT YOU ACTIVATE JAVASCRIPT!</noscript></div>
+		<div id=\"ratControl\" class=\"controlArea\">&nbsp;</div>
+		<div id=\"ratMain\" class=\"mainArea\"></div>
+		<script>".file_get_contents($global['approot']."/mod/rat/rat.js")."</script>
+		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
+		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
 	";
 
+    if(isset($_GET['general'])) {
+        $control = "rat_load_general";
 
+    } elseif(isset($_GET['popRes'])) {
+        $control = "rat_load_popres";
+
+    } elseif(isset($_GET['indicators'])) {
+        $control = "rat_load_indicators";
+
+    } elseif(isset($_GET['wash'])) {
+        $control = "rat_load_wash";
+
+    } elseif(isset($_GET['food'])) {
+        $control = "rat_load_food";
+
+    } elseif(isset($_GET['shelter'])) {
+        $control = "rat_load_shelter";
+
+    }
 	echo "
+        <script type=\"text/javascript\">rat_store_values();".$control."()</script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-autocomplete.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
