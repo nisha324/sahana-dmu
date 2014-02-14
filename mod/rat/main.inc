@@ -21,7 +21,7 @@ require_once($global['approot'].'/mod/rat/xajax.inc');
 shn_xajax_registerFunction('rat_append_log');
 shn_xajax_registerFunction('rat_prepend_log');
 shn_xajax_registerFunction('rat_show_message');
-shn_xajax_registerFunction('rat_store_values');
+//shn_xajax_registerFunction('rat_store_values');
 shn_xajax_registerFunction('rat_load_general');
 
 
@@ -65,9 +65,11 @@ function shn_rat_default() {
     } elseif(isset($_GET['shelter'])) {
         $control = "rat_load_shelter";
 
+    } else {
+        $control = "rat_load_general";
     }
 	echo "
-        <script type=\"text/javascript\">rat_store_values();".$control."()</script>
+        <script type=\"text/javascript\">".$control."();</script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-autocomplete.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>

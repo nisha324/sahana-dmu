@@ -67,7 +67,20 @@ function rat_load_general()
 
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("General Information");
-    $htmlMain .= shn_form_select_return(array("Flood" => "Flood", "Drought" => "Drought", "Landslide" => "Landslide"), "Type of Disaster", "disaster_type");
+    $htmlMain .= shn_form_select_return(array("Flood" => "Flood", "Drought" => "Drought", "Landslide" => "Landslide"),
+        "Type of Disaster", "disaster_type");
+    $htmlMain .= shn_form_text_return("Date of Assessment", "reportDate");
+    $htmlMain .= shn_form_text_return("Date of Disaster", "disasterDate");
+    $htmlMain .= shn_form_select_return(array("Galle" => "Galle", "Nuwara Eliya" => "Nuwara Eliya", "Ampara" => "Ampara"),
+        "Affected Area Name", "affected_area");
+    $htmlMain .= shn_form_select_return(array("A1" => "A1", "A2" => "A2", "A3" => "A3"), "Name of Focal Point", "focal_point_name");
+    $htmlMain .= shn_form_select_return(array("GN" => "GN", "MOH" => "MOH", "District" => "District", "Province" => "Province"), "GN, MOH, District, Province", "area_type");
+    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Herath" => "Rasika Herath",
+            "Chathura Thennakoon" => "Chathura Thennakoon", "Thilina Mendis" => "Thilina Mendis"), "Assessor's Name", "assessor_name");
+    $htmlMain .= shn_form_select_return(array("MOH Admin" => "MOH Admin", "FP Admin" => "FP Admin",
+        "HO" => "HO"), "Assessor's Designation", "assessor_designation");
+    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Herath" => "Rasika Herath"),
+        "Team Leader Name", "team_leader");
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_fclose_return();
 

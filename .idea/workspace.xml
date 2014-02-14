@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b5354082-f916-4760-a680-40f5255f1425" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mod/rat/main.inc" afterPath="$PROJECT_DIR$/mod/rat/main.inc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mod/rat/rat.js" afterPath="$PROJECT_DIR$/mod/rat/rat.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mod/rat/xajax.inc" afterPath="$PROJECT_DIR$/mod/rat/xajax.inc" />
     </list>
     <ignored path="sahana-dmu.iws" />
@@ -29,7 +31,7 @@
       <file leaf-file-name="conf.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/rat/conf.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="44" selection-start="327" selection-end="327" vertical-scroll-proportion="-0.0" vertical-offset="126" max-vertical-offset="450">
+            <state line="7" column="44" selection-start="327" selection-end="327" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="450">
               <folding />
             </state>
           </provider>
@@ -38,10 +40,8 @@
       <file leaf-file-name="rat.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/rat/rat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="1" selection-start="625" selection-end="625" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="216">
-              <folding>
-                <element signature="n#!!doc;n#initCalendar#0" expanded="false" />
-              </folding>
+            <state line="15" column="20" selection-start="640" selection-end="640" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -49,10 +49,8 @@
       <file leaf-file-name="main.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/rat/main.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="44" selection-start="994" selection-end="994" vertical-scroll-proportion="-10.666667" vertical-offset="144" max-vertical-offset="1692">
-              <folding>
-                <element signature="e#6#537#0" expanded="true" />
-              </folding>
+            <state line="23" column="2" selection-start="904" selection-end="904" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="1530">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -60,7 +58,7 @@
       <file leaf-file-name="main.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/mon/main.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="8" selection-start="1446" selection-end="1524" vertical-scroll-proportion="-18.0" vertical-offset="0" max-vertical-offset="684">
+            <state line="36" column="8" selection-start="1446" selection-end="1524" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="846">
               <folding />
             </state>
           </provider>
@@ -69,7 +67,7 @@
       <file leaf-file-name="mon.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/mon/mon.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="0" selection-start="2979" selection-end="3071" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="1278">
+            <state line="65" column="1" selection-start="3071" selection-end="3071" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="1278">
               <folding />
             </state>
           </provider>
@@ -78,7 +76,7 @@
       <file leaf-file-name="xajax.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/mon/xajax.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="0" selection-start="443" selection-end="503" vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="9954">
+            <state line="14" column="0" selection-start="443" selection-end="503" vertical-scroll-proportion="94.666664" vertical-offset="2628" max-vertical-offset="9954">
               <folding>
                 <marker date="1392169314015" expanded="false" signature="2540:2570" placeholder="..." />
                 <marker date="1392169314015" expanded="true" signature="2628:3111" placeholder="..." />
@@ -100,7 +98,7 @@
       <file leaf-file-name="main.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/admin/main.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="0" selection-start="1731" selection-end="2379" vertical-scroll-proportion="124.0" vertical-offset="4320" max-vertical-offset="13302">
+            <state line="64" column="0" selection-start="1731" selection-end="2379" vertical-scroll-proportion="0.0" vertical-offset="1152" max-vertical-offset="13482">
               <folding>
                 <marker date="1391875288780" expanded="true" signature="15589:15632" placeholder="..." />
                 <marker date="1391875288780" expanded="true" signature="15600:15632" placeholder="..." />
@@ -114,7 +112,7 @@
       <file leaf-file-name="admin.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/rez/admin.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="13.296296" vertical-offset="359" max-vertical-offset="1062">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
               <folding />
             </state>
           </provider>
@@ -123,7 +121,7 @@
       <file leaf-file-name="xajax.inc" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mod/rat/xajax.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="56" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.33913043" vertical-offset="0" max-vertical-offset="1602">
+            <state line="82" column="40" selection-start="3770" selection-end="3770" vertical-scroll-proportion="1.8521739" vertical-offset="0" max-vertical-offset="1836">
               <folding />
             </state>
           </provider>
@@ -155,8 +153,8 @@
         <option value="$PROJECT_DIR$/www/.htaccess" />
         <option value="$PROJECT_DIR$/mod/rat/conf.inc" />
         <option value="$PROJECT_DIR$/mod/rat/rat.js" />
-        <option value="$PROJECT_DIR$/mod/rat/main.inc" />
         <option value="$PROJECT_DIR$/mod/rat/xajax.inc" />
+        <option value="$PROJECT_DIR$/mod/rat/main.inc" />
       </list>
     </option>
   </component>
@@ -193,7 +191,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -368,6 +365,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -414,7 +412,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25718102" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16432866" sideWeight="0.67061925" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16633266" sideWeight="0.67061925" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -453,9 +451,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="29" selection-start="813" selection-end="813" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
+        <state line="21" column="29" selection-start="813" selection-end="813" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/conf/sahana.conf">
@@ -465,9 +461,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/theme/lpf3/header.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="31" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <folding />
-        </state>
+        <state line="30" column="31" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/rat/conf.inc">
@@ -484,7 +478,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/admin/main.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="1731" selection-end="2379" vertical-scroll-proportion="124.0" vertical-offset="4320" max-vertical-offset="13302">
+        <state line="64" column="0" selection-start="1731" selection-end="2379" vertical-scroll-proportion="0.0" vertical-offset="1152" max-vertical-offset="13482">
           <folding>
             <marker date="1391875288780" expanded="true" signature="15589:15632" placeholder="..." />
             <marker date="1391875288780" expanded="true" signature="15600:15632" placeholder="..." />
@@ -496,21 +490,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/rez/xajax.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="543" column="57" selection-start="23344" selection-end="23344" vertical-scroll-proportion="1.4811594" vertical-offset="8590" max-vertical-offset="12762">
-          <folding />
-        </state>
+        <state line="543" column="57" selection-start="23344" selection-end="23344" vertical-scroll-proportion="1.4811594" vertical-offset="8590" max-vertical-offset="12762" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/rez/admin.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="13.296296" vertical-offset="359" max-vertical-offset="1062">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/mon/main.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="8" selection-start="1446" selection-end="1524" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/mon/mon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="1" selection-start="3071" selection-end="3071" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="1278">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/mon/xajax.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="443" selection-end="503" vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="9954">
+        <state line="14" column="0" selection-start="443" selection-end="503" vertical-scroll-proportion="94.666664" vertical-offset="2628" max-vertical-offset="9954">
           <folding>
             <marker date="1392169314015" expanded="false" signature="2540:2570" placeholder="..." />
             <marker date="1392169314015" expanded="true" signature="2628:3111" placeholder="..." />
@@ -530,39 +536,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/rat/rat.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="1" selection-start="625" selection-end="625" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="216">
-          <folding>
-            <element signature="n#!!doc;n#initCalendar#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mod/mon/mon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="0" selection-start="2979" selection-end="3071" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="1278">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mod/mon/main.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="8" selection-start="1446" selection-end="1524" vertical-scroll-proportion="-18.0" vertical-offset="0" max-vertical-offset="684">
+        <state line="15" column="20" selection-start="640" selection-end="640" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/rat/main.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="44" selection-start="994" selection-end="994" vertical-scroll-proportion="-10.666667" vertical-offset="144" max-vertical-offset="1692">
-          <folding>
-            <element signature="e#6#537#0" expanded="true" />
-          </folding>
+        <state line="23" column="2" selection-start="904" selection-end="904" vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="1530">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/rat/xajax.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="56" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.33913043" vertical-offset="0" max-vertical-offset="1602">
+        <state line="82" column="40" selection-start="3770" selection-end="3770" vertical-scroll-proportion="1.8521739" vertical-offset="0" max-vertical-offset="1836">
           <folding />
         </state>
       </provider>

@@ -12,6 +12,7 @@
  */
 
 function initCalendar() {
-    $("#monitoringDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#reportDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#disasterDate").datepicker({ dateFormat: 'yy-mm-dd' });
 }
 
