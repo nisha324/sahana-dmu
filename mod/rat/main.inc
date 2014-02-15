@@ -23,6 +23,7 @@ shn_xajax_registerFunction('rat_prepend_log');
 shn_xajax_registerFunction('rat_show_message');
 //shn_xajax_registerFunction('rat_store_values');
 shn_xajax_registerFunction('rat_load_general');
+shn_xajax_registerFunction('rat_load_popres');
 
 
 
@@ -30,12 +31,12 @@ function shn_rat_default() {
 
 	global $global;
     shn_tabmenu_open();
-    shn_tabmenu_item("general", _t("Rat-Menu|General Info"),                 "Rat");
-    shn_tabmenu_item("popRes",  _t("Rat-Menu|Population and Resource Data"), "Rat");
-    shn_tabmenu_item("indicators", _t("Rat-Menu|Indicators"),                "Rat");
-    shn_tabmenu_item("wash", _t("Rat-Menu|WASH Indicators"),                 "Rat");
-    shn_tabmenu_item("food",   _t("Rat-Menu|Food security and nutrition"),   "Rat");
-    shn_tabmenu_item("shelter",  _t("Rat-Menu|Shelter Indicators"),          "Rat");
+    shn_tabmenu_item("general", _t("Rat-Menu|General Info"),                 "rat");
+    shn_tabmenu_item("popRes",  _t("Rat-Menu|Population and Resource Data"), "rat");
+    shn_tabmenu_item("indicators", _t("Rat-Menu|Indicators"),                "rat");
+    shn_tabmenu_item("wash", _t("Rat-Menu|WASH Indicators"),                 "rat");
+    shn_tabmenu_item("food",   _t("Rat-Menu|Food security and nutrition"),   "rat");
+    shn_tabmenu_item("shelter",  _t("Rat-Menu|Shelter Indicators"),          "rat");
     shn_tabmenu_close();
 	shn_xajax_printJavascript();
 	echo "
@@ -46,7 +47,6 @@ function shn_rat_default() {
 		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
 	";
-
     if(isset($_GET['general'])) {
         $control = "rat_load_general";
 
