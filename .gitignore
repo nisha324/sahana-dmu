@@ -1,0 +1,16 @@
+conf/sahana.conf
+www/tmp
+www/.htaccess
+.project
+.settings
+.buildpath
+time
+version
+.externalToolBuilders
+mod/dpa/bin/*
+.idea
+.idea/*
+.htaccess
+www/.htaccess
+# Keep empty directories:
+!*/.git*
