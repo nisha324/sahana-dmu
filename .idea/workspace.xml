@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5354082-f916-4760-a680-40f5255f1425" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mod/rat/main.inc" afterPath="$PROJECT_DIR$/mod/rat/main.inc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mod/rat/xajax.inc" afterPath="$PROJECT_DIR$/mod/rat/xajax.inc" />
     </list>
     <ignored path="sahana-dmu.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,7 +48,7 @@
       <file leaf-file-name="main.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/rat/main.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="43" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1728">
+            <state line="66" column="38" selection-start="2712" selection-end="2712" vertical-scroll-proportion="-20.666666" vertical-offset="432" max-vertical-offset="1548">
               <folding />
             </state>
           </provider>
@@ -109,7 +111,7 @@
       <file leaf-file-name="xajax.inc" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mod/rat/xajax.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="147" column="66" selection-start="7946" selection-end="7946" vertical-scroll-proportion="-0.088405795" vertical-offset="2509" max-vertical-offset="3222">
+            <state line="197" column="67" selection-start="11851" selection-end="11851" vertical-scroll-proportion="0.63372093" vertical-offset="2912" max-vertical-offset="3906">
               <folding />
             </state>
           </provider>
@@ -179,7 +181,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -198,8 +199,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sahana-dmu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sahana-dmu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mod" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sahana-dmu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sahana-dmu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mod" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -239,14 +273,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="56" y="-4" width="1545" height="905" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25718102" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1743487" sideWeight="0.67061925" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17702071" sideWeight="0.67061925" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -375,14 +409,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/rat/main.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="43" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1728">
+        <state line="66" column="38" selection-start="2712" selection-end="2712" vertical-scroll-proportion="-20.666666" vertical-offset="432" max-vertical-offset="1548">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/rat/xajax.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="66" selection-start="7946" selection-end="7946" vertical-scroll-proportion="-0.088405795" vertical-offset="2509" max-vertical-offset="3222">
+        <state line="197" column="67" selection-start="11851" selection-end="11851" vertical-scroll-proportion="0.63372093" vertical-offset="2912" max-vertical-offset="3906">
           <folding />
         </state>
       </provider>

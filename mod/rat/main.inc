@@ -24,6 +24,7 @@ shn_xajax_registerFunction('rat_show_message');
 //shn_xajax_registerFunction('rat_store_values');
 shn_xajax_registerFunction('rat_load_general');
 shn_xajax_registerFunction('rat_load_popres');
+shn_xajax_registerFunction('rat_load_wash');
 
 
 
@@ -33,7 +34,7 @@ function shn_rat_default() {
     shn_tabmenu_open();
     shn_tabmenu_item("general", _t("Rat-Menu|General Info"),                 "rat");
     shn_tabmenu_item("popRes",  _t("Rat-Menu|Population and Resource Data"), "rat");
-    shn_tabmenu_item("indicators", _t("Rat-Menu|Indicators"),                "rat");
+    /*shn_tabmenu_item("indicators", _t("Rat-Menu|Indicators"),                "rat");*/
     shn_tabmenu_item("wash", _t("Rat-Menu|WASH Indicators"),                 "rat");
     shn_tabmenu_item("food",   _t("Rat-Menu|Food security and nutrition"),   "rat");
     shn_tabmenu_item("shelter",  _t("Rat-Menu|Shelter Indicators"),          "rat");
@@ -53,10 +54,10 @@ function shn_rat_default() {
     } elseif(isset($_GET['popRes'])) {
         $control = "rat_load_popres";
 
-    } elseif(isset($_GET['indicators'])) {
+    } /*elseif(isset($_GET['indicators'])) {
         $control = "rat_load_indicators";
 
-    } elseif(isset($_GET['wash'])) {
+    } */elseif(isset($_GET['wash'])) {
         $control = "rat_load_wash";
 
     } elseif(isset($_GET['food'])) {
