@@ -196,6 +196,14 @@ function rat_load_wash() {
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
         "Requirement of water treatment", "water_treatment_required");
+    $htmlMain .= shn_form_text_return("Estimated Requirement of Water/day", "estimated_requirement_per_day");
+    $htmlMain .= shn_form_fsopen_return("Estimated waiting time at a single water source");
+    $htmlMain .= shn_form_text_return("Pipe-borne", "waiting_time_pipe_borne");
+    $htmlMain .= shn_form_text_return("Open Well", "waiting_time_open_well");
+    $htmlMain .= shn_form_text_return("Hand-pump", "waiting_time_hand_pump");
+    $htmlMain .= shn_form_fsclose_return();
+    $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
+        "Requirement basic hygiene training", "hygiene_training_required");
     $htmlMain .= shn_form_fsclose_return();
 
     $editControlHtml = '
