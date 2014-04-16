@@ -197,13 +197,25 @@ function rat_load_wash() {
     $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
         "Requirement of water treatment", "water_treatment_required");
     $htmlMain .= shn_form_text_return("Estimated Requirement of Water/day", "estimated_requirement_per_day");
+
     $htmlMain .= shn_form_fsopen_return("Estimated waiting time at a single water source");
-    $htmlMain .= shn_form_text_return("Pipe-borne", "waiting_time_pipe_borne");
-    $htmlMain .= shn_form_text_return("Open Well", "waiting_time_open_well");
-    $htmlMain .= shn_form_text_return("Hand-pump", "waiting_time_hand_pump");
+    $htmlMain .= shn_form_text_return("Pipe-borne", "waiting_time_pipe_borne", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow rate * available number within 500m => should be less than 30min'));
+    $htmlMain .= shn_form_text_return("Open Well", "waiting_time_open_well", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow rate * available number within 500m => should be less than 30min'));
+    $htmlMain .= shn_form_text_return("Hand-pump", "waiting_time_hand_pump", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow rate * available number within 500m => should be less than 30min'));
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
         "Requirement basic hygiene training", "hygiene_training_required");
+    $htmlMain .= shn_form_fsopen_return("Toilets");
+    $htmlMain .= shn_form_text_return("Number of appropriately designed toilets", "number_of_toilets");
+    $htmlMain .= shn_form_text_return("Required Number", "required_toilets_number", null, array("help"=>"On basis of one toilet per 20 people", "disabled"=>true));
+    $htmlMain .= shn_form_text_return("Deficit", "toilet_deficit",null,array("help"=>"Required - Available","disabled"=>true));
+    $htmlMain .= shn_form_fsclose_return();
+
+    $htmlMain .= shn_form_fsopen_return("Tendency for vector-borne diseases");
+    $htmlMain .= shn_form_text_return("Type of vector", "vector_type");
+    $htmlMain .= shn_form_text_return("Name of disease", "vector_disease");
+    $htmlMain .= shn_form_fsclose_return();
+
     $htmlMain .= shn_form_fsclose_return();
 
     $editControlHtml = '
