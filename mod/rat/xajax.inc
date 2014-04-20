@@ -25,6 +25,7 @@ array_push($global['xajax_functions'], 'rat_show_message');
 array_push($global['xajax_functions'], 'rat_load_general');
 array_push($global['xajax_functions'], 'rat_load_popres');
 array_push($global['xajax_functions'], 'rat_load_wash');
+array_push($global['xajax_functions'], 'rat_load_food');
 
 
 // adds a message to the log div @ tail
@@ -205,6 +206,63 @@ function rat_load_wash() {
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
         "Requirement basic hygiene training", "hygiene_training_required");
+    $htmlMain .= shn_form_fsclose_return();
+
+    $htmlMain .= shn_form_fsopen_return("Toilets");
+    $htmlMain .= shn_form_text_return("Number of appropriately designed toilets", "number_of_toilets");
+    $htmlMain .= shn_form_text_return("Required Number", "required_toilets_number", null, array("help"=>"On basis of one toilet per 20 people", "disabled"=>true));
+    $htmlMain .= shn_form_text_return("Deficit", "toilet_deficit",null,array("help"=>"Required - Available","disabled"=>true));
+    $htmlMain .= shn_form_fsclose_return();
+
+    $htmlMain .= shn_form_fsopen_return("Tendency for vector-borne diseases");
+    $htmlMain .= shn_form_text_return("Type of vector", "vector_type");
+    $htmlMain .= shn_form_text_return("Name of disease", "vector_disease");
+    $htmlMain .= shn_form_fsclose_return();
+
+    $editControlHtml = '
+
+		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'rat_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes...').'<br>\'); rat_perform_save(\''.$uuid.'\', rat_get_data());" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes and Closing...<br>').'\'); rat_perform_save(\''.$uuid.'\', rat_get_data()); " value="'._t('Save Changes and Close').'">
+	';
+    $global['xajax_res']->addAssign('ratMain','style.opacity','1.0');
+    $global['xajax_res']->addAssign('ratMain','innerHTML',$htmlMain);
+    $global['xajax_res']->addAssign('ratControl', 'innerHTML', $editControlHtml);
+    $global['xajax_res']->addAppend('ratLog','innerHTML',$htmlLog);
+    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'ratLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
+    $global['xajax_res']->addScript("initCalendar();");
+    return $global['xajax_res']->getXML();
+
+
+}
+
+function rat_load_food() {
+    global $global;
+    $htmlLog = "";
+    $htmlMain = "";
+    $_SESSION['rat_current_page'] = "food";
+    $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
+    $htmlMain .= shn_form_fsopen_return("Food Security");
+    $htmlMain .= shn_form_select_return(array("Pipe-borne" => "Pipe-borne", "Open Well" => "Open Well", "Reservoir" => "Reservoir"
+    , "Hand-pumped well" => "Hand-pumped well", "Other" => "Other"),"Pre-disaster water source", "pre_disaster_water_source");
+    $htmlMain .= shn_form_select_return(array("Similar to pre-disaster" => "Similar to pre-disaster", "Greater than 75%" => "Greater than 75%",
+        "Greater than 50%" => "Greater than 50%", "Less than 50%" => "Less than 50%", "Less than 25%" => "Less than 25%",
+        "All damaged" => "All damaged"),"Post-disaster water status", "post_disaster_water_status");
+    $htmlMain .= shn_form_fsopen_return("Number of water sources");
+    $htmlMain .= shn_form_text_return("Within 500m", "water_sources_within_range");
+    $htmlMain .= shn_form_text_return("Further than 500m", "water_sources_further_than_range");
+    $htmlMain .= shn_form_fsclose_return();
+    $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
+        "Requirement of water treatment", "water_treatment_required");
+    $htmlMain .= shn_form_text_return("Estimated Requirement of Water/day", "estimated_requirement_per_day");
+
+    $htmlMain .= shn_form_fsopen_return("Estimated waiting time at a single water source");
+    $htmlMain .= shn_form_text_return("Pipe-borne", "waiting_time_pipe_borne", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow rate * available number within 500m => should be less than 30min'));
+    $htmlMain .= shn_form_text_return("Open Well", "waiting_time_open_well", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow rate * available number within 500m => should be less than 30min'));
+    $htmlMain .= shn_form_text_return("Hand-pump", "waiting_time_hand_pump", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow rate * available number within 500m => should be less than 30min'));
+    $htmlMain .= shn_form_fsclose_return();
+    $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
+        "Requirement basic hygiene training", "hygiene_training_required");
     $htmlMain .= shn_form_fsopen_return("Toilets");
     $htmlMain .= shn_form_text_return("Number of appropriately designed toilets", "number_of_toilets");
     $htmlMain .= shn_form_text_return("Required Number", "required_toilets_number", null, array("help"=>"On basis of one toilet per 20 people", "disabled"=>true));
@@ -231,8 +289,6 @@ function rat_load_wash() {
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'ratLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
     return $global['xajax_res']->getXML();
-
-
 }
 
 

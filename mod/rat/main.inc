@@ -25,6 +25,7 @@ shn_xajax_registerFunction('rat_show_message');
 shn_xajax_registerFunction('rat_load_general');
 shn_xajax_registerFunction('rat_load_popres');
 shn_xajax_registerFunction('rat_load_wash');
+shn_xajax_registerFunction('rat_load_food');
 
 
 
