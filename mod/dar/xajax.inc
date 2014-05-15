@@ -1,10 +1,10 @@
 <?php
 /**
- * @name         Rapid Assessment Tool
+ * @name         Disaster Assessment and Response
  * @version      01
- * @package      rat
+ * @package      dar
  * @author       Ramindu Deshapriya <rdeshapriya@virtusa.com>
- * @about        Developed in whole or part by the U.S. National Library of Medicine,the Sahana Foundation and Virtusa Corporation
+ * @about        Developed in whole or part by the U.S. National Library of Medicine,the Sahana Foundation and Virtusa Corpodarion
  * @link         https://pl.nlm.nih.gov/about
  * @link         http://sahanafoundation.org
  * @link         http://www.virtusa.com
@@ -19,56 +19,56 @@ global $global;
 $global['xajax_functions'] = array();
 
 // publicly register accessible xajax funtions
-array_push($global['xajax_functions'], 'rat_append_log');
-array_push($global['xajax_functions'], 'rat_prepend_log');
-array_push($global['xajax_functions'], 'rat_show_message');
-array_push($global['xajax_functions'], 'rat_load_general');
-array_push($global['xajax_functions'], 'rat_load_popres');
-array_push($global['xajax_functions'], 'rat_load_wash');
-array_push($global['xajax_functions'], 'rat_load_food');
-array_push($global['xajax_functions'], 'rat_load_shelter');
+array_push($global['xajax_functions'], 'dar_append_log');
+array_push($global['xajax_functions'], 'dar_prepend_log');
+array_push($global['xajax_functions'], 'dar_show_message');
+array_push($global['xajax_functions'], 'dar_load_general');
+array_push($global['xajax_functions'], 'dar_load_popres');
+array_push($global['xajax_functions'], 'dar_load_wash');
+array_push($global['xajax_functions'], 'dar_load_food');
+array_push($global['xajax_functions'], 'dar_load_shelter');
 
 
 // adds a message to the log div @ tail
-function rat_append_log($message = "no message specified?")
+function dar_append_log($message = "no message specified?")
 {
 
     global $global;
-    $global['xajax_res']->addAppend('ratLog', 'innerHTML', $message);
+    $global['xajax_res']->addAppend('darLog', 'innerHTML', $message);
     //---- scroll the log to the bottom
-    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'ratLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
+    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     return $global['xajax_res']->getXML();
 }
 
 
 // adds a message to the log div @ head
-function rat_prepend_log($message = "no message specified?")
+function dar_prepend_log($message = "no message specified?")
 {
 
     global $global;
-    $global['xajax_res']->addPrepend('ratLog', 'innerHTML', $message);
+    $global['xajax_res']->addPrepend('darLog', 'innerHTML', $message);
     return $global['xajax_res']->getXML();
 }
 
 
 // shows a status message before another ajax function is executed
-function rat_show_message($message = "no message specified?")
+function dar_show_message($message = "no message specified?")
 {
 
     global $global;
-    $global['xajax_res']->addAssign('ratMain', 'innerHTML', '<div class="loadingMessage"><center><blink>' . $message . '</blink></center></div>');
+    $global['xajax_res']->addAssign('darMain', 'innerHTML', '<div class="loadingMessage"><center><blink>' . $message . '</blink></center></div>');
     return $global['xajax_res']->getXML();
 }
 
 /**
  * Function to load the General Information section
  */
-function rat_load_general()
+function dar_load_general()
 {
     global $global;
     $htmlLog = "";
     $htmlMain = "";
-    $_SESSION['rat_current_page'] = "general";
+    $_SESSION['dar_current_page'] = "general";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("General Information");
     $htmlMain .= shn_form_select_return(array("Flood" => "Flood", "Drought" => "Drought", "Landslide" => "Landslide"),
@@ -79,36 +79,36 @@ function rat_load_general()
         "Affected Area Name", "affected_area");
     $htmlMain .= shn_form_select_return(array("A1" => "A1", "A2" => "A2", "A3" => "A3"), "Name of Focal Point", "focal_point_name");
     $htmlMain .= shn_form_select_return(array("GN" => "GN", "MOH" => "MOH", "District" => "District", "Province" => "Province"), "GN, MOH, District, Province", "area_type");
-    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Herath" => "Rasika Herath",
+    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Hedarh" => "Rasika Hedarh",
             "Chathura Thennakoon" => "Chathura Thennakoon", "Thilina Mendis" => "Thilina Mendis"), "Assessor's Name", "assessor_name");
     $htmlMain .= shn_form_select_return(array("MOH Admin" => "MOH Admin", "FP Admin" => "FP Admin",
         "HO" => "HO"), "Assessor's Designation", "assessor_designation");
-    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Herath" => "Rasika Herath"),
-        "Team Leader Name", "team_leader");
+    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Hedarh" => "Rasika Hedarh"),
+        "Focal Point Coordinator Name", "focal_point_coordinator");
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_fclose_return();
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'rat_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes...').'<br>\'); rat_perform_save(\''.$uuid.'\', rat_get_data());" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes and Closing...<br>').'\'); rat_perform_save(\''.$uuid.'\', rat_get_data()); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$uuid.'\', dar_get_data());" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$uuid.'\', dar_get_data()); " value="'._t('Save Changes and Close').'">
 	';
-    //setTimeout(\'rat_perform_save('.$uuid.', rat_get_data());\', 250)
-    $global['xajax_res']->addAssign('ratMain','style.opacity','1.0');
-    $global['xajax_res']->addAssign('ratMain','innerHTML',$htmlMain);
-    $global['xajax_res']->addAssign('ratControl', 'innerHTML', $editControlHtml);
-    $global['xajax_res']->addAppend('ratLog','innerHTML',$htmlLog);
-    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'ratLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
+    //setTimeout(\'dar_perform_save('.$uuid.', dar_get_data());\', 250)
+    $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
+    $global['xajax_res']->addAssign('darMain','innerHTML',$htmlMain);
+    $global['xajax_res']->addAssign('darControl', 'innerHTML', $editControlHtml);
+    $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
+    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
     return $global['xajax_res']->getXML();
 }
 
-function rat_load_popres() {
+function dar_load_popres() {
     global $global;
     $htmlLog = "";
     $htmlMain = "";
-    $_SESSION['rat_current_page'] = "popRes";
+    $_SESSION['dar_current_page'] = "popRes";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Population and Resource Data");
     $htmlMain .= shn_form_text_return("Total Area", "total_area");
@@ -155,36 +155,36 @@ function rat_load_popres() {
         "Affected Area Name", "affected_area");
     $htmlMain .= shn_form_select_return(array("A1" => "A1", "A2" => "A2", "A3" => "A3"), "Name of Focal Point", "focal_point_name");
     $htmlMain .= shn_form_select_return(array("GN" => "GN", "MOH" => "MOH", "District" => "District", "Province" => "Province"), "GN, MOH, District, Province", "area_type");
-    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Herath" => "Rasika Herath",
+    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Hedarh" => "Rasika Hedarh",
         "Chathura Thennakoon" => "Chathura Thennakoon", "Thilina Mendis" => "Thilina Mendis"), "Assessor's Name", "assessor_name");
     $htmlMain .= shn_form_select_return(array("MOH Admin" => "MOH Admin", "FP Admin" => "FP Admin",
         "HO" => "HO"), "Assessor's Designation", "assessor_designation");
-    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Herath" => "Rasika Herath"),
+    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Hedarh" => "Rasika Hedarh"),
         "Team Leader Name", "team_leader");
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_fclose_return();
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'rat_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes...').'<br>\'); rat_perform_save(\''.$uuid.'\', rat_get_data());" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes and Closing...<br>').'\'); rat_perform_save(\''.$uuid.'\', rat_get_data()); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$uuid.'\', dar_get_data());" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$uuid.'\', dar_get_data()); " value="'._t('Save Changes and Close').'">
 	';
-    //setTimeout(\'rat_perform_save('.$uuid.', rat_get_data());\', 250)
-    $global['xajax_res']->addAssign('ratMain','style.opacity','1.0');
-    $global['xajax_res']->addAssign('ratMain','innerHTML',$htmlMain);
-    $global['xajax_res']->addAssign('ratControl', 'innerHTML', $editControlHtml);
-    $global['xajax_res']->addAppend('ratLog','innerHTML',$htmlLog);
-    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'ratLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
+    //setTimeout(\'dar_perform_save('.$uuid.', dar_get_data());\', 250)
+    $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
+    $global['xajax_res']->addAssign('darMain','innerHTML',$htmlMain);
+    $global['xajax_res']->addAssign('darControl', 'innerHTML', $editControlHtml);
+    $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
+    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
     return $global['xajax_res']->getXML();
 }
 
-function rat_load_wash() {
+function dar_load_wash() {
     global $global;
     $htmlLog = "";
     $htmlMain = "";
-    $_SESSION['rat_current_page'] = "wash";
+    $_SESSION['dar_current_page'] = "wash";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Water");
     $htmlMain .= shn_form_select_return(array("Pipe-borne" => "Pipe-borne", "Open Well" => "Open Well", "Reservoir" => "Reservoir"
@@ -201,9 +201,9 @@ function rat_load_wash() {
     $htmlMain .= shn_form_text_return("Estimated Requirement of Water/day", "estimated_requirement_per_day");
 
     $htmlMain .= shn_form_fsopen_return("Estimated waiting time at a single water source");
-    $htmlMain .= shn_form_text_return("Pipe-borne", "waiting_time_pipe_borne", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow rate * available number within 500m => should be less than 30min'));
-    $htmlMain .= shn_form_text_return("Open Well", "waiting_time_open_well", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow rate * available number within 500m => should be less than 30min'));
-    $htmlMain .= shn_form_text_return("Hand-pump", "waiting_time_hand_pump", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow rate * available number within 500m => should be less than 30min'));
+    $htmlMain .= shn_form_text_return("Pipe-borne", "waiting_time_pipe_borne", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow dare * available number within 500m => should be less than 30min'));
+    $htmlMain .= shn_form_text_return("Open Well", "waiting_time_open_well", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow dare * available number within 500m => should be less than 30min'));
+    $htmlMain .= shn_form_text_return("Hand-pump", "waiting_time_hand_pump", null, array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow dare * available number within 500m => should be less than 30min'));
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
         "Requirement basic hygiene training", "hygiene_training_required");
@@ -222,30 +222,30 @@ function rat_load_wash() {
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'rat_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes...').'<br>\'); rat_perform_save(\''.$uuid.'\', rat_get_data());" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes and Closing...<br>').'\'); rat_perform_save(\''.$uuid.'\', rat_get_data()); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$uuid.'\', dar_get_data());" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$uuid.'\', dar_get_data()); " value="'._t('Save Changes and Close').'">
 	';
-    $global['xajax_res']->addAssign('ratMain','style.opacity','1.0');
-    $global['xajax_res']->addAssign('ratMain','innerHTML',$htmlMain);
-    $global['xajax_res']->addAssign('ratControl', 'innerHTML', $editControlHtml);
-    $global['xajax_res']->addAppend('ratLog','innerHTML',$htmlLog);
-    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'ratLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
+    $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
+    $global['xajax_res']->addAssign('darMain','innerHTML',$htmlMain);
+    $global['xajax_res']->addAssign('darControl', 'innerHTML', $editControlHtml);
+    $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
+    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
     return $global['xajax_res']->getXML();
 
 
 }
 
-function rat_load_food() {
+function dar_load_food() {
     global $global;
     $htmlLog = "";
     $htmlMain = "";
-    $_SESSION['rat_current_page'] = "food";
+    $_SESSION['dar_current_page'] = "food";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Food Security");
     $htmlMain .= shn_form_select_return(array("Disrupted" => "Disrupted", "Not Disrupted" => "Not Disrupted"),
-        "Disruption of usual food preparation practices", "food_practices_disruption");
+        "Disruption of usual food prepadarion practices", "food_practices_disruption");
     $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),"Is there an accessible food source within 2km?",
         "accessible_food_source");
 
@@ -254,24 +254,24 @@ function rat_load_food() {
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'rat_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes...').'<br>\'); rat_perform_save(\''.$uuid.'\', rat_get_data());" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes and Closing...<br>').'\'); rat_perform_save(\''.$uuid.'\', rat_get_data()); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$uuid.'\', dar_get_data());" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$uuid.'\', dar_get_data()); " value="'._t('Save Changes and Close').'">
 	';
-    $global['xajax_res']->addAssign('ratMain','style.opacity','1.0');
-    $global['xajax_res']->addAssign('ratMain','innerHTML',$htmlMain);
-    $global['xajax_res']->addAssign('ratControl', 'innerHTML', $editControlHtml);
-    $global['xajax_res']->addAppend('ratLog','innerHTML',$htmlLog);
-    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'ratLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
+    $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
+    $global['xajax_res']->addAssign('darMain','innerHTML',$htmlMain);
+    $global['xajax_res']->addAssign('darControl', 'innerHTML', $editControlHtml);
+    $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
+    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
     return $global['xajax_res']->getXML();
 }
 
-function rat_load_shelter() {
+function dar_load_shelter() {
     global $global;
     $htmlLog = "";
     $htmlMain = "";
-    $_SESSION['rat_current_page'] = "shelter";
+    $_SESSION['dar_current_page'] = "shelter";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Number of Affected Houses");
     $htmlMain .= shn_form_text_return("Partially affected", "partially_affected_houses");
@@ -301,15 +301,15 @@ function rat_load_shelter() {
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'rat_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes...').'<br>\'); rat_perform_save(\''.$uuid.'\', rat_get_data());" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: rat_append_log(\''._t('Saving Changes and Closing...<br>').'\'); rat_perform_save(\''.$uuid.'\', rat_get_data()); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$uuid.'\', dar_get_data());" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$uuid.'\', dar_get_data()); " value="'._t('Save Changes and Close').'">
 	';
-    $global['xajax_res']->addAssign('ratMain','style.opacity','1.0');
-    $global['xajax_res']->addAssign('ratMain','innerHTML',$htmlMain);
-    $global['xajax_res']->addAssign('ratControl', 'innerHTML', $editControlHtml);
-    $global['xajax_res']->addAppend('ratLog','innerHTML',$htmlLog);
-    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'ratLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
+    $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
+    $global['xajax_res']->addAssign('darMain','innerHTML',$htmlMain);
+    $global['xajax_res']->addAssign('darControl', 'innerHTML', $editControlHtml);
+    $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
+    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
     return $global['xajax_res']->getXML();
 }

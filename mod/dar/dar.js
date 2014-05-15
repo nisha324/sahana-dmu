@@ -1,8 +1,7 @@
-<?php
 /**
- * @name         Rapid Assessment Tool
+ * @name         Disaster Assessment and Response
  * @version      01
- * @package      rat
+ * @package      dar
  * @author       Ramindu Deshapriya <rdeshapriya@virtusa.com>
  * @about        Developed in whole or part by the U.S. National Library of Medicine,the Sahana Foundation and Virtusa Corporation
  * @link         https://pl.nlm.nih.gov/about
@@ -12,8 +11,8 @@
  * @lastModified 2013.11.21
  */
 
+function initCalendar() {
+    $("#reportDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#disasterDate").datepicker({ dateFormat: 'yy-mm-dd' });
+}
 
-$conf['mod_rat_name']         = _t("Rapid Assessment Tool");   // Defines the name of the module
-$conf['mod_rat_menuorder']    =  21;                             	// Defines this module's main menu priority
-$conf['mod_rat_dependencies'] = "";
-$conf['mod_rat_version']      = 23;
