@@ -2,6 +2,7 @@
  display: inline-block;
  margin: 1%;
  text-align: center;
+ cursor: pointer;
 }
 #the-map {
 height: 400px;
