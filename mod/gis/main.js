@@ -3,13 +3,8 @@
 app = {}
 
 $(document).ready(function(){
-layers = [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ];
 
-olmap = new ol.Map({
+	olmap = new ol.Map({
         target: 'the-map',
 		
         layers: [],
@@ -18,6 +13,7 @@ olmap = new ol.Map({
           zoom: 2
         })
       });
+	  
 });	 
 
 
@@ -25,7 +21,6 @@ function confirm_delete_map( map_id ){
 	if(confirm("Are you sure?")){
 		gis_delete_map(map_id)
 	}
-
 }
 function save_map(){
 	gis_save_map($('#map-name').val());
