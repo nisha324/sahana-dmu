@@ -137,6 +137,7 @@ function gis_get_layer_data($map_id) {
 		JOIN map_has_layer
 		ON map_has_layer.layer_layer_id = layer.layer_id
 		WHERE map_map_id = $map_id
+		ORDER BY  type DESC
 	";
 	$result = $global['db']->Execute($q);
 	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "show events 1"); }
