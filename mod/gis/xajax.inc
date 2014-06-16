@@ -76,12 +76,12 @@ function gis_create_vector_layer($map_id, $name, $options, $GeoJSONString) {
 		if($feature['geometry']['type'] == 'Point'){
                     $geometryCode = 1;
                 }
-                else if($feature['geometry']['type'] == 'LineString'){
-                    $geometryCode = 2;
-                }
-                else if($feature['geometry']['type'] == 'Polygon'){
-                    $geometryCode = 3;
-                }
+		else if($feature['geometry']['type'] == 'LineString'){
+			$geometryCode = 2;
+		}
+		else if($feature['geometry']['type'] == 'Polygon'){
+			$geometryCode = 3;
+		}
 		$q = "
 			INSERT INTO feature (geometry, layer_layer_id)
 			VALUES ($geometryCode, $layer_id );
@@ -95,15 +95,34 @@ function gis_create_vector_layer($map_id, $name, $options, $GeoJSONString) {
                     $lon = $feature['geometry']['coordinates'][1];
                     $alt = $feature['geometry']['coordinates'][2]?$feature['geometry']['coordinates'][2]:0;
                     $q = "
-			INSERT INTO marker(lat, lon, alt, feature_feature_id)
-			VALUES ($lat, $lon, $alt, $feature_id );
+						INSERT INTO marker(lat, lon, alt, feature_feature_id)
+						VALUES ($lat, $lon, $alt, $feature_id );
                     ";
                     $result = $global['db']->Execute($q);
                     if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
 		
                 }
                 else if($feature['geometry']['type'] == 'LineString'){
-                    $geometryCode = 2;
+					$q = "
+							INSERT INTO polyline(feature_feature_id)
+							VALUES ( $feature_id );
+					";
+					$result = $global['db']->Execute($q);
+					if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+					$polyline_id = $global['db'] -> Insert_ID();
+                    foreach( $feature['geometry']['coordinates'] as $point){
+						$lat = $point[0];
+						$lon = $point[1];
+						$alt = $point[2]?$point[2]:0;
+						
+						$q = "
+							INSERT INTO point(lat, lon, alt, polyline_polyline_id)
+							VALUES ( $point[0], $point[1], $polyline_id );
+						";
+						$result = $global['db']->Execute($q);
+						if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+					
+					}
                 }
                 else if($feature['geometry']['type'] == 'Polygon'){
                     $geometryCode = 3;
