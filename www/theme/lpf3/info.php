@@ -15,6 +15,6 @@
 // Theme Information File
 
 $shortname = "lpf3";
-$longname  = "Sahana for the Disaster Management Unit, Ministry of Health, Sri Lanka";
-$siteTitle = "DMU Sahana";
+$longname  = "Sahana for the Disaster Preparedness and Response Division, Ministry of Health, Sri Lanka";
+$siteTitle = "DMIS";
 

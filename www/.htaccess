@@ -59,8 +59,12 @@ RewriteRule ^(pop|outbound)$                   $2?mod=pop [QSA]
 RewriteRule ^(rap)$                            $2?mod=rap [QSA]
 RewriteRule ^(report)$                         $2?mod=report [QSA]
 RewriteRule ^(rez|resources)$                  $2?mod=rez [QSA]
+<<<<<<< HEAD
 
 RewriteRule ^(rat|rapidassessment)$            $2?mod=rat [QSA]
+=======
+RewriteRule ^(rat|dar|assessment)$             $2?mod=dar [QSA]
+>>>>>>> a2e12ecc455666b2414274c684078b7327e28da5
 RewriteRule ^(sepl|searchplus)$                $2?mod=sepl [QSA]
 RewriteRule ^(snap|snapshot)$                  $2?mod=snap [QSA]
 RewriteRule ^(stat|statistics)$                $2?mod=stat [QSA]

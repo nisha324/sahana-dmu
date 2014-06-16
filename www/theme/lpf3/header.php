@@ -57,7 +57,7 @@ if(isset($_GET['shortname'])) {
 			<div id="headerText">
 				<h1>'._t($conf['site_name']).' '.$long.'</h1>
 				<h3>'._t("of").' '.$date.'</h3>
-				<h4>'._t("Disaster Management Unit").'</h4>
+				<h4>'._t("Disaster Preparedness and Response Division").'</h4>
 				<h4>'._t("Ministry of Health, Sri Lanka").'</h4>
 			</div>
 		';
@@ -72,7 +72,7 @@ if(!$full) {
 		<div id="headerText">
 			<h1>'._t($conf['site_name']).'</h1>
 			<h3>&nbsp;</h3>
-			<h4>'._t("Disaster Management Unit").'</h4>
+			<h4>'._t("Disaster Preparedness and Response Division").'</h4>
 			<h4>'._t("Ministry of Health, Sri Lanka").'</h4>
 		</div>
 	';

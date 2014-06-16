@@ -33,7 +33,7 @@ header('Content-type: text/html; charset=UTF-8')
 <head>
 <title><?php echo $global['title'];?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="Software " content="Sahana for the Disaster Management Unit, Ministry of Health, Sri Lanka" />
+<meta name="Software " content="Sahana for the Disaster Preparedness and Response Division, Ministry of Health, Sri Lanka" />
 <meta name="Website" content="http://pl.nlm.nih.gov" />
 <meta name="Licence" content="Lesser General Public Licence, Version 2.1" />
 <meta name="Licence Website" content="http://www.gnu.org/licenses/lgpl-2.1.txt" />
