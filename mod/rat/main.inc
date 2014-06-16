@@ -29,6 +29,9 @@ shn_xajax_registerFunction('rat_load_food');
 shn_xajax_registerFunction('rat_load_shelter');
 
 
+shn_xajax_registerFunction('rat_perform_save');
+
+
 
 function shn_rat_default() {
 

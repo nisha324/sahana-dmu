@@ -29,6 +29,9 @@ array_push($global['xajax_functions'], 'rat_load_food');
 array_push($global['xajax_functions'], 'rat_load_shelter');
 
 
+array_push($global['xajax_functions'], 'rat_perform_save');
+
+
 // adds a message to the log div @ tail
 function rat_append_log($message = "no message specified?")
 {
@@ -312,6 +315,10 @@ function rat_load_shelter() {
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'ratLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
     return $global['xajax_res']->getXML();
+}
+
+function rat_perform_save() {
+
 }
 
 
