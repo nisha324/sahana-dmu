@@ -28,6 +28,8 @@ shn_xajax_registerFunction('dar_load_wash');
 shn_xajax_registerFunction('dar_load_food');
 shn_xajax_registerFunction('dar_load_shelter');
 
+shn_xajax_registerFunction('dar_perform_save');
+
 
 
 function shn_dar_default() {

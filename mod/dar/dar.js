@@ -15,4 +15,8 @@ function initCalendar() {
     $("#reportDate").datepicker({ dateFormat: 'yy-mm-dd' });
     $("#disasterDate").datepicker({ dateFormat: 'yy-mm-dd' });
 }
+function dar_get_data() {
+     return $("#form0").serialize();
+}
+
 

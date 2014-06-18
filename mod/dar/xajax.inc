@@ -28,8 +28,7 @@ array_push($global['xajax_functions'], 'dar_load_wash');
 array_push($global['xajax_functions'], 'dar_load_food');
 array_push($global['xajax_functions'], 'dar_load_shelter');
 
-
-array_push($global['xajax_functions'], 'rat_perform_save');
+array_push($global['xajax_functions'], 'dar_perform_save');
 
 
 // adds a message to the log div @ tail
@@ -317,8 +316,25 @@ function dar_load_shelter() {
     return $global['xajax_res']->getXML();
 }
 
-function rat_perform_save() {
+function dar_perform_save($disaster_id, $data) {
 
+global $global;
+parse_str($data);
+
+if($_SESSION['dar_current_page'] == "popRes"){
+	$q = "
+		INSERT INTO point(disaster_id, total_area, area_population, affected_area, male_injured, female_injured, pregnant_female_injured, young_children_injured, infants_injured, children_injured, male_displaced, female_displaced, pregnant_female_displaced, children_displaced, young_children_displaced, infants_displaced, male_missing, female_missing, pregnant_female_missing, children_missing, young_children_missing, infants_missing, male_deceased, female_deceased, pregnant_female_deceased, children_deceased, young_children_deceased, infants_deceased  )
+		VALUES ( $disaster_id, $total_area, $area_population, $affected_area, $male_injured, $female_injured, $pregnant_female_injured, $young_children_injured, $infants_injured, $children_injured, $male_displaced, $female_displaced, $pregnant_female_displaced, $children_displaced, $young_children_displaced, $infants_displaced, $male_missing, $female_missing, $pregnant_female_missing, $children_missing, $young_children_missing, $infants_missing, $male_deceased, $female_deceased, $pregnant_female_deceased, $children_deceased, $young_children_deceased, $infants_deceased  );
+	";
+	$result = $global['db']->Execute($q);
+	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+
+}
+
+	//$global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
+    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
+    return $global['xajax_res']->getXML();
+	
 }
 
 
