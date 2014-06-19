@@ -189,16 +189,16 @@ function dar_load_wash() {
     $_SESSION['dar_current_page'] = "wash";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Water");
-    $htmlMain .= shn_form_select_return(array("Pipe-borne" => "Pipe-borne", "Open Well" => "Open Well", "Reservoir" => "Reservoir"
-    , "Hand-pumped well" => "Hand-pumped well", "Other" => "Other"),"Pre-disaster water source", "pre_disaster_water_source");
-    $htmlMain .= shn_form_select_return(array("Similar to pre-disaster" => "Similar to pre-disaster", "Greater than 75%" => "Greater than 75%",
-        "Greater than 50%" => "Greater than 50%", "Less than 50%" => "Less than 50%", "Less than 25%" => "Less than 25%",
-    "All damaged" => "All damaged"),"Post-disaster water status", "post_disaster_water_status");
+    $htmlMain .= shn_form_select_return(array("1" => "Pipe-borne", "1" => "Open Well", "2" => "Reservoir"
+    , "3" => "Hand-pumped well", "4" => "Other"),"Pre-disaster water source", "pre_disaster_water_source");
+    $htmlMain .= shn_form_select_return(array("1" => "Similar to pre-disaster", "2" => "Greater than 75%",
+        "3" => "Greater than 50%", "4" => "Less than 50%", "5" => "Less than 25%",
+    "6" => "All damaged"),"Post-disaster water status", "post_disaster_water_status");
     $htmlMain .= shn_form_fsopen_return("Number of water sources");
     $htmlMain .= shn_form_text_return("Within 500m", "water_sources_within_range");
     $htmlMain .= shn_form_text_return("Further than 500m", "water_sources_further_than_range");
     $htmlMain .= shn_form_fsclose_return();
-    $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
+    $htmlMain .= shn_form_select_return(array("1" => "Yes", "0" => "No"),
         "Requirement of water treatment", "water_treatment_required");
     $htmlMain .= shn_form_text_return("Estimated Requirement of Water/day", "estimated_requirement_per_day");
 
@@ -325,6 +325,26 @@ if($_SESSION['dar_current_page'] == "popRes"){
 	$q = "
 		INSERT INTO point(disaster_id, total_area, area_population, affected_area, male_injured, female_injured, pregnant_female_injured, young_children_injured, infants_injured, children_injured, male_displaced, female_displaced, pregnant_female_displaced, children_displaced, young_children_displaced, infants_displaced, male_missing, female_missing, pregnant_female_missing, children_missing, young_children_missing, infants_missing, male_deceased, female_deceased, pregnant_female_deceased, children_deceased, young_children_deceased, infants_deceased  )
 		VALUES ( $disaster_id, $total_area, $area_population, $affected_area, $male_injured, $female_injured, $pregnant_female_injured, $young_children_injured, $infants_injured, $children_injured, $male_displaced, $female_displaced, $pregnant_female_displaced, $children_displaced, $young_children_displaced, $infants_displaced, $male_missing, $female_missing, $pregnant_female_missing, $children_missing, $young_children_missing, $infants_missing, $male_deceased, $female_deceased, $pregnant_female_deceased, $children_deceased, $young_children_deceased, $infants_deceased  );
+	";
+	$result = $global['db']->Execute($q);
+	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+
+}
+else if($_SESSION['dar_current_page'] == "wash"){
+	$q = "
+		INSERT INTO point(disaster_id, water_resources_id, water_status, water_in500, water_out500, need_treatment, water_per_day, wait_pipe_borne, wait_open_well, wait_hand_pump, need_hygin_training, toilets, required_toilets, deficit_toilet, vector_type, vector_name  )
+		VALUES ( $disaster_id, $pre_disaster_water_source, $post_disaster_water_status, $water_sources_within_range, $water_sources_further_than_range, $water_treatment_required, $estimated_requirement_per_day, 
+		$waiting_time_pipe_borne, $waiting_time_open_well, $waiting_time_hand_pump, $hygiene_training_required, $number_of_toilets, $required_toilets_number, $toilet_deficit, $vector_type, $vector_disease );
+	";
+	$result = $global['db']->Execute($q);
+	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+
+}
+else if($_SESSION['dar_current_page'] == "food"){
+	$q = "
+		INSERT INTO point(disaster_id, water_resources_id, water_status, water_in500, water_out500, need_treatment, water_per_day, wait_pipe_borne, wait_open_well, wait_hand_pump, need_hygin_training, toilets, required_toilets, deficit_toilet, vector_type, vector_name  )
+		VALUES ( $disaster_id, $pre_disaster_water_source, $post_disaster_water_status, $water_sources_within_range, $water_sources_further_than_range, $water_treatment_required, $estimated_requirement_per_day, 
+		$waiting_time_pipe_borne, $waiting_time_open_well, $waiting_time_hand_pump, $hygiene_training_required, $number_of_toilets, $required_toilets_number, $toilet_deficit, $vector_type, $vector_disease );
 	";
 	$result = $global['db']->Execute($q);
 	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
