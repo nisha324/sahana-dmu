@@ -318,37 +318,47 @@ function dar_load_shelter() {
 
 function dar_perform_save($disaster_id, $data) {
 
-global $global;
-parse_str($data);
-
-if($_SESSION['dar_current_page'] == "popRes"){
+	global $global;
 	$q = "
-		INSERT INTO population(disaster_id, total_area, area_population, affected_area, male_injured, female_injured, pregnant_female_injured, young_children_injured, infants_injured, children_injured, male_displaced, female_displaced, pregnant_female_displaced, children_displaced, young_children_displaced, infants_displaced, male_missing, female_missing, pregnant_female_missing, children_missing, young_children_missing, infants_missing, male_deceased, female_deceased, pregnant_female_deceased, children_deceased, young_children_deceased, infants_deceased  )
-		VALUES ( $disaster_id, $total_area, $area_population, $affected_area, $male_injured, $female_injured, $pregnant_female_injured, $young_children_injured, $infants_injured, $children_injured, $male_displaced, $female_displaced, $pregnant_female_displaced, $children_displaced, $young_children_displaced, $infants_displaced, $male_missing, $female_missing, $pregnant_female_missing, $children_missing, $young_children_missing, $infants_missing, $male_deceased, $female_deceased, $pregnant_female_deceased, $children_deceased, $young_children_deceased, $infants_deceased  );
+		SELECT incident_id
+		FROM incident
+		WHERE shortname = '".mysql_real_escape_string($_GET['shortname'])."';
 	";
-	$result = $global['db']->Execute($q);
-	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+	$result   = $global['db']->Execute($q);
+	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "report default 1 ((".$q."))"); }
+	$row      = $result->FetchRow();
+	$incident_id   = $row['incident_id'];
+		
+	parse_str($data);
 
-}
-else if($_SESSION['dar_current_page'] == "wash"){
-	$q = "
-		INSERT INTO wash(disaster_id, water_resources_id, water_status, water_in500, water_out500, need_treatment, water_per_day, wait_pipe_borne, wait_open_well, wait_hand_pump, need_hygin_training, toilets, required_toilets, deficit_toilet, vector_type, vector_name  )
-		VALUES ( $disaster_id, $pre_disaster_water_source, $post_disaster_water_status, $water_sources_within_range, $water_sources_further_than_range, $water_treatment_required, $estimated_requirement_per_day, 
-		$waiting_time_pipe_borne, $waiting_time_open_well, $waiting_time_hand_pump, $hygiene_training_required, $number_of_toilets, $required_toilets_number, $toilet_deficit, $vector_type, $vector_disease );
-	";
-	$result = $global['db']->Execute($q);
-	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+	if($_SESSION['dar_current_page'] == "popRes"){
+		$q = "
+			INSERT INTO population(disaster_id, total_area, area_population, affected_area, male_injured, female_injured, pregnant_female_injured, young_children_injured, infants_injured, children_injured, male_displaced, female_displaced, pregnant_female_displaced, children_displaced, young_children_displaced, infants_displaced, male_missing, female_missing, pregnant_female_missing, children_missing, young_children_missing, infants_missing, male_deceased, female_deceased, pregnant_female_deceased, children_deceased, young_children_deceased, infants_deceased  )
+			VALUES ( $disaster_id, $total_area, $area_population, $affected_area, $male_injured, $female_injured, $pregnant_female_injured, $young_children_injured, $infants_injured, $children_injured, $male_displaced, $female_displaced, $pregnant_female_displaced, $children_displaced, $young_children_displaced, $infants_displaced, $male_missing, $female_missing, $pregnant_female_missing, $children_missing, $young_children_missing, $infants_missing, $male_deceased, $female_deceased, $pregnant_female_deceased, $children_deceased, $young_children_deceased, $infants_deceased  );
+		";
+		$result = $global['db']->Execute($q);
+		if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
 
-}
-else if($_SESSION['dar_current_page'] == "food"){
-	$q = "
-		INSERT INTO wash(disaster_id, food_disruption, food_in200 )
-		VALUES ( $disaster_id, $food_practices_disruption, $accessible_food_source );
-	";
-	$result = $global['db']->Execute($q);
-	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+	}
+	else if($_SESSION['dar_current_page'] == "wash"){
+		$q = "
+			INSERT INTO wash(disaster_id, water_resources_id, water_status, water_in500, water_out500, need_treatment, water_per_day, wait_pipe_borne, wait_open_well, wait_hand_pump, need_hygin_training, toilets, required_toilets, deficit_toilet, vector_type, vector_name  )
+			VALUES ( $disaster_id, $pre_disaster_water_source, $post_disaster_water_status, $water_sources_within_range, $water_sources_further_than_range, $water_treatment_required, $estimated_requirement_per_day, 
+			$waiting_time_pipe_borne, $waiting_time_open_well, $waiting_time_hand_pump, $hygiene_training_required, $number_of_toilets, $required_toilets_number, $toilet_deficit, $vector_type, $vector_disease );
+		";
+		$result = $global['db']->Execute($q);
+		if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
 
-}
+	}
+	else if($_SESSION['dar_current_page'] == "food"){
+		$q = "
+			INSERT INTO wash(disaster_id, food_disruption, food_in200 )
+			VALUES ( $disaster_id, $food_practices_disruption, $accessible_food_source );
+		";
+		$result = $global['db']->Execute($q);
+		if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+
+	}
 
 	//$global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
