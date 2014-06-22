@@ -3,20 +3,48 @@
 app = {}
 
 $(document).ready(function(){
-
+	
+		
+	var dragAndDropInteraction = new ol.interaction.DragAndDrop({
+	  formatConstructors: [
+		ol.format.GPX,
+		ol.format.GeoJSON,
+		ol.format.IGC,
+		ol.format.KML,
+		ol.format.TopoJSON
+	  ]
+	});
+	
 	olmap = new ol.Map({
         target: 'the-map',
-		
         layers: [],
+		interactions: ol.interaction.defaults().extend([dragAndDropInteraction]),
         view: new ol.View2D({
           center: [0,0],
           zoom: 2
         })
       });
+	  
+	
 	olmap.on('click', function(evt) {
 		displayFeatureInfo(evt.pixel);
 	});
 	var highlightStyleCache = {};
+	
+	
+	dragAndDropInteraction.on('addfeatures', function(event) {
+		
+		test  = event.features;
+	  var vectorSource = new ol.source.Vector({
+		features: event.features,
+		projection: event.projection
+	  });
+	  olmap.getLayers().push(new ol.layer.Vector({
+		source: vectorSource
+	  }));
+	  var view2D = olmap.getView().getView2D();
+	  view2D.fitExtent(vectorSource.getExtent(), olmap.getSize());
+	});
 
 	featureOverlay = new ol.FeatureOverlay({
 	  map: olmap,
@@ -60,6 +88,8 @@ function init_map( map_id ){
 }
 
 //Layers
+//---------------
+//Initialize the layers of the map
 function init_layers( data ){
 	app.layers  = data;
 	
@@ -74,6 +104,8 @@ function init_layers( data ){
 		}
 	});
 }
+
+//Show the options for adding a layers to the map
 function add_layer(){
 	if(app.map_id){
 		$('#add-layer').html('<p>Loading...</P>');
@@ -83,8 +115,9 @@ function add_layer(){
 		alert('Please, save the map before adding layers');
 	}
 }
+
+//Save the layer 
 function save_layer(){
-	
 	if($('#add-layer-options #Tile').is(':checked')){
 	}
 	else if($('#add-layer-options #Vector').is(':checked')){
@@ -98,6 +131,8 @@ function save_layer(){
 		alert('Please, select a layer type!')
 	}
 }
+
+//function for adding GeoJSON data onto the OL3 map
 function add_vector_layer( data ){
 	var jsonLayer = new ol.layer.Vector({
      source: new ol.source.GeoJSON({
@@ -107,16 +142,21 @@ function add_vector_layer( data ){
   });
 olmap.addLayer(jsonLayer);
 }
+//function for adding a tile layer onto to the OL3 map
 function add_tile_layer( data ){
 	olmap.addLayer( 
 		new ol.layer.Tile(  eval("( "+data+")") )
 	);
 }
+
+//Cancel the adding layer;hides the add layer option.
 function cancle_add_layer(){
 	$('#add-layer').html('');
 }
 
 //Features
+//----------------------
+
 var highlight;
 function displayFeatureInfo(pixel) {
 
