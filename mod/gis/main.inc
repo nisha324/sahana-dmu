@@ -27,6 +27,7 @@ shn_xajax_registerFunction('gis_add_layer');
 shn_xajax_registerFunction('gis_get_layer_data');
 shn_xajax_registerFunction('gis_get_Vector_layer_data');
 shn_xajax_registerFunction('gis_create_vector_layer');
+shn_xajax_registerFunction('gis_vector_layer_options');
 
 /** Displays the Resources pages' content on the front end of the site. */
 function shn_gis_default()
@@ -127,10 +128,11 @@ function shn_gis_add_map()
 		</td>
 	</tr>
 </tbody></table>
-<div id='add-layer'></div><table class='emTable' id='layers'><tbody> <tr> <td class='mainRowEven'><b style='line-height: 28px;'>Layers</b> <input type='button' style='float: right;' class='styleTehButton' onclick='gis_add_layer();' value='Add layer'></td></tr>
+<div id='properties-panel'></div>
+<div id='add-layer'></div><table class='emTable' id='layers'><tbody> <tr> <td class='mainRowEven'><b style='line-height: 28px;'>Layers</b> <input type='button' style='float: right;' class='styleTehButton' onclick='add_layer();' value='Add layer'></td></tr>
 </tbody></table>		
 <?php
-    
-    echo "<script> " . file_get_contents($global['approot'] . "/mod/gis/main.js") . "init_map(" . $_GET['map_id'] . ");</script>";
+    $map_id = isset($_GET['name'])?$_GET['map_id']:'';
+    echo "<script> " . file_get_contents($global['approot'] . "/mod/gis/main.js") . "init_map($map_id);</script>";
     
 }

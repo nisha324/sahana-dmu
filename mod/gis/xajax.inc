@@ -25,7 +25,10 @@ array_push($global['xajax_functions'],'gis_add_layer');
 array_push($global['xajax_functions'],'gis_get_layer_data');
 array_push($global['xajax_functions'],'gis_get_Vector_layer_data');
 array_push($global['xajax_functions'],'gis_create_vector_layer');
+array_push($global['xajax_functions'],'gis_vector_layer_options');
 
+
+//Maps
 function gis_create_new() {
 	global $global;
 	
@@ -44,6 +47,17 @@ function gis_update_map() {
 	global $global;
 	
 	$global['xajax_res']->addAppend('rezLog','innerHTML',$message);
+	$global['xajax_res']->addScript("");
+	return $global['xajax_res']->getXML();
+}
+
+//layers
+
+function gis_add_layer() {
+	global $global;
+	$output = '<table class="emTable" id="add-layer-options"><tbody> <tr> <td class="mainRowEven"><b style="line-height: 28px;">Add layer</b> <input type="button" style="float: right; margin-left:3px;" class="styleTehButton" onclick="cancle_add_layer();" value="Cancel"><input type="button" style="float: right;" class="styleTehButton" onclick="save_layer();" value="Save"></td></tr>
+<tr><td>Name: <input type="text" id="name"/> </br><label for="Tile" > <input type="radio" name="layer-type" value="Tile" id="Tile" onclick="showAddTileLayerOptions()"/> Tile Layer</label><label for="Vector"> <input type="radio" name="layer-type" value="Vector" id="Vector" onclick="showAddVectorLayerOptions()"/> Vector Layer</label><div id="layer-options"></div></td></tr></tbody></table>';
+	$global['xajax_res']->addAssign('add-layer','innerHTML',$output);
 	$global['xajax_res']->addScript("");
 	return $global['xajax_res']->getXML();
 }
@@ -108,24 +122,43 @@ function gis_create_vector_layer($map_id, $name, $options, $GeoJSONString) {
 							VALUES ( $feature_id );
 					";
 					$result = $global['db']->Execute($q);
-					if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+					if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting polyline"); }
 					$polyline_id = $global['db'] -> Insert_ID();
                     foreach( $feature['geometry']['coordinates'] as $point){
 						$lat = $point[0];
 						$lon = $point[1];
-						$alt = $point[2]?$point[2]:0;
+						$alt = isset($point[2])?$point[2]:0;
 						
 						$q = "
 							INSERT INTO point(lat, lon, alt, polyline_polyline_id)
-							VALUES ( $point[0], $point[1], $polyline_id );
+							VALUES ( $lat, $lon, $alt, $polyline_id );
 						";
 						$result = $global['db']->Execute($q);
-						if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+						if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting point"); }
 					
 					}
                 }
                 else if($feature['geometry']['type'] == 'Polygon'){
-                    $geometryCode = 3;
+                    $q = "
+							INSERT INTO polyline(feature_feature_id)
+							VALUES ( $feature_id );
+					";
+					$result = $global['db']->Execute($q);
+					if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting polyline"); }
+					$polyline_id = $global['db'] -> Insert_ID();
+                    foreach( $feature['geometry']['coordinates'][0] as $point){
+						$lat = $point[0];
+						$lon = $point[1];
+						$alt = isset($point[2])?$point[2]:0;
+						
+						$q = "
+							INSERT INTO point(lat, lon, alt, polyline_polyline_id)
+							VALUES ( $lat, $lon, $alt, $polyline_id );
+						";
+						$result = $global['db']->Execute($q);
+						if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting point"); }
+					
+					}
                 }
 		
 		foreach ($feature['properties']  as $key => $value) {
@@ -291,6 +324,13 @@ function gis_get_Vector_layer_data($layer_id) {
 	}
 	
 	$global['xajax_res']->addScript("add_vector_layer(".json_encode($layer).")");
+	return $global['xajax_res']->getXML();
+}
+
+function gis_vector_layer_options(){
+	global $global;
+	$output = '<textarea id="GeoJSON-data" style="width: 95%;"></textarea>';
+	$global['xajax_res']->addAssign('layer-options','innerHTML',$output);
 	return $global['xajax_res']->getXML();
 }
 
