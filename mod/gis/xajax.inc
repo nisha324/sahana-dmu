@@ -56,7 +56,7 @@ function gis_update_map() {
 function gis_add_layer() {
 	global $global;
 	$output = '<table class="emTable" id="add-layer-options"><tbody> <tr> <td class="mainRowEven"><b style="line-height: 28px;">Add layer</b> <input type="button" style="float: right; margin-left:3px;" class="styleTehButton" onclick="cancle_add_layer();" value="Cancel"><input type="button" style="float: right;" class="styleTehButton" onclick="save_layer();" value="Save"></td></tr>
-<tr><td>Name: <input type="text" id="name"/> </br><label for="Tile" > <input type="radio" name="layer-type" value="Tile" id="Tile" onclick="showAddTileLayerOptions()"/> Tile Layer</label><label for="Vector"> <input type="radio" name="layer-type" value="Vector" id="Vector" onclick="showAddVectorLayerOptions()"/> Vector Layer</label><div id="layer-options"></div></td></tr></tbody></table>';
+<tr><td>Name: <input type="text" id="name"/> </td></tr><tr><td>Type: <label for="Tile" > <input type="radio" name="layer-type" value="Tile" id="Tile" onclick="showAddTileLayerOptions()"/> Tile Layer</label><label for="Vector"> <input type="radio" name="layer-type" value="Vector" id="Vector" onclick="showAddVectorLayerOptions()"/> Vector Layer</label><div id="layer-options"></div></td></tr><tr><td></td></tr></tbody></table>';
 	$global['xajax_res']->addAssign('add-layer','innerHTML',$output);
 	$global['xajax_res']->addScript("");
 	return $global['xajax_res']->getXML();
@@ -329,7 +329,7 @@ function gis_get_Vector_layer_data($layer_id) {
 
 function gis_vector_layer_options(){
 	global $global;
-	$output = '<textarea id="GeoJSON-data" style="width: 95%;"></textarea>';
+	$output = '<br/>GeoJSON:<br/><textarea id="GeoJSON-data" style="width: 95%;"></textarea>';
 	$global['xajax_res']->addAssign('layer-options','innerHTML',$output);
 	return $global['xajax_res']->getXML();
 }
