@@ -68,6 +68,7 @@ function dar_show_message($message = "no message specified?")
 function dar_load_general()
 {
     global $global;
+    $dar_id = $global['dar_id'];
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "general";
@@ -90,9 +91,9 @@ function dar_load_general()
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$uuid.'\', dar_get_data());" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$uuid.'\', dar_get_data()); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_load_general();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$dar_id.'\', dar_get_general_data(), \'general\');" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$dar_id.'\', dar_get_general_data(), \'general\'); " value="'._t('Save Changes and Close').'">
 	';
     //setTimeout(\'dar_perform_save('.$uuid.', dar_get_data());\', 250)
     $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
@@ -106,6 +107,7 @@ function dar_load_general()
 
 function dar_load_popres() {
     global $global;
+    $dar_id = $global['dar_id'];
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "popRes";
@@ -156,9 +158,9 @@ function dar_load_popres() {
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$uuid.'\', dar_get_data());" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$uuid.'\', dar_get_data()); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_load_popres();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$dar_id.'\', dar_get_popres_data(), \'popRes\');" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$dar_id.'\', dar_get_popres_data(), \'popRes\'); " value="'._t('Save Changes and Close').'">
 	';
     //setTimeout(\'dar_perform_save('.$uuid.', dar_get_data());\', 250)
     $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
@@ -172,6 +174,7 @@ function dar_load_popres() {
 
 function dar_load_wash() {
     global $global;
+    $dar_id = $global['dar_id'];
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "wash";
@@ -216,9 +219,9 @@ function dar_load_wash() {
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$uuid.'\', dar_get_data());" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$uuid.'\', dar_get_data()); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_load_wash();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$dar_id.'\', dar_get_wash_data(), \'wash\');" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$dar_id.'\', dar_get_wash_data(), \'wash\'); " value="'._t('Save Changes and Close').'">
 	';
     $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
     $global['xajax_res']->addAssign('darMain','innerHTML',$htmlMain);
@@ -233,6 +236,7 @@ function dar_load_wash() {
 
 function dar_load_food() {
     global $global;
+    $dar_id = $global['dar_id'];
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "food";
@@ -248,9 +252,9 @@ function dar_load_food() {
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$uuid.'\', dar_get_data());" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$uuid.'\', dar_get_data()); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_load_food();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$dar_id.'\', dar_get_food_data(), \'food\');" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$dar_id.'\', dar_get_food_data(), \'food\'); " value="'._t('Save Changes and Close').'">
 	';
     $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
     $global['xajax_res']->addAssign('darMain','innerHTML',$htmlMain);
@@ -263,6 +267,7 @@ function dar_load_food() {
 
 function dar_load_shelter() {
     global $global;
+    $dar_id = $global['dar_id'];
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "shelter";
@@ -295,9 +300,9 @@ function dar_load_shelter() {
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_show_patients();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$uuid.'\', dar_get_data());" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$uuid.'\', dar_get_data()); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_load_shelter();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$dar_id.'\', dar_get_shelter_data(), \'shelter\');" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$dar_id.'\', dar_get_shelter_data(), \'shelter\'); " value="'._t('Save Changes and Close').'">
 	';
     $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
     $global['xajax_res']->addAssign('darMain','innerHTML',$htmlMain);
@@ -308,43 +313,282 @@ function dar_load_shelter() {
     return $global['xajax_res']->getXML();
 }
 
-function dar_perform_save($dar_id, $rj, $update = false) {
+function dar_perform_save($dar_id, $rj, $page, $update = false) {
 
     global $global;
 
     $r = json_decode($rj);
 
-    if($_SESSION['dar_current_page'] == "general"){
+    if($page == "general"){
 
         $reportDate                 = mysql_real_escape_string($r['reportDate']);
         $affected_area              = mysql_real_escape_string($r['affected_area']);
         $focal_point_name           = mysql_real_escape_string($r['focal_point_name']);
         $area_type                  = mysql_real_escape_string($r['area_type']);
         $assessor_name              = mysql_real_escape_string($r['assessor_name']);
-        $aassessor_designation      = mysql_real_escape_string($r['assessor_designation']);
+        $assessor_designation       = mysql_real_escape_string($r['assessor_designation']);
         $focal_point_coordinator    = mysql_real_escape_string($r['focal_point_coordinator']);
 
+        if ( $update ) {
+            $q = "
+            UPDATE dar_general
+            SET reportDate              ='".$reportDate."',
+                affected_area           ='".$affected_area."',
+                focal_point_name        ='".$focal_point_name."',
+                area_type               ='".$area_type."',
+                assessor_name           ='".$assessor_name."',
+                assessor_designation    ='".$assessor_designation."',
+                focal_point_coordinator ='".$focal_point_coordinator."'
+            WHERE dar_id='".$dar_id."'
+             ";
+        }
+        else {
+            $q = "
+            INSERT INTO dar_general
+            VALUES('".$dar_id."',
+                   '".$reportDate."',
+                   '".$affected_area."',
+                   '".$focal_point_name."',
+                   '".$area_type."',
+                   '".$assessor_name."',
+                   '".$assessor_designation."',
+                   '".$focal_point_coordinator."'
+
+             )";
+        }
+
         $result = $global['db']->Execute($q);
-        if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+        if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting General Data"); }
 
     }
-    else if($_SESSION['dar_current_page'] == "wash"){
-        $q = "
-			INSERT INTO wash(disaster_id, water_resources_id, water_status, water_in500, water_out500, need_treatment, water_per_day, wait_pipe_borne, wait_open_well, wait_hand_pump, need_hygin_training, toilets, required_toilets, deficit_toilet, vector_type, vector_name  )
-			VALUES ( $disaster_id, $pre_disaster_water_source, $post_disaster_water_status, $water_sources_within_range, $water_sources_further_than_range, $water_treatment_required, $estimated_requirement_per_day, 
-			$waiting_time_pipe_borne, $waiting_time_open_well, $waiting_time_hand_pump, $hygiene_training_required, $number_of_toilets, $required_toilets_number, $toilet_deficit, $vector_type, $vector_disease );
-		";
+    else if($page == "popRes"){
+        $total_area                 = mysql_real_escape_string($r['total_area']);
+        $area_population            = mysql_real_escape_string($r['area_population']);
+        $male_injured               = mysql_real_escape_string($r['male_injured']);
+        $female_injured             = mysql_real_escape_string($r['female_injured']);
+        $pregnant_female_injured    = mysql_real_escape_string($r['pregnant_female_injured']);
+        $children_injured           = mysql_real_escape_string($r['children_injured']);
+        $young_children_injured     = mysql_real_escape_string($r['young_children_injured']);
+        $infants_injured            = mysql_real_escape_string($r['infants_injured']);
+        $male_displaced             = mysql_real_escape_string($r['male_displaced']);
+        $female_displaced           = mysql_real_escape_string($r['female_displaced']);
+        $pregnant_female_displaced  = mysql_real_escape_string($r['pregnant_female_displaced']);
+        $children_displaced         = mysql_real_escape_string($r['children_displaced']);
+        $young_children_displaced   = mysql_real_escape_string($r['young_children_displaced']);
+        $infants_displaced          = mysql_real_escape_string($r['infants_displaced']);
+        $male_missing               = mysql_real_escape_string($r['male_missing ']);
+        $female_missing             = mysql_real_escape_string($r['female_missing']);
+        $pregnant_female_missing    = mysql_real_escape_string($r['pregnant_female_missing']);
+        $children_missing           = mysql_real_escape_string($r['children_missing']);
+        $young_children_missing     = mysql_real_escape_string($r['young_children_missing']);
+        $infants_missing            = mysql_real_escape_string($r['infants_missing']);
+        $male_deceased              = mysql_real_escape_string($r['male_deceased ']);
+        $female_deceased            = mysql_real_escape_string($r['female_deceased ']);
+        $pregnant_female_deceased   = mysql_real_escape_string($r['pregnant_female_deceased']);
+        $children_deceased          = mysql_real_escape_string($r['children_deceased']);
+        $young_children_deceased    = mysql_real_escape_string($r['young_children_deceased']);
+        $infants_deceased           = mysql_real_escape_string($r['infants_deceased']);
+
+        if ( $update ) {
+            $q = "
+            UPDATE dar_popres
+            SET total_area                  ='".$total_area."',
+                area_population             ='".$area_population."',
+                male_injured                ='".$male_injured."',
+                female_injured              ='".$female_injured."',
+                pregnant_female_injured     ='".$pregnant_female_injured."',
+                children_injured            ='".$children_injured."',
+                young_children_injured      ='".$young_children_injured."',
+                infants_injured             ='".$infants_injured."',
+                male_displaced              ='".$male_displaced."',
+                female_displaced            ='".$female_displaced."',
+                pregnant_female_displaced   ='".$pregnant_female_displaced."',
+                children_displaced          ='".$children_displaced."',
+                young_children_displaced    ='".$young_children_displaced."',
+                infants_displaced           ='".$infants_displaced."',
+                male_missing                ='".$male_missing."',
+                female_missing              ='".$female_missing."',
+                pregnant_female_missing     ='".$pregnant_female_missing."',
+                children_missing            ='".$children_missing."',
+                young_children_missing      ='".$young_children_missing."',
+                infants_missing             ='".$infants_missing."',
+                male_deceased               ='".$male_deceased."',
+                female_deceased             ='".$female_deceased."',
+                pregnant_female_deceased    ='".$pregnant_female_deceased."',
+                children_deceased           ='".$children_deceased."',
+                young_children_deceased     ='".$young_children_deceased."',
+                infants_deceased            ='".$infants_deceased."'
+            WHERE dar_id='".$dar_id."'
+             ";
+        }
+        else {
+            $q = "
+            INSERT INTO dar_popres
+            VALUES('".$dar_id."',
+                   '".$total_area."',
+                   '".$area_population."',
+                   '".$male_injured."',
+                   '".$female_injured."',
+                   '".$pregnant_female_injured."',
+                   '".$children_injured."',
+                   '".$young_children_injured."',
+                   '".$infants_injured."',
+                   '".$male_displaced."',
+                   '".$female_displaced."',
+                   '".$pregnant_female_displaced."',
+                   '".$children_displaced."',
+                   '".$young_children_displaced."',
+                   '".$infants_displaced."',
+                   '".$male_missing."',
+                   '".$female_missing."',
+                   '".$pregnant_female_missing."',
+                   '".$children_missing."',
+                   '".$young_children_missing."',
+                   '".$infants_missing."',
+                   '".$male_deceased."',
+                   '".$female_deceased."',
+                   '".$pregnant_female_deceased."',
+                   '".$children_deceased."',
+                   '".$young_children_deceased."',
+                   '".$infants_deceased."'
+             )";
+        }
         $result = $global['db']->Execute($q);
-        if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+        if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting Population data"); }
 
     }
-    else if($_SESSION['dar_current_page'] == "food"){
-        $q = "
-			INSERT INTO wash(disaster_id, food_disruption, food_in200 )
-			VALUES ( $disaster_id, $food_practices_disruption, $accessible_food_source );
-		";
+    else if($page == "wash"){
+        $pre_disaster_water_source          = mysql_real_escape_string($r['pre_disaster_water_source']);
+        $post_disaster_water_status         = mysql_real_escape_string($r['post_disaster_water_status']);
+        $water_sources_within_range         = mysql_real_escape_string($r['water_sources_within_range']);
+        $water_sources_further_than_range   = mysql_real_escape_string($r['water_sources_further_than_range']);
+        $water_treatment_required           = mysql_real_escape_string($r['water_treatment_required']);
+        $estimated_requirement_per_day      = mysql_real_escape_string($r['estimated_requirement_per_day ']);
+        $waiting_time_pipe_borne            = mysql_real_escape_string($r['waiting_time_pipe_borne']);
+        $waiting_time_open_well             = mysql_real_escape_string($r['waiting_time_open_well']);
+        $waiting_time_hand_pump             = mysql_real_escape_string($r['waiting_time_hand_pump']);
+        $hygiene_training_required          = mysql_real_escape_string($r['hygiene_training_required']);
+        $number_of_toilets                  = mysql_real_escape_string($r['number_of_toilets']);
+        $required_toilets_number            = mysql_real_escape_string($r['required_toilets_number']);
+        $toilet_deficit                     = mysql_real_escape_string($r['toilet_deficit']);
+        $vector_type                        = mysql_real_escape_string($r['vector_type']);
+        $vector_disease                     = mysql_real_escape_string($r['vector_disease']);
+
+        if ( $update ) {
+            $q = "
+            UPDATE dar_wash
+            SET pre_disaster_water_source         ='".$pre_disaster_water_source."',
+                post_disaster_water_status        ='".$post_disaster_water_status."',
+                water_sources_within_range        ='".$water_sources_within_range."',
+                water_sources_further_than_range  ='".$water_sources_further_than_range."',
+                water_treatment_required          ='".$water_treatment_required."',
+                estimated_requirement_per_day     ='".$estimated_requirement_per_day."',
+                waiting_time_pipe_borne           ='".$waiting_time_pipe_borne."',
+                waiting_time_open_well            ='".$waiting_time_open_well."',
+                waiting_time_hand_pump            ='".$waiting_time_hand_pump."',
+                hygiene_training_required         ='".$hygiene_training_required."',
+                number_of_toilets                 ='".$number_of_toilets."',
+                required_toilets_number           ='".$required_toilets_number."',
+                toilet_deficit                    ='".$toilet_deficit."',
+                vector_type                       ='".$vector_type."',
+                vector_disease                    ='".$vector_disease."'
+            WHERE dar_id='".$dar_id."'
+             ";
+        }
+        else {
+            $q = "
+            INSERT INTO dar_wash
+            VALUES('".$dar_id."',
+                   '".$pre_disaster_water_source."',
+                   '".$post_disaster_water_status."',
+                   '".$water_sources_within_range."',
+                   '".$water_sources_further_than_range."',
+                   '".$water_treatment_required."',
+                   '".$estimated_requirement_per_day."',
+                   '".$waiting_time_pipe_borne."',
+                   '".$waiting_time_open_well."',
+                   '".$waiting_time_hand_pump."',
+                   '".$hygiene_training_required."',
+                   '".$number_of_toilets."',
+                   '".$required_toilets_number."',
+                   '".$toilet_deficit."',
+                   '".$vector_type."',
+                   '".$vector_disease."'
+
+             )";
+        }
         $result = $global['db']->Execute($q);
-        if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting feature"); }
+        if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting WASH data"); }
+
+    }
+    else if($page == "food"){
+        $food_practices_disruption         = mysql_real_escape_string($r['food_practices_disruption']);
+        $accessible_food_source         = mysql_real_escape_string($r['accessible_food_source']);
+
+        if ( $update ) {
+            $q = "
+            UPDATE dar_food
+            SET food_practices_disruption     ='".$food_practices_disruption."',
+                accessible_food_source        ='".$accessible_food_source."'
+            WHERE dar_id='".$dar_id."'
+             ";
+        }
+        else {
+            $q = "
+            INSERT INTO dar_food
+            VALUES('".$dar_id."',
+                   '".$food_practices_disruption."',
+                   '".$accessible_food_source."'
+
+             )";
+        }
+        $result = $global['db']->Execute($q);
+        if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting food data"); }
+
+    }
+    else if($page == "shelter"){
+        $partially_affected_houses              = mysql_real_escape_string($r['partially_affected_houses']);
+        $totally_affected_houses                = mysql_real_escape_string($r['totally_affected_houses']);
+        $families_evacuation                    = mysql_real_escape_string($r['families_evacuation']);
+        $population_evacuation                  = mysql_real_escape_string($r['population_evacuation']);
+        $families_displaced                     = mysql_real_escape_string($r['families_displaced']);
+        $population_displaced                   = mysql_real_escape_string($r['population_displaced ']);
+        $estimated_number_requiring_shelter     = mysql_real_escape_string($r['estimated_number_requiring_shelter']);
+        $temporary_shelter_available            = mysql_real_escape_string($r['temporary_shelter_available']);
+        $temp_shelter_covered_area              = mysql_real_escape_string($r['temp_shelter_covered_area']);
+
+        if ( $update ) {
+            $q = "
+            UPDATE dar_shelter
+            SET partially_affected_houses           ='".$partially_affected_houses."',
+                totally_affected_houses             ='".$totally_affected_houses."',
+                families_evacuation                 ='".$families_evacuation."',
+                population_evacuation               ='".$population_evacuation."',
+                families_displaced                  ='".$families_displaced."',
+                population_displaced                ='".$population_displaced."',
+                estimated_number_requiring_shelter  ='".$estimated_number_requiring_shelter."',
+                temporary_shelter_available         ='".$temporary_shelter_available."',
+                temp_shelter_covered_area           ='".$temp_shelter_covered_area."'
+            WHERE dar_id='".$dar_id."'
+             ";
+        }
+        else {
+            $q = "
+            INSERT INTO dar_shelter
+            VALUES('".$dar_id."',
+                   '".$partially_affected_houses."',
+                   '".$totally_affected_houses."',
+                   '".$families_evacuation."',
+                   '".$population_evacuation."',
+                   '".$families_displaced."',
+                   '".$population_displaced."',
+                   '".$estimated_number_requiring_shelter."',
+                   '".$temporary_shelter_available."',
+                   '".$temp_shelter_covered_area."'
+             )";
+        }
+        $result = $global['db']->Execute($q);
+        if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting WASH data"); }
 
     }
 
