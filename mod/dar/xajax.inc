@@ -53,7 +53,9 @@ function dar_prepend_log($message = "no message specified?")
 }
 
 
-// shows a status message before another ajax function is executed
+/**
+ * shows a status message before another ajax function is executed
+ */
 function dar_show_message($message = "no message specified?")
 {
 
@@ -62,6 +64,75 @@ function dar_show_message($message = "no message specified?")
     return $global['xajax_res']->getXML();
 }
 
+/**
+ * Function to show a list of current reports
+ */
+function dar_show_reports() {
+    global $global;
+    $htmlLog = "";
+    $htmlMain = "";
+    $htmlMain .= "
+			<table class=\"emTable\">
+			<tr>
+			<td style=\"font-size: 120%; padding-left: 8px;\" ><b>Date of Report</b></td>
+			<td style=\"font-size: 120%; padding-left: 8px;text-align: center;\" ><b>UUID</b></td>
+			<td style=\"font-size: 120%; padding-left: 8px;text-align: center;\" ><b>Disaster</b></td>
+			<td style=\"font-size: 120%; padding-left: 8px;text-align: center;\" ><b>Assessor</b></td>
+			<td style=\"font-size: 120%; padding-left: 8px;text-align: center;\" ><b>View/Edit</b></td>
+			</tr>
+			";
+
+    $q = "
+			SELECT  d.disaster_name, dar.dar_id, dar.date_created, dg.assessor_name
+			FROM disaster AS d, disaster_assessment AS dar, dar_general AS dg
+			WHERE d.disaster_id = dar.disaster_id
+			AND dar.dar_id = dg.dar_id
+			";
+    $result = $global['db']->Execute($q);
+    if($result === false) {
+        daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "show reports");
+    }
+    $rcount = 0;
+    $reports = array();
+    while ( $row = $result->FetchRow() ) {
+        $reports[$rcount] = $row;
+        $rcount++;
+    }
+    $eo = 0;
+    for ( $i = 0; $i < count($reports); $i++ ) {
+        $row		=	$reports[$i];
+        $uuid		=	$row['p_uuid'];
+        $name		=	'<b>'.$row['full_name'].'</b>';
+        $disease	=	$row['name'];
+
+        if(($eo % 2) == 0) {
+            $evenOddClass = "mainRowEven";
+        } else {
+            $evenOddClass = "mainRowOdd";
+        }
+
+        $htmlMain .= "
+				<tr>
+				<td style=\"padding-left: 8px;\" class=\"".$evenOddClass."\">".$name."</td>
+				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\"><a href=\"http://{$uuid}\">".$uuid."</a></td>
+				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\">".$disease."</td>
+				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\"><input class=\"styleTehButton\" type=\"button\" onclick=\"javascript: dar_append_log('Showing monitoring data for patient <b>".$name." </b>...<br>'); dar_show_list_for_patient('".$uuid."');\" value=\"View\"></td>
+				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\"><input class=\"styleTehButton\" type=\"button\" onclick=\"javascript: dar_append_log('Adding Monitoring data for patient <b>".$name." </b>...<br>'); dar_add_data('".$uuid."');\" value=\"Add\"></td>
+				</tr>
+				";
+        $eo++;
+    }
+    $htmlMain .= "</table>";
+    $pageControlHtml = '<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_load_general();\', 250);" value="'._t('Add new Data').'">';
+    $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
+    $global['xajax_res']->addAssign('darMain','innerHTML',$htmlMain);
+    $global['xajax_res']->addAssign('darControl','style.opacity','1.0');
+    $global['xajax_res']->addAssign('darControl','innerHTML',$pageControlHtml);
+    $htmlLog .= _t("Found <b>").$rcount._t("</b> Report(s).<br>");
+    $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
+    $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog \'); e.scrollTop = e.scrollHeight+1000;', 500);");
+    return $global['xajax_res']->getXML();
+}
 /**
  * Function to load the General Information section
  */

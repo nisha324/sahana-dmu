@@ -71,7 +71,7 @@ function shn_dar_default() {
         $control = "dar_load_shelter";
 
     } else {
-        $control = "dar_load_general";
+        $control = "dar_show_reports";
     }
 	echo "
         <script type=\"text/javascript\">".$control."();</script>
