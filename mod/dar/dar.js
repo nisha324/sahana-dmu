@@ -12,9 +12,64 @@
  */
 
 function initCalendar() {
-    $("#reportDate").datepicker({ dateFormat: 'yy-mm-dd' });
-    $("#disasterDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#assDate").datepicker({ dateFormat: 'yy-mm-dd' ,maxDate: 0});
+    $("#disasterDate").datepicker({ dateFormat: 'yy-mm-dd',maxDate: 0 });
+	$("#endDate").datepicker({ dateFormat: 'yy-mm-dd',maxDate: 0 });
 }
+
+function checkLimit(hey){
+    if($(hey).val()>99){
+        $('#call').remove();
+        $(hey).before("<div class='callout' id='call' onclick=$('#call').remove()>The value you entered seems to be high! Are you sure about this? Click to ignore</div>");
+    }
+    else{
+        $('#call').remove();
+    }
+
+}
+
+
+function limit(){
+    $("#male_injured").keyup(function(){checkLimit("#male_injured")});
+    $("#female_injured").keyup(function(){checkLimit("#female_injured")});
+    $("#pregnant_female_injured").keyup(function(){checkLimit("#pregnant_female_injured")});
+    $("#children_injured").keyup(function(){checkLimit("#children_injured")});
+    $("#young_children_injured").keyup(function(){checkLimit("#young_children_injured")});
+    $("#infants_injured").keyup(function(){checkLimit("#infants_injured")});
+}
+
+function dis(){
+    if($("#disaster_type").val()=="Other"){
+        $("#other_type").show();
+
+    }
+    else{
+        $("#other_type").hide();
+    }
+    if($("#assessor_name").val()=="otherName"){
+        $("#other_name").show();
+    }
+    else{
+        $("#other_name").hide();
+    }
+}
+
+
+function other(){
+    $("#other_type").hide();
+    $("#other_name").hide();
+    $( "select" ).change(dis);
+}
+
+function toolTip(){
+    $("#area_type").attr('title','Area affected by the disaster. The most accurate geographical area must be selected. The lowest possible area is ‘one GN area’');
+}
+
+
+
+
+
+
 function dar_get_general_data() {
     var r = new Object();
     r.reportDate                     = $("#reportDate").val();
@@ -115,3 +170,10 @@ function dar_get_shelter_data() {
     return(rj);
 }
 
+function dar_get_capacity_data(){
+
+}
+
+function dar_get_hazard_data(){
+
+}

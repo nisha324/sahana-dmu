@@ -119,8 +119,7 @@ function shn_gis_add_map()
 		</td>
 	</tr>
 
-	<tr>
-		<td class="mainRowEven" style=" border-top: none;" colspan="2">
+	<tr>		<td class="mainRowEven" style=" border-top: none;" colspan="2">
 			<label>latitude: </label>
 				<input id="latitude" type="text" value="0" readonly="">
 			<label> &nbsp; longitude: </label>
