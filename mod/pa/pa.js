@@ -39,7 +39,7 @@ function tempCheckBox(){
             // the checkbox was unchecked
         }
         if ($("#plan_no").is(':checked')){
-            $('#dplan_field').prop('disabled', true);
+            $('#plan_field').prop('disabled', true);
             // the checkbox was unchecked
         }
 

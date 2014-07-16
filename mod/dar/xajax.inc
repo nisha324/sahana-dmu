@@ -151,12 +151,13 @@ function dar_load_general()
         "Type of Disaster", "disaster_type");
     $htmlMain .= shn_form_text_return("","other_type");
 	$htmlMain .= shn_form_text_return("Disaster Name(if any)","disasterName");
-	$htmlMain .= shn_form_date_return("Date of Disaster", "reportDate");
+	$htmlMain .= shn_form_date_return("Date of Disaster", "reportDate",null,array('help'=>'Date the disaster occurred'));
     $htmlMain .= shn_form_select_return(array("colombo"=>"Colombo","kalutara"=>"Kalutara","galle"=>"Galle","gampaha"=>"Gampaha"),
-        "Affected Area", "affected_area");
+        "Affected Area", "affected_area",null,
+        array('help'=>'Area affected by the disaster. The most accurate geographical area must be selected. The lowest possible area is ‘one GN area’'));
    // $htmlMain .= shn_form_select_return(array("GN" => "GN", "MOH" => "MOH", "District" => "District", "Province" => "Province"),
         //"Affected Area", "area_type");
-    $htmlMain .= shn_form_text_return("Assessor's Name","assessor_name");
+    $htmlMain .= shn_form_text_return("Assessor's Name","assessor_name",null,array('help'=>'The person who is conducting the disaster assessment. She/He must be assigned by the focal point administrator'));
     $htmlMain .= shn_form_select_return(array("MOH Admin" => "MOH Admin", "FP Admin" => "FP Admin",
         "HO" => "HO"), "Assessor's Designation", "assessor_designation");
 	$htmlMain .= shn_form_date_return("Date of Assessment", "assDate");
@@ -190,7 +191,7 @@ function dar_load_popres() {
     $_SESSION['dar_current_page'] = "popRes";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Population and Resource Data");
-    $htmlMain.="<div class='long'>";
+    $htmlMain.="<div class='mid'>";
 
 
 
@@ -257,7 +258,7 @@ function dar_load_popres() {
 	$htmlMain .= shn_form_text_return("Female","total_female");
 	$htmlMain .= shn_form_text_return("Pregnant","total_pregnant");
 	$htmlMain .= shn_form_text_return("Children","total_children");
-	$htmlMain .= shn_form_text_return("Children between 1-5 yrs","total_1-5_Children");
+	$htmlMain .= shn_form_text_return("Children between 1-5 yrs","total_1to5_children");
 	$htmlMain .= shn_form_text_return("Infants","total_infants");
 	$htmlMain .= shn_form_text_return("Total","total_full");
 	$htmlMain .= shn_form_text_return("Total number of families","total_families");
@@ -292,6 +293,7 @@ function dar_load_popres() {
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
     $global['xajax_res']->addScript("limit();");
+    $global['xajax_res']->addScript("numericOnly();");
     return $global['xajax_res']->getXML();
 }
 
@@ -308,27 +310,19 @@ function dar_load_wash() {
     $htmlMain .= shn_form_select_return(array("1" => "Similar to pre-disaster", "2" => "Greater than 75%",
         "3" => "Greater than 50%", "4" => "Less than 50%", "5" => "Less than 25%",
         "6" => "All damaged"),"Post-disaster water status", "post_disaster_water_status");
-    $htmlMain .= shn_form_fsopen_return("Number of water sources");
-    $htmlMain .= shn_form_text_return("Within 500m", "water_sources_within_range",null,array());
-    $htmlMain .= shn_form_text_return("Further than 500m", "water_sources_further_than_range");
-    $htmlMain .= shn_form_fsclose_return();
-    $htmlMain .= shn_form_select_return(array("1" => "Yes", "0" => "No"),
+    $htmlMain .= shn_form_select_return(array('1'=>'Less than 30min','2'=>'More than 30min','3'=>'Difficult to assess'),
+        "Waiting time at the main water source",'wait_time_water');
+    $htmlMain .= shn_form_text_return("Water sources within 500m of affected area", "water_sources_within_range",null,array('help'=>''));
+    $htmlMain .= shn_form_select_return(array("1" => "Yes", "0" => "No","3"=>"Difficult to asses"),
         "Requirement of water treatment", "water_treatment_required");
-    $htmlMain .= shn_form_text_return("Estimated Requirement of Water/day", "estimated_requirement_per_day");
-
-    $htmlMain .= shn_form_fsopen_return("Estimated waiting time at a single water source");
-    $htmlMain .= shn_form_text_return("Pipe-borne", "waiting_time_pipe_borne", null,
-        array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow dare * available number within 500m => should be less than 30min'));
-    $htmlMain .= shn_form_text_return("Open Well", "waiting_time_open_well", null,
-        array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow dare * available number within 500m => should be less than 30min'));
-    $htmlMain .= shn_form_text_return("Hand-pump", "waiting_time_hand_pump", null,
-        array('help'=>'Estimated waiting time = Total water requirement  of the affected population / flow dare * available number within 500m => should be less than 30min'));
+    $htmlMain .= shn_form_text_return("Est Requirement of water per day for affected population", "estimated_requirement_per_day"); //number field
     $htmlMain .= shn_form_fsclose_return();
-    $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
-        "Requirement basic hygiene training", "hygiene_training_required");
+
     $htmlMain .= shn_form_fsclose_return();
 
     $htmlMain .= shn_form_fsopen_return("Toilets");
+    $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
+        "Requirement basic hygiene training", "hygiene_training_required");
     $htmlMain .= shn_form_text_return("Number of appropriately designed toilets", "number_of_toilets");
     $htmlMain .= shn_form_text_return("Required Number", "required_toilets_number", null,
         array("help"=>"On basis of one toilet per 20 people", "disabled"=>true));
@@ -336,8 +330,14 @@ function dar_load_wash() {
     $htmlMain .= shn_form_fsclose_return();
 
     $htmlMain .= shn_form_fsopen_return("Tendency for vector-borne diseases");
-    $htmlMain .= shn_form_text_return("Type of vector", "vector_type");
-    $htmlMain .= shn_form_text_return("Name of disease", "vector_disease");
+    $htmlMain .= shn_form_select_return(array("1" => "Yes", "0" => "No","3"=>"Difficult to asses"),"", "vector_type");
+    $htmlMain .= '<br><fieldset><select id="diseases" disabled>
+                <option value="dengue">Dengue</option>
+                <option value="leptospirosis ">Leptospirosis</option>
+                <option value="other">Other</option>
+                </select>
+                <input type="text" id="other_disease" disabled>
+                </fieldset>';
     $htmlMain .= shn_form_fsclose_return();
 
     $editControlHtml = '
@@ -352,6 +352,7 @@ function dar_load_wash() {
     $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
+    $global['xajax_res']->addScript("vector_yes();");
     return $global['xajax_res']->getXML();
 
 
