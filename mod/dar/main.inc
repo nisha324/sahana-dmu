@@ -39,9 +39,9 @@ function shn_dar_default() {
     shn_tabmenu_item("general", _t("dar-Menu|General Info"),                 "dar");
     shn_tabmenu_item("popRes",  _t("dar-Menu|Population and Resource Data"), "dar");
     /*shn_tabmenu_item("indicators", _t("dar-Menu|Indicators"),                "dar");*/
-    shn_tabmenu_item("wash", _t("dar-Menu|WASH Indicators"),                 "dar");
+    shn_tabmenu_item("wash", _t("dar-Menu|WASH"),                 "dar");
     shn_tabmenu_item("food",   _t("dar-Menu|Food security and nutrition"),   "dar");
-    shn_tabmenu_item("shelter",  _t("dar-Menu|Shelter Indicators"),          "dar");
+    shn_tabmenu_item("shelter",  _t("dar-Menu|Shelters"),          "dar");
     shn_tabmenu_close();
 	shn_xajax_printJavascript();
 	echo "
@@ -52,6 +52,8 @@ function shn_dar_default() {
 		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
 	";
+    echo "<style>".file_get_contents($global['approot']."/mod/dar/dar.css")."</style>".
+        "<script>".file_get_contents($global['approot']."/mod/dar/chosen.proto.js")."</script>";
     if(isset($_GET['general'])) {
         $control = "dar_load_general";
 
@@ -70,7 +72,13 @@ function shn_dar_default() {
     } elseif(isset($_GET['shelter'])) {
         $control = "dar_load_shelter";
 
-    } else {
+    } elseif(isset($_GET['loadCap'])){
+        $control = "dar_load_capacity";
+
+    } elseif(isset($_GET['loadHazard'])){
+        $control = "dar_load_hazard";
+    }
+    else {
         $control = "dar_show_reports";
     }
 	echo "
@@ -80,6 +88,8 @@ function shn_dar_default() {
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
 	";
 }
+
+
 
 
 

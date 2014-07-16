@@ -27,6 +27,8 @@ array_push($global['xajax_functions'], 'dar_load_popres');
 array_push($global['xajax_functions'], 'dar_load_wash');
 array_push($global['xajax_functions'], 'dar_load_food');
 array_push($global['xajax_functions'], 'dar_load_shelter');
+array_push($global['xajax_functions'], 'dar_load_capacity');
+array_push($global['xajax_functions'], 'dar_load_hazard');
 
 array_push($global['xajax_functions'], 'dar_perform_save');
 
@@ -145,18 +147,20 @@ function dar_load_general()
     $_SESSION['dar_current_page'] = "general";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("General Information");
-    $htmlMain .= shn_form_text_return("Date of Assessment", "reportDate");
-    $htmlMain .= shn_form_select_return(array("Galle" => "Galle", "Nuwara Eliya" => "Nuwara Eliya", "Ampara" => "Ampara"),
-        "Affected Area Name", "affected_area");
-    $htmlMain .= shn_form_select_return(array("A1" => "A1", "A2" => "A2", "A3" => "A3"), "Name of Focal Point", "focal_point_name");
-    $htmlMain .= shn_form_select_return(array("GN" => "GN", "MOH" => "MOH", "District" => "District", "Province" => "Province"),
-        "GN, MOH, District, Province", "area_type");
-    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Hedarh" => "Rasika Hedarh",
-        "Chathura Thennakoon" => "Chathura Thennakoon", "Thilina Mendis" => "Thilina Mendis"), "Assessor's Name", "assessor_name");
+	$htmlMain .= shn_form_select_return(array("Flood" => "Flood", "Drought" => "Drought", "Landslide" => "Landslide", "Tsunami" => "Tsunami","Drought"=>"Drought","Storm"=>"Storm/Cyclone","Other"=>"Other. Please Specify"),
+        "Type of Disaster", "disaster_type");
+    $htmlMain .= shn_form_text_return("","other_type");
+	$htmlMain .= shn_form_text_return("Disaster Name(if any)","disasterName");
+	$htmlMain .= shn_form_date_return("Date of Disaster", "reportDate");
+    $htmlMain .= shn_form_select_return(array("colombo"=>"Colombo","kalutara"=>"Kalutara","galle"=>"Galle","gampaha"=>"Gampaha"),
+        "Affected Area", "affected_area");
+   // $htmlMain .= shn_form_select_return(array("GN" => "GN", "MOH" => "MOH", "District" => "District", "Province" => "Province"),
+        //"Affected Area", "area_type");
+    $htmlMain .= shn_form_text_return("Assessor's Name","assessor_name");
     $htmlMain .= shn_form_select_return(array("MOH Admin" => "MOH Admin", "FP Admin" => "FP Admin",
         "HO" => "HO"), "Assessor's Designation", "assessor_designation");
-    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Hedarh" => "Rasika Hedarh"),
-        "Focal Point Coordinator Name", "focal_point_coordinator");
+	$htmlMain .= shn_form_date_return("Date of Assessment", "assDate");
+	$htmlMain .= shn_form_date_return("Disaster End Date","endDate");
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_fclose_return();
 
@@ -173,6 +177,8 @@ function dar_load_general()
     $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
+    $global['xajax_res']->addScript("other();");
+    $global['xajax_res']->addScript("toolTip();");
     return $global['xajax_res']->getXML();
 }
 
@@ -184,9 +190,25 @@ function dar_load_popres() {
     $_SESSION['dar_current_page'] = "popRes";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Population and Resource Data");
-    $htmlMain .= shn_form_text_return("Total Area", "total_area");
-    $htmlMain .= shn_form_text_return("Total Population in area", "area_population");
-    $htmlMain .= shn_form_text_return("Affected Area", "affected_area");
+    $htmlMain.="<div class='long'>";
+
+
+
+    $q = "SELECT * FROM property WHERE feature_feature_id=(SELECT feature_id FROM map,layer,map_has_layer,feature,property WHERE map.map_id=map_has_layer.map_map_id AND layer.layer_id=map_has_layer.layer_layer_id AND property.feature_feature_id=feature.feature_id AND feature.layer_layer_id=layer.layer_id AND layer.name='districts' AND property.name='name' AND property.value='colombo');";
+
+    $properties =Array();
+
+    $result = $global['db']->Execute($q);
+    while($row = $result->FetchRow() ){
+        $properties[$row['name']] = $row['value'];
+
+    }
+
+    $htmlMain .= shn_form_text_return("Total Area under focal point(in km&#178)", "total_area");
+    $htmlMain .= shn_form_text_return("Total Population of the focal point", "focal_population",null,array());
+    $htmlMain .= shn_form_text_return("Affected Area(in km&#178)", "affected_area",null,array('value'=>substr($properties['area'],0, -2)));
+    $htmlMain .= shn_form_text_return("Total population of the affected area", "area_population",null,array('value'=>substr($properties['population'], -2)));
+    $htmlMain.="</div>";
 
     $htmlMain .= shn_form_fsopen_return("Injured Persons");
     $htmlMain .= shn_form_text_return("Male", "male_injured");
@@ -195,6 +217,7 @@ function dar_load_popres() {
     $htmlMain .= shn_form_text_return("Children", "children_injured");
     $htmlMain .= shn_form_text_return("Between ages 1-5", "young_children_injured");
     $htmlMain .= shn_form_text_return("Infants", "infants_injured");
+	$htmlMain .= shn_form_text_return("Total", "total_injured");
     $htmlMain .= shn_form_fsclose_return();
 
     $htmlMain .= shn_form_fsopen_return("Displaced Persons");
@@ -204,6 +227,7 @@ function dar_load_popres() {
     $htmlMain .= shn_form_text_return("Children", "children_displaced");
     $htmlMain .= shn_form_text_return("Between ages 1-5", "young_children_displaced");
     $htmlMain .= shn_form_text_return("Infants", "infants_displaced");
+	$htmlMain .= shn_form_text_return("Total", "total_displaced");
     $htmlMain .= shn_form_fsclose_return();
 
     $htmlMain .= shn_form_fsopen_return("Missing Persons");
@@ -213,18 +237,45 @@ function dar_load_popres() {
     $htmlMain .= shn_form_text_return("Children", "children_missing");
     $htmlMain .= shn_form_text_return("Between ages 1-5", "young_children_missing");
     $htmlMain .= shn_form_text_return("Infants", "infants_missing");
+	$htmlMain .= shn_form_text_return("Total", "total_missing");
     $htmlMain .= shn_form_fsclose_return();
 
-    $htmlMain .= shn_form_fsopen_return("Deceased Persons");
-    $htmlMain .= shn_form_text_return("Male", "male_deceased");
-    $htmlMain .= shn_form_text_return("Female", "female_deceased");
-    $htmlMain .= shn_form_text_return("Pregnant Females", "pregnant_female_deceased");
-    $htmlMain .= shn_form_text_return("Children", "children_deceased");
-    $htmlMain .= shn_form_text_return("Between ages 1-5", "young_children_deceased");
-    $htmlMain .= shn_form_text_return("Infants", "infants_deceased");
+    $htmlMain .= shn_form_fsopen_return("Communicable Disease");
+    $htmlMain .= shn_form_text_return("Respiratory diseases", "res_diseases");
+    $htmlMain .= shn_form_text_return("Dysentery", "dysentery");
+    $htmlMain .= shn_form_text_return("Hepatitis A", "hepatitis");
+    $htmlMain .= shn_form_text_return("Dengue", "dengue");
+    $htmlMain .= shn_form_text_return("Malaria", "malaria");
+    $htmlMain .= shn_form_text_return("Measles", "measles");
+    $htmlMain .= shn_form_text_return("Meningitis", "meningitis");
+    $htmlMain .= shn_form_text_return("Chicken pox", "chikenpox");
+    $htmlMain .= shn_form_text_return("Total", "total_deceased");
+    $htmlMain .= shn_form_fsclose_return();
+	
+	$htmlMain .= shn_form_fsopen_return("Total number affected");
+	$htmlMain .= shn_form_text_return("Male","total_male");
+	$htmlMain .= shn_form_text_return("Female","total_female");
+	$htmlMain .= shn_form_text_return("Pregnant","total_pregnant");
+	$htmlMain .= shn_form_text_return("Children","total_children");
+	$htmlMain .= shn_form_text_return("Children between 1-5 yrs","total_1-5_Children");
+	$htmlMain .= shn_form_text_return("Infants","total_infants");
+	$htmlMain .= shn_form_text_return("Total","total_full");
+	$htmlMain .= shn_form_text_return("Total number of families","total_families");
     $htmlMain .= shn_form_fsclose_return();
 
-    $htmlMain .= shn_form_fsclose_return();
+    //$htmlMain .= shn_form_fsopen_return();
+    $htmlMain.="<div class='long'>";
+    $htmlMain .= shn_form_text_return("Number of health institutes in the FP","fp_hi");
+    $htmlMain .= shn_form_text_return("Total bed strength of all FP health institutes","fp_bs");
+    $htmlMain .= shn_form_text_return("Number of health institutes in the affected area","ae_hi");
+    $htmlMain .= shn_form_text_return("Total bed strength of all health institutes in the affected area","ae_bs");
+    $htmlMain .= shn_form_text_return("Number of health institutions within 10km radius of the affected area","tenKm_hi");
+    $htmlMain .= shn_form_text_return("Number of district hospitals and above in the FP","fp_dh");
+    $htmlMain .= shn_form_text_return("Number of other inpatient facilities in the FP","fp_if");
+    $htmlMain .= shn_form_text_return("Number of Doctors in the affected area","ae_doc");
+    $htmlMain .="</div>";
+    //$htmlMain .= shn_form_fclose_return();
+
     $htmlMain .= shn_form_fclose_return();
 
     $editControlHtml = '
@@ -240,6 +291,7 @@ function dar_load_popres() {
     $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
+    $global['xajax_res']->addScript("limit();");
     return $global['xajax_res']->getXML();
 }
 
@@ -257,7 +309,7 @@ function dar_load_wash() {
         "3" => "Greater than 50%", "4" => "Less than 50%", "5" => "Less than 25%",
         "6" => "All damaged"),"Post-disaster water status", "post_disaster_water_status");
     $htmlMain .= shn_form_fsopen_return("Number of water sources");
-    $htmlMain .= shn_form_text_return("Within 500m", "water_sources_within_range");
+    $htmlMain .= shn_form_text_return("Within 500m", "water_sources_within_range",null,array());
     $htmlMain .= shn_form_text_return("Further than 500m", "water_sources_further_than_range");
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_select_return(array("1" => "Yes", "0" => "No"),
@@ -312,11 +364,27 @@ function dar_load_food() {
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "food";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
-    $htmlMain .= shn_form_fsopen_return("Food Security");
-    $htmlMain .= shn_form_select_return(array("Disrupted" => "Disrupted", "Not Disrupted" => "Not Disrupted"),
+    $htmlMain .= shn_form_fsopen_return("Food Security & Nutrition");
+    /*$htmlMain .= shn_form_select_return(array("Disrupted" => "Disrupted", "Not Disrupted" => "Not Disrupted"),
         "Disruption of usual food prepadarion practices", "food_practices_disruption");
     $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),"Is there an accessible food source within 2km?",
-        "accessible_food_source");
+        "accessible_food_source");*/
+    $htmlMain.='<fieldset>
+    <legend>Disruption of usual food preparation practices</legend>
+    <input type="radio" name="food_dist" value="Yes"> Yes<br>
+    <input type="radio" name="food_dist" value="No"> No<br>
+    <input type="radio" name="food_dist" value="Difficult to assess"> Difficult to assess
+    <!-- etc -->
+    </fieldset>
+        <fieldset>
+    <legend>Accessibility to food source within 2km</legend>
+    <input type="radio" name="food_access" value="Yes"> Yes<br>
+    <input type="radio" name="food_access" value="No"> No<br>
+    <input type="radio" name="food_access" value="Difficult to assess"> Difficult to assess
+    <!-- etc -->
+    </fieldset>';
+    ;
+
 
 
     $htmlMain .= shn_form_fsclose_return();
@@ -360,13 +428,20 @@ function dar_load_shelter() {
 
     $htmlMain .= shn_form_fsopen_return("Shelter estimates");
     $htmlMain .= shn_form_text_return("Estimated Number requiring shelter", "estimated_number_requiring_shelter");
-    $htmlMain .= shn_form_text_return("Required area for shelter", "required_area_for_shelter");
+    $htmlMain .= shn_form_text_return("Required area for shelter", "required_area_for_shelter",null,array("help"=>"covered living area calculation based on 3.5m&#178"));
     $htmlMain .= shn_form_fsclose_return();
 
-    $htmlMain .= shn_form_fsopen_return("Temporary shelter availability");
-    $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),"Is there temporary shelter available?",
-        "temporary_shelter_available");
-    $htmlMain .= shn_form_text_return("Total Covered Area", "temp_shelter_covered_area");
+    $htmlMain .= shn_form_fsopen_return("Temporary shelter availability in the area");
+    $htmlMain .= '<div class="checkBox"><form>
+        <label>Schools</label><input type="checkbox" id="schools">
+        <input type="text" id="schools_list" disabled><br>
+        <label>Temples/Religious Places</label><input type="checkbox" id="temples">
+        <input type="text" id="temples_list" disabled><br>
+        <label>Government offices</label><input type="checkbox" id="gOffices">
+        <input type="text" id="gOffices_list" disabled><br>
+        <label>Other</label><input type="checkbox" id="other">
+        <input type="text" id="other_list" disabled>
+        </form></div>';
     $htmlMain .= shn_form_fsclose_return();
 
     $editControlHtml = '
@@ -381,9 +456,9 @@ function dar_load_shelter() {
     $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
+    $global['xajax_res']->addScript("tempCheckBox()");
     return $global['xajax_res']->getXML();
 }
-
 
 function dar_perform_save($dar_id, $rj, $page, $update = false) {
 
@@ -594,9 +669,9 @@ function dar_perform_save($dar_id, $rj, $page, $update = false) {
 
     }
     else if($page == "food"){
-        $food_practices_disruption         = mysql_real_escape_string($r['food_practices_disruption']);
-        $accessible_food_source         = mysql_real_escape_string($r['accessible_food_source']);
-
+        $food_practices_disruption         = 3;//$r['food_practices_disruption'];
+        $accessible_food_source         = 5;//$r['accessible_food_source'];
+       // alert("hh");
         if ( $update ) {
             $q = "
             UPDATE dar_food

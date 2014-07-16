@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5354082-f916-4760-a680-40f5255f1425" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mod/dar/main.inc" afterPath="$PROJECT_DIR$/mod/dar/main.inc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mod/dar/xajax.inc" afterPath="$PROJECT_DIR$/mod/dar/xajax.inc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/translation_log.txt" afterPath="$PROJECT_DIR$/res/translation_log.txt" />
     </list>
     <ignored path="sahana-dmu.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,25 +28,7 @@
       <file leaf-file-name="conf.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/dar/conf.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="68" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="450">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".htaccess" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/.htaccess">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="59" selection-start="2633" selection-end="2633" vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="1458">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.inc" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mod/mon/main.inc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="8" selection-start="1446" selection-end="1524" vertical-scroll-proportion="-18.0" vertical-offset="0" max-vertical-offset="684">
+            <state line="15" column="68" selection-start="624" selection-end="624" vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="238">
               <folding />
             </state>
           </provider>
@@ -57,7 +37,7 @@
       <file leaf-file-name="main.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/dar/main.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="36" selection-start="2916" selection-end="2916" vertical-scroll-proportion="-22.0" vertical-offset="720" max-vertical-offset="1818">
+            <state line="54" column="87" selection-start="2463" selection-end="2463" vertical-scroll-proportion="4.9038463" vertical-offset="1173" max-vertical-offset="1887">
               <folding>
                 <element signature="e#6#548#0" expanded="true" />
               </folding>
@@ -65,27 +45,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mon.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mod/mon/mon.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="1" selection-start="3071" selection-end="3071" vertical-scroll-proportion="0.0" vertical-offset="550" max-vertical-offset="1278">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="xajax.inc" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="xajax.inc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/dar/xajax.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="42" selection-start="3863" selection-end="3863" vertical-scroll-proportion="0.7924528" vertical-offset="1242" max-vertical-offset="12078">
+            <state line="435" column="8" selection-start="24871" selection-end="24929" vertical-scroll-proportion="-0.0" vertical-offset="7395" max-vertical-offset="12920">
               <folding>
-                <marker date="1404677916606" expanded="true" signature="2532:3007" placeholder="..." />
-                <marker date="1404677916606" expanded="true" signature="2540:3003" placeholder="..." />
-                <marker date="1404677916606" expanded="true" signature="2557:2592" placeholder="..." />
-                <marker date="1404677916606" expanded="true" signature="2638:2692" placeholder="..." />
-                <marker date="1404677916606" expanded="true" signature="2728:2782" placeholder="..." />
-                <marker date="1404677916606" expanded="true" signature="2822:2876" placeholder="..." />
-                <marker date="1404677916606" expanded="true" signature="2916:2970" placeholder="..." />
+                <element signature="e#6#559#0" expanded="true" />
+                <marker date="1405486085136" expanded="true" signature="2652:3127" placeholder="..." />
+                <marker date="1405486085136" expanded="true" signature="2660:3123" placeholder="..." />
+                <marker date="1405486085136" expanded="false" signature="2677:2712" placeholder="..." />
+                <marker date="1405486085136" expanded="false" signature="2758:2812" placeholder="..." />
+                <marker date="1405486085136" expanded="false" signature="2848:2902" placeholder="..." />
+                <marker date="1405486085136" expanded="false" signature="2942:2996" placeholder="..." />
+                <marker date="1405486085136" expanded="false" signature="3036:3090" placeholder="..." />
+                <marker date="1405486085136" expanded="true" signature="3146:3357" placeholder="SELECT d.dis..disaster..." />
+                <marker date="1405486085136" expanded="true" signature="9407:9774" placeholder="SELECT * FRO..property..." />
+                <marker date="1405486085136" expanded="true" signature="9407:9784" placeholder="SELECT * FRO..property..." />
+                <marker date="1405486085136" expanded="true" signature="21285:21598" placeholder="..." />
+                <marker date="1405486085136" expanded="true" signature="21617:21929" placeholder="..." />
+                <marker date="1405486085136" expanded="true" signature="24855:25407" placeholder="..." />
+                <marker date="1405486085136" expanded="true" signature="24861:25401" placeholder="..." />
+                <marker date="1405486085136" expanded="true" signature="38900:38993" placeholder="UPDATE dar_f..." />
               </folding>
             </state>
           </provider>
@@ -94,30 +74,94 @@
       <file leaf-file-name="dar.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mod/dar/dar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="110" column="6" selection-start="5553" selection-end="5578" vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="2214">
+            <state line="19" column="0" selection-start="782" selection-end="1108" vertical-scroll-proportion="0.0" vertical-offset="99" max-vertical-offset="4131">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="xajax.inc" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mod/mon/xajax.inc">
+      <file leaf-file-name="conf.inc" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mod/pa/conf.inc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="146" column="46" selection-start="5020" selection-end="5649" vertical-scroll-proportion="-18.222221" vertical-offset="1956" max-vertical-offset="9954">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="238">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.inc" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mod/pa/main.inc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="26" selection-start="1190" selection-end="1190" vertical-scroll-proportion="-3.2692308" vertical-offset="306" max-vertical-offset="1258">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pa.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mod/pa/pa.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="21" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0" vertical-offset="273" max-vertical-offset="884">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="xajax.inc" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mod/pa/xajax.inc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="151" column="76" selection-start="6229" selection-end="6229" vertical-scroll-proportion="0.28671327" vertical-offset="2216" max-vertical-offset="5559">
               <folding>
-                <marker date="1392169314015" expanded="false" signature="2540:2570" placeholder="..." />
-                <marker date="1392169314015" expanded="true" signature="2628:3111" placeholder="..." />
-                <marker date="1392169314015" expanded="true" signature="2636:3107" placeholder="..." />
-                <marker date="1392169314015" expanded="false" signature="2653:2688" placeholder="..." />
-                <marker date="1392169314015" expanded="false" signature="2724:2778" placeholder="..." />
-                <marker date="1392169314015" expanded="false" signature="2814:2868" placeholder="..." />
-                <marker date="1392169314015" expanded="false" signature="2907:2961" placeholder="..." />
-                <marker date="1392169314015" expanded="false" signature="3010:3064" placeholder="..." />
-                <marker date="1392169314015" expanded="true" signature="19575:19762" placeholder="..." />
-                <marker date="1392169314015" expanded="true" signature="19583:19758" placeholder="..." />
-                <marker date="1392169314015" expanded="false" signature="19600:19635" placeholder="..." />
-                <marker date="1392169314015" expanded="false" signature="19671:19725" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="2344:2819" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="2352:2815" placeholder="..." />
+                <marker date="1405495236762" expanded="false" signature="2369:2404" placeholder="..." />
+                <marker date="1405495236762" expanded="false" signature="2450:2504" placeholder="..." />
+                <marker date="1405495236762" expanded="false" signature="2540:2594" placeholder="..." />
+                <marker date="1405495236762" expanded="false" signature="2634:2688" placeholder="..." />
+                <marker date="1405495236762" expanded="false" signature="2728:2782" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="2838:3049" placeholder="SELECT d.dis..disaster..." />
+                <marker date="1405495236762" expanded="true" signature="6013:6444" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="6151:6423" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="6483:7146" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="6607:6753" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="6796:7124" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="7026:7103" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="7186:7752" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="7330:7476" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="7519:7730" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="7792:8565" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="7906:8052" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="8095:8329" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="8393:8543" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="8605:9130" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="9170:9421" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="9461:10053" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="9576:9734" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="9780:10031" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="9930:10010" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="10093:10784" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="10268:10422" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="10467:10762" placeholder="..." />
+                <marker date="1405495236762" expanded="true" signature="10583:10741" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pa.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mod/pa/pa.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="21" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dar.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mod/dar/dar.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="79" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1683">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -152,18 +196,24 @@
         <option value="$PROJECT_DIR$/mod/rat/xajax.inc" />
         <option value="$PROJECT_DIR$/mod/dar/conf.inc" />
         <option value="$PROJECT_DIR$/www/.htaccess" />
-        <option value="$PROJECT_DIR$/mod/dar/dar.js" />
+        <option value="$PROJECT_DIR$/mod/gis/main.inc" />
+        <option value="$PROJECT_DIR$/mod/pa/main.inc" />
         <option value="$PROJECT_DIR$/mod/dar/main.inc" />
+        <option value="$PROJECT_DIR$/mod/dar/dar.css" />
         <option value="$PROJECT_DIR$/mod/dar/xajax.inc" />
+        <option value="$PROJECT_DIR$/mod/dar/dar.js" />
+        <option value="$PROJECT_DIR$/mod/pa/pa.js" />
+        <option value="$PROJECT_DIR$/mod/pa/pa.css" />
+        <option value="$PROJECT_DIR$/mod/pa/xajax.inc" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="49" />
-    <option name="y" value="-4" />
-    <option name="width" value="1551" />
-    <option name="height" value="904" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -219,20 +269,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sahana-dmu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sahana-dmu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="mod" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -251,7 +287,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="mon" />
+              <option name="myItemId" value="pa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sahana-dmu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sahana-dmu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mod" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gis" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -328,15 +382,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="49" y="-4" width="1551" height="904" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25718102" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20863788" sideWeight="0.67107004" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12518302" sideWeight="0.67107004" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -344,11 +398,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32810047" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -368,24 +422,250 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mod/mon/xajax.inc">
+    <entry file="file://$PROJECT_DIR$/mod/dar/dar.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="216" column="43" selection-start="9796" selection-end="9796" vertical-scroll-proportion="0.0" vertical-offset="3888" max-vertical-offset="10134">
+        <state line="30" column="13" selection-start="497" selection-end="497" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1411">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/dar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="159" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="2992">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/conf.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="68" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/main.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="1247" selection-end="1247" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="1768">
           <folding>
-            <marker date="1392169314015" expanded="false" signature="2540:2570" placeholder="..." />
-            <marker date="1392169314015" expanded="true" signature="2628:3111" placeholder="..." />
-            <marker date="1392169314015" expanded="true" signature="2636:3107" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="2653:2688" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="2724:2778" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="2814:2868" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="2907:2961" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="3010:3064" placeholder="..." />
-            <marker date="1392169314015" expanded="true" signature="19575:19762" placeholder="..." />
-            <marker date="1392169314015" expanded="true" signature="19583:19758" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="19600:19635" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="19671:19725" placeholder="..." />
+            <element signature="e#6#548#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="264" column="25" selection-start="14397" selection-end="14397" vertical-scroll-proportion="0.0" vertical-offset="4488" max-vertical-offset="12274">
+          <folding>
+            <element signature="e#6#559#0" expanded="true" />
+            <marker date="1405486085136" expanded="true" signature="2652:3127" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="2660:3123" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2677:2712" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2758:2812" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2848:2902" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2942:2996" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="3036:3090" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="3146:3357" placeholder="SELECT d.dis..disaster..." />
+            <marker date="1405486085136" expanded="true" signature="9407:9774" placeholder="SELECT * FRO..property..." />
+            <marker date="1405486085136" expanded="true" signature="9407:9784" placeholder="SELECT * FRO..property..." />
+            <marker date="1405486085136" expanded="true" signature="21285:21598" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="21617:21929" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="24855:25407" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="24861:25401" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="38900:38993" placeholder="UPDATE dar_f..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/dar.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="15" selection-start="463" selection-end="463" vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="1377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/dar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="25" selection-start="1204" selection-end="1204" vertical-scroll-proportion="0.0" vertical-offset="246" max-vertical-offset="2618">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/conf.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="68" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/main.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="87" selection-start="2484" selection-end="2484" vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="1768">
+          <folding>
+            <element signature="e#6#548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="264" column="25" selection-start="14397" selection-end="14397" vertical-scroll-proportion="0.0" vertical-offset="4488" max-vertical-offset="12274">
+          <folding>
+            <element signature="e#6#559#0" expanded="true" />
+            <marker date="1405486085136" expanded="true" signature="2652:3127" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="2660:3123" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2677:2712" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2758:2812" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2848:2902" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2942:2996" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="3036:3090" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="3146:3357" placeholder="SELECT d.dis..disaster..." />
+            <marker date="1405486085136" expanded="true" signature="9407:9774" placeholder="SELECT * FRO..property..." />
+            <marker date="1405486085136" expanded="true" signature="9407:9784" placeholder="SELECT * FRO..property..." />
+            <marker date="1405486085136" expanded="true" signature="21285:21598" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="21617:21929" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="24855:25407" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="24861:25401" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="38900:38993" placeholder="UPDATE dar_f..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/dar.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="1" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="153">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/dar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="28" selection-start="1114" selection-end="1114" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="2601">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/conf.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="68" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/main.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="0" selection-start="3267" selection-end="3267" vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="1751">
+          <folding>
+            <element signature="e#6#548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="184" column="44" selection-start="9497" selection-end="9497" vertical-scroll-proportion="0.0" vertical-offset="2703" max-vertical-offset="12257">
+          <folding>
+            <element signature="e#6#559#0" expanded="true" />
+            <marker date="1405486085136" expanded="true" signature="2652:3127" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="2660:3123" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2677:2712" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2758:2812" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2848:2902" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2942:2996" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="3036:3090" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="3146:3357" placeholder="SELECT d.dis..disaster..." />
+            <marker date="1405486085136" expanded="true" signature="9407:9774" placeholder="SELECT * FRO..property..." />
+            <marker date="1405486085136" expanded="true" signature="9407:9784" placeholder="SELECT * FRO..property..." />
+            <marker date="1405486085136" expanded="true" signature="21285:21598" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="21617:21929" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="24855:25407" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="24861:25401" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="38900:38993" placeholder="UPDATE dar_f..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/dar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="19" selection-start="1551" selection-end="1551" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2805">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/gis/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="315" column="18" selection-start="11484" selection-end="11484" vertical-scroll-proportion="0.0" vertical-offset="5355" max-vertical-offset="5865" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/conf.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="68" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="59" selection-start="2621" selection-end="2621" vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="1377" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/mon/main.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="8" selection-start="1446" selection-end="1524" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="799" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/main.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="36" selection-start="2916" selection-end="2916" vertical-scroll-proportion="0.0" vertical-offset="1241" max-vertical-offset="1717">
+          <folding>
+            <element signature="e#6#548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/mon/mon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="1" selection-start="3071" selection-end="3071" vertical-scroll-proportion="0.0" vertical-offset="1105" max-vertical-offset="1207" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="19" selection-start="5390" selection-end="5390" vertical-scroll-proportion="0.0" vertical-offset="1649" max-vertical-offset="10200">
+          <folding>
+            <element signature="e#6#559#0" expanded="true" />
+            <marker date="1405486085136" expanded="true" signature="2652:3127" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="2660:3123" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2677:2712" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2758:2812" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2848:2902" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2942:2996" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="3036:3090" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="3146:3357" placeholder="SELECT d.dis..disaster..." />
+            <marker date="1405486085136" expanded="true" signature="9407:9774" placeholder="SELECT * FRO..property..." />
+            <marker date="1405486085136" expanded="true" signature="9407:9784" placeholder="SELECT * FRO..property..." />
+            <marker date="1405486085136" expanded="true" signature="21285:21598" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="21617:21929" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="24855:25407" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="24861:25401" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="38900:38993" placeholder="UPDATE dar_f..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/dar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="6" selection-start="5553" selection-end="5578" vertical-scroll-proportion="0.0" vertical-offset="1870" max-vertical-offset="2091">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/mon/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="46" selection-start="5020" selection-end="5649" vertical-scroll-proportion="0.0" vertical-offset="2482" max-vertical-offset="9571" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/mon/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="216" column="43" selection-start="9796" selection-end="9796" vertical-scroll-proportion="0.0" vertical-offset="3888" max-vertical-offset="10134" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/res/js/vesuvius.js">
@@ -425,81 +705,169 @@
         <state line="35" column="90" selection-start="1180" selection-end="1180" vertical-scroll-proportion="0.3837375" vertical-offset="163" max-vertical-offset="1674" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mod/dar/conf.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="68" selection-start="624" selection-end="624" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="450">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="59" selection-start="2633" selection-end="2633" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1458">
-          <folding />
-        </state>
+        <state line="55" column="59" selection-start="2621" selection-end="2621" vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="1377" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/mon/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="46" selection-start="5020" selection-end="5649" vertical-scroll-proportion="-1.4562937" vertical-offset="3145" max-vertical-offset="9401" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/mon/mon.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="1" selection-start="3071" selection-end="3071" vertical-scroll-proportion="0.0" vertical-offset="548" max-vertical-offset="1278">
-          <folding />
-        </state>
+        <state line="65" column="1" selection-start="3071" selection-end="3071" vertical-scroll-proportion="0.83306056" vertical-offset="596" max-vertical-offset="1207" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/mon/main.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="8" selection-start="1446" selection-end="1524" vertical-scroll-proportion="-18.0" vertical-offset="0" max-vertical-offset="684">
+        <state line="36" column="8" selection-start="1446" selection-end="1524" vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="646" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/gis/main.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="19" selection-start="2891" selection-end="2891" vertical-scroll-proportion="-47.076923" vertical-offset="0" max-vertical-offset="2244" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/gis/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="598" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/gis/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="217" column="10" selection-start="8647" selection-end="8647" vertical-scroll-proportion="4.8146853" vertical-offset="765" max-vertical-offset="5695">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mod/dar/dar.js">
+    <entry file="file://$PROJECT_DIR$/mod/gis/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="6" selection-start="5553" selection-end="5578" vertical-scroll-proportion="0.0" vertical-offset="1486" max-vertical-offset="2214">
+        <state line="14" column="7" selection-start="238" selection-end="238" vertical-scroll-proportion="0.3979933" vertical-offset="0" max-vertical-offset="3519">
+          <folding>
+            <marker date="1404719092743" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/conf.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="68" selection-start="624" selection-end="624" vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="238">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/dar/main.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="36" selection-start="2916" selection-end="2916" vertical-scroll-proportion="-22.0" vertical-offset="720" max-vertical-offset="1818">
+        <state line="54" column="87" selection-start="2463" selection-end="2463" vertical-scroll-proportion="4.9038463" vertical-offset="1173" max-vertical-offset="1887">
           <folding>
             <element signature="e#6#548#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mod/mon/xajax.inc">
+    <entry file="file://$PROJECT_DIR$/mod/pa/conf.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="46" selection-start="5020" selection-end="5649" vertical-scroll-proportion="-18.222221" vertical-offset="1956" max-vertical-offset="9954">
-          <folding>
-            <marker date="1392169314015" expanded="false" signature="2540:2570" placeholder="..." />
-            <marker date="1392169314015" expanded="true" signature="2628:3111" placeholder="..." />
-            <marker date="1392169314015" expanded="true" signature="2636:3107" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="2653:2688" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="2724:2778" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="2814:2868" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="2907:2961" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="3010:3064" placeholder="..." />
-            <marker date="1392169314015" expanded="true" signature="19575:19762" placeholder="..." />
-            <marker date="1392169314015" expanded="true" signature="19583:19758" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="19600:19635" placeholder="..." />
-            <marker date="1392169314015" expanded="false" signature="19671:19725" placeholder="..." />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="238">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mod/dar/xajax.inc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="42" selection-start="3863" selection-end="3863" vertical-scroll-proportion="0.7924528" vertical-offset="1242" max-vertical-offset="12078">
+        <state line="435" column="8" selection-start="24871" selection-end="24929" vertical-scroll-proportion="-0.0" vertical-offset="7395" max-vertical-offset="12920">
           <folding>
-            <marker date="1404677916606" expanded="true" signature="2532:3007" placeholder="..." />
-            <marker date="1404677916606" expanded="true" signature="2540:3003" placeholder="..." />
-            <marker date="1404677916606" expanded="true" signature="2557:2592" placeholder="..." />
-            <marker date="1404677916606" expanded="true" signature="2638:2692" placeholder="..." />
-            <marker date="1404677916606" expanded="true" signature="2728:2782" placeholder="..." />
-            <marker date="1404677916606" expanded="true" signature="2822:2876" placeholder="..." />
-            <marker date="1404677916606" expanded="true" signature="2916:2970" placeholder="..." />
+            <element signature="e#6#559#0" expanded="true" />
+            <marker date="1405486085136" expanded="true" signature="2652:3127" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="2660:3123" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2677:2712" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2758:2812" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2848:2902" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="2942:2996" placeholder="..." />
+            <marker date="1405486085136" expanded="false" signature="3036:3090" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="3146:3357" placeholder="SELECT d.dis..disaster..." />
+            <marker date="1405486085136" expanded="true" signature="9407:9774" placeholder="SELECT * FRO..property..." />
+            <marker date="1405486085136" expanded="true" signature="9407:9784" placeholder="SELECT * FRO..property..." />
+            <marker date="1405486085136" expanded="true" signature="21285:21598" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="21617:21929" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="24855:25407" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="24861:25401" placeholder="..." />
+            <marker date="1405486085136" expanded="true" signature="38900:38993" placeholder="UPDATE dar_f..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/dar.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="79" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1683">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/dar/dar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="0" selection-start="782" selection-end="1108" vertical-scroll-proportion="0.0" vertical-offset="99" max-vertical-offset="4131">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/pa/main.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="26" selection-start="1190" selection-end="1190" vertical-scroll-proportion="-3.2692308" vertical-offset="306" max-vertical-offset="1258">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/pa/pa.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="21" selection-start="1439" selection-end="1439" vertical-scroll-proportion="0.0" vertical-offset="273" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/pa/pa.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="21" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mod/pa/xajax.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="151" column="76" selection-start="6229" selection-end="6229" vertical-scroll-proportion="0.28671327" vertical-offset="2216" max-vertical-offset="5559">
+          <folding>
+            <marker date="1405495236762" expanded="true" signature="2344:2819" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="2352:2815" placeholder="..." />
+            <marker date="1405495236762" expanded="false" signature="2369:2404" placeholder="..." />
+            <marker date="1405495236762" expanded="false" signature="2450:2504" placeholder="..." />
+            <marker date="1405495236762" expanded="false" signature="2540:2594" placeholder="..." />
+            <marker date="1405495236762" expanded="false" signature="2634:2688" placeholder="..." />
+            <marker date="1405495236762" expanded="false" signature="2728:2782" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="2838:3049" placeholder="SELECT d.dis..disaster..." />
+            <marker date="1405495236762" expanded="true" signature="6013:6444" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="6151:6423" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="6483:7146" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="6607:6753" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="6796:7124" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="7026:7103" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="7186:7752" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="7330:7476" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="7519:7730" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="7792:8565" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="7906:8052" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="8095:8329" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="8393:8543" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="8605:9130" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="9170:9421" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="9461:10053" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="9576:9734" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="9780:10031" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="9930:10010" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="10093:10784" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="10268:10422" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="10467:10762" placeholder="..." />
+            <marker date="1405495236762" expanded="true" signature="10583:10741" placeholder="..." />
           </folding>
         </state>
       </provider>

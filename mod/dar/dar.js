@@ -12,18 +12,124 @@
  */
 
 function initCalendar() {
-    $("#reportDate").datepicker({ dateFormat: 'yy-mm-dd' });
-    $("#disasterDate").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#assDate").datepicker({ dateFormat: 'yy-mm-dd' ,maxDate: 0});
+    $("#disasterDate").datepicker({ dateFormat: 'yy-mm-dd',maxDate: 0 });
+	$("#endDate").datepicker({ dateFormat: 'yy-mm-dd',maxDate: 0 });
 }
+
+function tempCheckBox(){
+    $(":checkbox").click(function(){
+
+        if ($("#schools").is(':checked')) {
+            $('#schools_list').prop('disabled', false);
+            // the checkbox was checked
+        } else {
+            $('#schools_list').prop('disabled', true);
+            // the checkbox was unchecked
+        }
+        if ($("#temples").is(':checked')) {
+            $('#temples_list').prop('disabled', false);
+        } else {
+            $('#temples_list').prop('disabled', true);
+        }
+        if ($("#gOffices").is(':checked')) {
+            $('#gOffices_list').prop('disabled', false);
+        } else {
+            $('#gOffices_list').prop('disabled', true);
+        }
+        if ($("#other").is(':checked')) {
+            $('#other_list').prop('disabled', false);
+        } else {
+            $('#other_list').prop('disabled', true);
+        }
+
+    });
+}
+
+function checkLimit(hey){
+    if($(hey).val()>99){
+        $('#call').remove();
+        $(hey).before("<div class='callout' id='call' onclick=$('#call').remove()>The value you entered seems to be high! Are you sure about this? Click to ignore</div>");
+    }
+    else{
+        $('#call').remove();
+    }
+
+}
+
+
+function limit(){
+    $("#male_injured").keyup(function(){checkLimit("#male_injured")});
+    $("#female_injured").keyup(function(){checkLimit("#female_injured")});
+    $("#pregnant_female_injured").keyup(function(){checkLimit("#pregnant_female_injured")});
+    $("#children_injured").keyup(function(){checkLimit("#children_injured")});
+    $("#young_children_injured").keyup(function(){checkLimit("#young_children_injured")});
+    $("#infants_injured").keyup(function(){checkLimit("#infants_injured")});
+    $("#male_displaced").keyup(function(){checkLimit("#male_displaced")});
+    $("#female_displaced").keyup(function(){checkLimit("#female_displaced")});
+    $("#pregnant_female_displaced").keyup(function(){checkLimit("#pregnant_female_displaced")});
+    $("#children_displaced").keyup(function(){checkLimit("#children_displaced")});
+    $("#young_children_displaced").keyup(function(){checkLimit("#young_children_displaced")});
+    $("#infants_displaced").keyup(function(){checkLimit("#infants_displaced")});
+    $("#male_missing").keyup(function(){checkLimit("#male_missing")});
+    $("#female_missing").keyup(function(){checkLimit("#female_missing")});
+    $("#pregnant_female_missing").keyup(function(){checkLimit("#pregnant_female_missing")});
+    $("#children_missing").keyup(function(){checkLimit("#children_displaced")});
+    $("#young_children_missing").keyup(function(){checkLimit("#young_children_missing")});
+    $("#infants_missing").keyup(function(){checkLimit("#infants_missing")});
+    $("#res_diseases").keyup(function(){checkLimit("#res_diseases")});
+    $("#dysentery").keyup(function(){checkLimit("#dysentery")});
+    $("#hepatitis").keyup(function(){checkLimit("#hepatitis")});
+    $("#dengue").keyup(function(){checkLimit("#dengue")});
+    $("#malaria").keyup(function(){checkLimit("#malaria")});
+    $("#measles").keyup(function(){checkLimit("#measles")});
+    $("#meningitis").keyup(function(){checkLimit("#meningitis")});
+    $("#chikenpox").keyup(function(){checkLimit("#chikenpox")});
+
+}
+
+
+function dis(){
+    if($("#disaster_type").val()=="Other"){
+        $("#other_type").show();
+
+    }
+    else{
+        $("#other_type").hide();
+    }
+    if($("#assessor_name").val()=="otherName"){
+        $("#other_name").show();
+    }
+    else{
+        $("#other_name").hide();
+    }
+}
+
+
+function other(){
+    $("#other_type").hide();
+    $("#other_name").hide();
+    $( "select" ).change(dis);
+}
+
+function toolTip(){
+    $("#area_type").attr('title','Area affected by the disaster. The most accurate geographical area must be selected. The lowest possible area is ‘one GN area’');
+}
+
+
+
+
+
+
 function dar_get_general_data() {
     var r = new Object();
     r.reportDate                     = $("#reportDate").val();
     r.affected_area                  = $("#affected_area").val();
-    r.focal_point_name               = $("#focal_point_name").val();
+    //r.focal_point_name               = $("#focal_point_name").val();
     r.area_type                      = $("#area_type").val();
     r.assessor_name                  = $("#assessor_name").val();
     r.assessor_designation           = $("#assessor_designation").val();
-    r.focal_point_coordinator        = $("#focal_point_coordinator").val();
+    //r.focal_point_coordinator        = $("#focal_point_coordinator").val();
 
 
     var rj = JSON.stringify(r);
@@ -34,6 +140,7 @@ function dar_get_popres_data() {
     var r = new Object();
     r.total_area                     = $("#total_area").val();
     r.area_population                = $("#area_population").val();
+    r.focal_population               = $("#focal_population").val();
     r.affected_area                  = $("#affected_area").val();
     r.male_injured                   = $("#male_injured").val();
     r.female_injured                 = $("#female_injured").val();
@@ -41,24 +148,31 @@ function dar_get_popres_data() {
     r.children_injured               = $("#children_injured").val();
     r.young_children_injured         = $("#young_children_injured").val();
     r.infants_injured                = $("#infants_injured").val();
+    r.total_injured                  = $("#total_injured").val();
     r.male_displaced                 = $("#male_displaced").val();
     r.female_displaced               = $("#female_displaced").val();
     r.pregnant_female_displaced      = $("#pregnant_female_displaced").val();
     r.children_displaced             = $("#children_displaced").val();
     r.young_children_displaced       = $("#young_children_displaced").val();
     r.infants_displaced              = $("#infants_displaced").val();
+    r.total_displaced                = $("#total_displaced").val();
     r.male_missing                   = $("#male_missing").val();
     r.female_missing                 = $("#female_missing").val();
     r.pregnant_female_missing        = $("#pregnant_female_missing").val();
     r.children_missing               = $("#children_missing").val();
     r.young_children_missing         = $("#young_children_missing").val();
     r.infants_missing                = $("#infants_missing").val();
-    r.male_deceased                  = $("#male_deceased").val();
-    r.female_deceased                = $("#female_deceased").val();
-    r.pregnant_female_deceased       = $("#pregnant_female_deceased").val();
-    r.children_deceased              = $("#children_deceased").val();
-    r.young_children_deceased        = $("#young_children_deceased").val();
-    r.infants_deceased               = $("#infants_deceased").val();
+    r.total_missing                  = $("#total_missing").val();
+    r.res_diseases                   = $("#res_diseases").val();
+    r.dysentery                      = $("#dysentery").val();
+    r.dengue                         = $("#dengue").val();
+    r.hepatitis                      = $("#hepatitis").val();
+    r.malaria                        = $("#malaria").val();
+    r.measles                        = $("#measles").val();
+    r.meningitis                     = $("#meningitis").val();
+    r.chikenpox                      = $("#chikenpox").val();
+    r.total_deceased                 = $("#total_deceased").val();
+
 
 
     var rj = JSON.stringify(r);
@@ -116,3 +230,10 @@ function dar_get_shelter_data() {
 }
 >>>>>>> decd297093251786c30937f5fc6ace03e0b6a589
 
+function dar_get_capacity_data(){
+
+}
+
+function dar_get_hazard_data(){
+
+}
