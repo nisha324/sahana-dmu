@@ -27,6 +27,7 @@ array_push($global['xajax_functions'],'gis_get_Vector_layer_data');
 array_push($global['xajax_functions'],'gis_create_vector_layer');
 array_push($global['xajax_functions'],'gis_vector_layer_options');
 array_push($global['xajax_functions'],'gis_image_layer_options');
+array_push($global['xajax_functions'],'gis_add_property');
 
 
 
@@ -348,6 +349,24 @@ function gis_image_layer_options(){
 	$output .= '<tr><td>Bottom-right long: <input type="text" id="brln"/> </td></tr>';
 	$output .= '<tr><td>Bottom-right lat: <input type="text" id="brlt"/> </td></tr></table>';
 	$global['xajax_res']->addAssign('layer-options','innerHTML',$output);
+	return $global['xajax_res']->getXML();
+}
+
+//property
+
+function gis_add_property($feature_id, $name, $value){
+	global $global;
+	
+	$q = "
+		INSERT INTO property(name, value, feature_feature_id)
+		VALUES('$name', '$value' , $feature_id)
+	";
+	$result = $global['db']->Execute($q);
+	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "INSERT a Property"); }
+			
+			
+			
+	$global['xajax_res']->addScript("update_feature_property($feature_id, '".$name."', '".$value."')");
 	return $global['xajax_res']->getXML();
 }
 

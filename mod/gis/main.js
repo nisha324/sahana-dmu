@@ -183,7 +183,8 @@ function displayFeatureInfo(pixel) {
 
   var info = document.getElementById('properties-panel');
   if (feature) {
-    info.innerHTML = '<table class="emTable" id="properties"> <tr> <td class="mainRowEven"><b style="line-height: 28px;">Properties</b></td></tr></table>';
+	theFeature = feature;
+    info.innerHTML = '<table class="emTable" id="properties"> <tr> <td class="mainRowEven"><b style="line-height: 28px;">Properties</b><input type="button" style="float: right;" class="styleTehButton" onclick="add_property('+feature.getId()+');" value="Add Property"></td></tr></table>';
 	$(feature.getKeys()).each(function(key, element){
 		if( element != 'geometry'){
 			$('#properties').append('<tr><td>' + element + ' : ' + feature.get(element) + ' </td></tr>');
@@ -218,6 +219,21 @@ function showAddImageLayerOptions(){
 	gis_image_layer_options();
 }
 
+//property
+
+function add_property(featureId){
+	$('#properties-panel').prepend('<table class="emTable" id="add-property"> <tbody><tr> <td class="mainRowEven"><b style="line-height: 28px;">New Property</b><input type="button" style="float: right;" class="styleTehButton" onclick="save_property('+featureId+');" value="Save Property"></td></tr><tr><td>name : <input type="text" name="name"/> </td></tr><tr><td>Value : <input type="text" name="value"/> </td></tr></tbody></table>');
+}
+function save_property(featureId){
+	gis_add_property(featureId, $('#add-property [name=name]').val(), $('#add-property [name=value]').val());
+}
+function update_feature_property(featureId, name, value){
+	$('#add-property').html('');
+	$('#properties').append('<tr><td>'+name+' : '+value+'</td></tr>');
+	var t= theFeature.getProperties();
+	t[''+name]=value;
+	theFeature.setProperties(t);
+}
 function test(){
     
     gis_create_vector_layer(2, 'Central Hospitals', '', '{"type":"FeatureCollection","features":[{"type":"Feature","id":"LKA","properties":{"name":"Sri Lanka"},"geometry":{"type":"Polygon","coordinates":[[[81.787959,7.523055],[81.637322,6.481775],[81.21802,6.197141],[80.348357,5.96837],[79.872469,6.763463],[79.695167,8.200843],[80.147801,9.824078],[80.838818,9.268427],[81.304319,8.564206],[81.787959,7.523055            ]] ]}}]}');
