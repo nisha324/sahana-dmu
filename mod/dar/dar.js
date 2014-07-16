@@ -228,7 +228,6 @@ function dar_get_shelter_data() {
     var rj = JSON.stringify(r);
     return(rj);
 }
->>>>>>> decd297093251786c30937f5fc6ace03e0b6a589
 
 function dar_get_capacity_data(){
 
