@@ -151,15 +151,12 @@ function dar_load_general()
         "Type of Disaster", "disaster_type");
     $htmlMain .= shn_form_text_return("","other_type");
 	$htmlMain .= shn_form_text_return("Disaster Name(if any)","disasterName");
-    //$htmlMain .= shn_form_text_return('<div><p>dhdh</p></div>');
 	$htmlMain .= shn_form_date_return("Date of Disaster", "reportDate");
-    $htmlMain .= shn_form_select_return(array("Galle" => "Galle", "Nuwara Eliya" => "Nuwara Eliya", "Ampara" => "Ampara"),
-        "Affected Area Name", "affected_area");
-    $htmlMain .= shn_form_select_return(array("GN" => "GN", "MOH" => "MOH", "District" => "District", "Province" => "Province"),
-        "Affected Area", "area_type");
-    $htmlMain .= shn_form_select_return(array("Ramindu Deshapriya" => "Ramindu Deshapriya", "Rasika Hedarh" => "Rasika Hedarh",
-        "Chathura Thennakoon" => "Chathura Thennakoon", "Thilina Mendis" => "Thilina Mendis","otherName"=>"Other"), "Assessor's Name(Dr./Mr./ Ms.)", "assessor_name");
-    $htmlMain .= shn_form_text_return("","other_name");
+    $htmlMain .= shn_form_select_return(array("colombo"=>"Colombo","kalutara"=>"Kalutara","galle"=>"Galle","gampaha"=>"Gampaha"),
+        "Affected Area", "affected_area");
+   // $htmlMain .= shn_form_select_return(array("GN" => "GN", "MOH" => "MOH", "District" => "District", "Province" => "Province"),
+        //"Affected Area", "area_type");
+    $htmlMain .= shn_form_text_return("Assessor's Name","assessor_name");
     $htmlMain .= shn_form_select_return(array("MOH Admin" => "MOH Admin", "FP Admin" => "FP Admin",
         "HO" => "HO"), "Assessor's Designation", "assessor_designation");
 	$htmlMain .= shn_form_date_return("Date of Assessment", "assDate");
@@ -196,6 +193,7 @@ function dar_load_popres() {
     $htmlMain.="<div class='long'>";
 
 
+
     $q = "SELECT * FROM property WHERE feature_feature_id=(SELECT feature_id FROM map,layer,map_has_layer,feature,property WHERE map.map_id=map_has_layer.map_map_id AND layer.layer_id=map_has_layer.layer_layer_id AND property.feature_feature_id=feature.feature_id AND feature.layer_layer_id=layer.layer_id AND layer.name='districts' AND property.name='name' AND property.value='colombo');";
 
     $properties =Array();
@@ -206,10 +204,10 @@ function dar_load_popres() {
 
     }
 
-    $htmlMain .= shn_form_text_return("Total Area under focal point(in km&#178)".$properties['area']."!", "total_area");
-    $htmlMain .= shn_form_text_return("Total Population of the focal point", "focal_population");
-    $htmlMain .= shn_form_text_return("Affected Area(in km&#178)", "affected_area");
-    $htmlMain .= shn_form_text_return("Total population of the affected area", "area_population");
+    $htmlMain .= shn_form_text_return("Total Area under focal point(in km&#178)", "total_area");
+    $htmlMain .= shn_form_text_return("Total Population of the focal point", "focal_population",null,array());
+    $htmlMain .= shn_form_text_return("Affected Area(in km&#178)", "affected_area",null,array('value'=>substr($properties['area'],0, -2)));
+    $htmlMain .= shn_form_text_return("Total population of the affected area", "area_population",null,array('value'=>substr($properties['population'], -2)));
     $htmlMain.="</div>";
 
     $htmlMain .= shn_form_fsopen_return("Injured Persons");
@@ -373,16 +371,16 @@ function dar_load_food() {
         "accessible_food_source");*/
     $htmlMain.='<fieldset>
     <legend>Disruption of usual food preparation practices</legend>
-    <label> <input type="radio" name="food_dist" value="Yes"> Yes</label>
-    <label> <input type="radio" name="food_dist" value="No"> No </label>
-    <label> <input type="radio" name="food_dist" value="Difficult to assess"> Difficult to assess </label>
+    <input type="radio" name="food_dist" value="Yes"> Yes<br>
+    <input type="radio" name="food_dist" value="No"> No<br>
+    <input type="radio" name="food_dist" value="Difficult to assess"> Difficult to assess
     <!-- etc -->
     </fieldset>
         <fieldset>
     <legend>Accessibility to food source within 2km</legend>
-    <label> <input type="radio" name="food_access" value="Yes"> Yes </label>
-    <label> <input type="radio" name="food_access" value="No"> No </label>
-    <label> <input type="radio" name="food_access" value="Difficult to assess"> Difficult to assess </label>
+    <input type="radio" name="food_access" value="Yes"> Yes<br>
+    <input type="radio" name="food_access" value="No"> No<br>
+    <input type="radio" name="food_access" value="Difficult to assess"> Difficult to assess
     <!-- etc -->
     </fieldset>';
     ;
@@ -433,10 +431,17 @@ function dar_load_shelter() {
     $htmlMain .= shn_form_text_return("Required area for shelter", "required_area_for_shelter",null,array("help"=>"covered living area calculation based on 3.5m&#178"));
     $htmlMain .= shn_form_fsclose_return();
 
-    $htmlMain .= shn_form_fsopen_return("Temporary shelter availability");
-    $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),"Is there temporary shelter available?",
-        "temporary_shelter_available");
-    $htmlMain .= shn_form_text_return("Total Covered Area", "temp_shelter_covered_area");
+    $htmlMain .= shn_form_fsopen_return("Temporary shelter availability in the area");
+    $htmlMain .= '<div class="checkBox"><form>
+        <label>Schools</label><input type="checkbox" id="schools">
+        <input type="text" id="schools_list" disabled><br>
+        <label>Temples/Religious Places</label><input type="checkbox" id="temples">
+        <input type="text" id="temples_list" disabled><br>
+        <label>Government offices</label><input type="checkbox" id="gOffices">
+        <input type="text" id="gOffices_list" disabled><br>
+        <label>Other</label><input type="checkbox" id="other">
+        <input type="text" id="other_list" disabled>
+        </form></div>';
     $htmlMain .= shn_form_fsclose_return();
 
     $editControlHtml = '
@@ -451,6 +456,7 @@ function dar_load_shelter() {
     $global['xajax_res']->addAppend('darLog','innerHTML',$htmlLog);
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'darLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("initCalendar();");
+    $global['xajax_res']->addScript("tempCheckBox()");
     return $global['xajax_res']->getXML();
 }
 

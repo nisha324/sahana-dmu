@@ -27,8 +27,6 @@ shn_xajax_registerFunction('dar_load_popres');
 shn_xajax_registerFunction('dar_load_wash');
 shn_xajax_registerFunction('dar_load_food');
 shn_xajax_registerFunction('dar_load_shelter');
-shn_xajax_registerFunction('dar_load_capacity');
-shn_xajax_registerFunction('dar_load_hazard');
 
 shn_xajax_registerFunction('dar_perform_save');
 
@@ -41,11 +39,9 @@ function shn_dar_default() {
     shn_tabmenu_item("general", _t("dar-Menu|General Info"),                 "dar");
     shn_tabmenu_item("popRes",  _t("dar-Menu|Population and Resource Data"), "dar");
     /*shn_tabmenu_item("indicators", _t("dar-Menu|Indicators"),                "dar");*/
-    shn_tabmenu_item("wash", _t("dar-Menu|WASH Indicators"),                 "dar");
+    shn_tabmenu_item("wash", _t("dar-Menu|WASH"),                 "dar");
     shn_tabmenu_item("food",   _t("dar-Menu|Food security and nutrition"),   "dar");
-    shn_tabmenu_item("shelter",  _t("dar-Menu|Shelter Indicators"),          "dar");
-    shn_tabmenu_item("loadCap",  _t("dar-Menu|Capacity Assessment"),          "dar");
-    shn_tabmenu_item("loadHazard",  _t("dar-Menu|Hazard Assessment"),          "dar");
+    shn_tabmenu_item("shelter",  _t("dar-Menu|Shelters"),          "dar");
     shn_tabmenu_close();
 	shn_xajax_printJavascript();
 	echo "
@@ -56,7 +52,8 @@ function shn_dar_default() {
 		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
 	";
-    echo "<style>".file_get_contents($global['approot']."/mod/dar/dar.css")."</style>";
+    echo "<style>".file_get_contents($global['approot']."/mod/dar/dar.css")."</style>".
+        "<script>".file_get_contents($global['approot']."/mod/dar/chosen.proto.js")."</script>";
     if(isset($_GET['general'])) {
         $control = "dar_load_general";
 

@@ -17,6 +17,44 @@ function initCalendar() {
 	$("#endDate").datepicker({ dateFormat: 'yy-mm-dd',maxDate: 0 });
 }
 
+function tempCheckBox(){
+    $(":checkbox").click(function(){
+
+        if ($("#schools").is(':checked')) {
+            $('#schools_list').prop('disabled', false);
+            // the checkbox was checked
+        } else {
+            $('#schools_list').prop('disabled', true);
+            // the checkbox was unchecked
+        }
+
+        if ($("#temples").is(':checked')) {
+            $('#temples_list').prop('disabled', false);
+            // the checkbox was checked
+        } else {
+            $('#temples_list').prop('disabled', true);
+            // the checkbox was unchecked
+        }
+
+        if ($("#gOffices").is(':checked')) {
+            $('#gOffices_list').prop('disabled', false);
+            // the checkbox was checked
+        } else {
+            $('#gOffices_list').prop('disabled', true);
+            // the checkbox was unchecked
+        }
+
+        if ($("#other").is(':checked')) {
+            $('#other_list').prop('disabled', false);
+            // the checkbox was checked
+        } else {
+            $('#other_list').prop('disabled', true);
+            // the checkbox was unchecked
+        }
+
+    });
+}
+
 function checkLimit(hey){
     if($(hey).val()>99){
         $('#call').remove();
@@ -36,7 +74,20 @@ function limit(){
     $("#children_injured").keyup(function(){checkLimit("#children_injured")});
     $("#young_children_injured").keyup(function(){checkLimit("#young_children_injured")});
     $("#infants_injured").keyup(function(){checkLimit("#infants_injured")});
+    $("#male_displaced").keyup(function(){checkLimit("#male_displaced")});
+    $("#female_displaced").keyup(function(){checkLimit("#female_displaced")});
+    $("#pregnant_female_displaced").keyup(function(){checkLimit("#pregnant_female_displaced")});
+    $("#children_displaced").keyup(function(){checkLimit("#children_displaced")});
+    $("#young_children_displaced").keyup(function(){checkLimit("#young_children_displaced")});
+    $("#infants_displaced").keyup(function(){checkLimit("#infants_displaced")});
+    $("#male_missing").keyup(function(){checkLimit("#male_missing")});
+    $("#female_missing").keyup(function(){checkLimit("#female_missing")});
+    $("#pregnant_female_missing").keyup(function(){checkLimit("#pregnant_female_missing")});
+    $("#children_missing").keyup(function(){checkLimit("#children_displaced")});
+    $("#young_children_missing").keyup(function(){checkLimit("#young_children_missing")});
+    $("#infants_missing").keyup(function(){checkLimit("#infants_missing")});
 }
+
 
 function dis(){
     if($("#disaster_type").val()=="Other"){
