@@ -52,8 +52,7 @@ function shn_dar_default() {
 		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
 	";
-    echo "<style>".file_get_contents($global['approot']."/mod/dar/dar.css")."</style>".
-        "<script>".file_get_contents($global['approot']."/mod/dar/chosen.proto.js")."</script>";
+    echo "<style>".file_get_contents($global['approot']."/mod/dar/dar.css")."</style>";
     if(isset($_GET['general'])) {
         $control = "dar_load_general";
 
