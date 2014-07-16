@@ -28,6 +28,11 @@
     left: 18.5em;
 }
 
+.washForms label{
+    text-align: left !important;
+    width: 20em !important;
+}
+
 
 
 body {

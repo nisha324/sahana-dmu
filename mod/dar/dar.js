@@ -182,6 +182,12 @@ function vector_yes(){
             $('#diseases').prop('disabled', true);
             $('#other_disease').prop('disabled', true);
         }
+        if($("#toilet_requirement").val()==1){
+            $('#toilet_number').prop('disabled', false);
+        }
+        else{
+            $('#toilet_number').prop('disabled', true);
+        }
 
     });
 }

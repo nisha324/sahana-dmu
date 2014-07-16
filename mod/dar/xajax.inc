@@ -303,8 +303,10 @@ function dar_load_wash() {
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "wash";
+    $htmlMain .='<div class="washForms">';
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Water");
+
     $htmlMain .= shn_form_select_return(array("1" => "Pipe-borne", "1" => "Open Well", "2" => "Reservoir"
     , "3" => "Hand-pumped well", "4" => "Other"),"Pre-disaster water source", "pre_disaster_water_source");
     $htmlMain .= shn_form_select_return(array("1" => "Similar to pre-disaster", "2" => "Greater than 75%",
@@ -315,23 +317,23 @@ function dar_load_wash() {
     $htmlMain .= shn_form_text_return("Water sources within 500m of affected area", "water_sources_within_range",null,array('help'=>''));
     $htmlMain .= shn_form_select_return(array("1" => "Yes", "0" => "No","3"=>"Difficult to asses"),
         "Requirement of water treatment", "water_treatment_required");
-    $htmlMain .= shn_form_text_return("Est Requirement of water per day for affected population", "estimated_requirement_per_day"); //number field
+    $htmlMain .= shn_form_text_return("Est. requirement of water per day<br>(for affected population)", "estimated_requirement_per_day"); //number field
     $htmlMain .= shn_form_fsclose_return();
 
     $htmlMain .= shn_form_fsclose_return();
 
     $htmlMain .= shn_form_fsopen_return("Toilets");
-    $htmlMain .= shn_form_select_return(array("Yes" => "Yes", "No" => "No"),
+    $htmlMain .= shn_form_select_return(array("1" => "Yes", "0" => "No","2"=>"Difficult to assess"),
         "Requirement basic hygiene training", "hygiene_training_required");
-    $htmlMain .= shn_form_text_return("Number of appropriately designed toilets", "number_of_toilets");
-    $htmlMain .= shn_form_text_return("Required Number", "required_toilets_number", null,
-        array("help"=>"On basis of one toilet per 20 people", "disabled"=>true));
-    $htmlMain .= shn_form_text_return("Deficit", "toilet_deficit",null,array("help"=>"Required - Available","disabled"=>true));
+    $htmlMain .='<br>';
+    $htmlMain .= shn_form_select_return(array("1" => "Yes", "0" => "No","2"=>"Difficult to assess"),"Requirement for new toilets","toilet_requirement");
+    $htmlMain .='<br><fieldset><legend>If Yes</legend><label>Required Number(1 toilet per 20 people)</label>
+                 <input type="text" id="toilet_number" disabled></fieldset>';
     $htmlMain .= shn_form_fsclose_return();
 
     $htmlMain .= shn_form_fsopen_return("Tendency for vector-borne diseases");
     $htmlMain .= shn_form_select_return(array("1" => "Yes", "0" => "No","3"=>"Difficult to asses"),"", "vector_type");
-    $htmlMain .= '<br><fieldset><select id="diseases" disabled>
+    $htmlMain .= '<br><fieldset><legend>If Yes</legend><select id="diseases" disabled>
                 <option value="dengue">Dengue</option>
                 <option value="leptospirosis ">Leptospirosis</option>
                 <option value="other">Other</option>
@@ -339,7 +341,7 @@ function dar_load_wash() {
                 <input type="text" id="other_disease" disabled>
                 </fieldset>';
     $htmlMain .= shn_form_fsclose_return();
-
+    $htmlMain .='</div>';
     $editControlHtml = '
 
 		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_load_wash();\', 250);" value="'._t('Cancel Edit / Close').'">
@@ -428,7 +430,7 @@ function dar_load_shelter() {
     $htmlMain .= shn_form_fsclose_return();
 
     $htmlMain .= shn_form_fsopen_return("Shelter estimates");
-    $htmlMain .= shn_form_text_return("Estimated Number requiring shelter", "estimated_number_requiring_shelter");
+    $htmlMain .= shn_form_text_return("Est Number requiring shelter", "estimated_number_requiring_shelter");
     $htmlMain .= shn_form_text_return("Required area for shelter", "required_area_for_shelter",null,array("help"=>"covered living area calculation based on 3.5m&#178"));
     $htmlMain .= shn_form_fsclose_return();
 
