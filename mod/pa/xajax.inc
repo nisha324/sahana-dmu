@@ -301,7 +301,215 @@ function pa_load_hazard(){
     $_SESSION['pa_current_page'] = "loadHazard";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Hazard Assessment");
-    //$htmlMain .= shn_form_fsclose_return();
+    $htmlMain .= '<table>
+                    <tr>
+                        <th> HAZARD </th>
+                        <th> POTENTIAL DAMAGE </th>
+                        <th> FREQUENCY </th>
+                        <th> SECONDARY PROBLEMS </th>
+                        <th> TOTAL SCORE </th>
+                    </tr>
+                    <tr>
+                        <td> Flood </td>
+                        <td>
+                            <form>
+                            <select id="flood_poten">
+                                <option value="0">  </option>
+                                <option value="1">1. No damage</option>
+                                <option value="2">2. Minor damage</option>
+                                <option value="3">3. Moderate damage</option>
+                                <option value="4">4. Significant damage</option>
+                                <option value="5">5. Destroyed or nearly destroyed</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                            <select id="flood_frq">
+                                <option value="0">  </option>
+                                <option value="1">1. Has not occurred in last 100 years </option>
+                                <option value="2">2. Happens at least once every fifty years</option>
+                                <option value="3">3. Happens at least once every ten years</option>
+                                <option value="4">4. Happens at least once every five years</option>
+                                <option value="5">5. Annual event, or more often</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                            <select id="flood_SP">
+                                <option value="0">  </option>
+                                <option value="1">1. No secondary effects or problems likely</option>
+                                <option value="2">2. At least one secondary effect, short-term in nature</option>
+                                <option value="3">3. Multiple secondary effect(s). May last 2 or 3 days</option>
+                                <option value="4">4. Significant secondary effect(s). May last a week</option>
+                                <option value="5">5. Significant secondary effects last more than a week</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td id="t_flood"></td>
+                    </tr>
+                    <tr>
+                        <td> Landslide </td>
+                        <td>
+                            <form>
+                            <select id="landslide_poten">
+                                <option value="0">  </option>
+                                <option value="1">1. No damage</option>
+                                <option value="2">2. Minor damage</option>
+                                <option value="3">3. Moderate damage</option>
+                                <option value="4">4. Significant damage</option>
+                                <option value="5">5. Destroyed or nearly destroyed</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                            <select id="landslide_frq">
+                                <option value="0">  </option>
+                                <option value="1">1. Has not occurred in last 100 years </option>
+                                <option value="2">2. Happens at least once every fifty years</option>
+                                <option value="3">3. Happens at least once every ten years</option>
+                                <option value="4">4. Happens at least once every five years</option>
+                                <option value="5">5. Annual event, or more often</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                            <select id="landslide_SP">
+                                <option value="0">  </option>
+                                <option value="1">1. No secondary effects or problems likely</option>
+                                <option value="2">2. At least one secondary effect, short-term in nature</option>
+                                <option value="3">3. Multiple secondary effect(s). May last 2 or 3 days</option>
+                                <option value="4">4. Significant secondary effect(s). May last a week</option>
+                                <option value="5">5. Significant secondary effects last more than a week</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td id="t_landslide"></td>
+                    </tr>
+                    <tr>
+                        <td> Drought </td>
+                        <td>
+                            <form>
+                            <select id="drought_poten">
+                                <option value="0">  </option>
+                                <option value="1">1. No damage</option>
+                                <option value="2">2. Minor damage</option>
+                                <option value="3">3. Moderate damage</option>
+                                <option value="4">4. Significant damage</option>
+                                <option value="5">5. Destroyed or nearly destroyed</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                            <select id="drought_frq">
+                                <option value="0">  </option>
+                                <option value="1">1. Has not occurred in last 100 years </option>
+                                <option value="2">2. Happens at least once every fifty years</option>
+                                <option value="3">3. Happens at least once every ten years</option>
+                                <option value="4">4. Happens at least once every five years</option>
+                                <option value="5">5. Annual event, or more often</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                            <select id="drought_SP">
+                                <option value="0">  </option>
+                                <option value="1">1. No secondary effects or problems likely</option>
+                                <option value="2">2. At least one secondary effect, short-term in nature</option>
+                                <option value="3">3. Multiple secondary effect(s). May last 2 or 3 days</option>
+                                <option value="4">4. Significant secondary effect(s). May last a week</option>
+                                <option value="5">5. Significant secondary effects last more than a week</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td id="t_drought"></td>
+                    </tr>
+                    <tr>
+                        <td> Cyclones </td>
+                        <td>
+                            <form>
+                            <select id="cyclones_poten">
+                                <option value="0">  </option>
+                                <option value="1">1. No damage</option>
+                                <option value="2">2. Minor damage</option>
+                                <option value="3">3. Moderate damage</option>
+                                <option value="4">4. Significant damage</option>
+                                <option value="5">5. Destroyed or nearly destroyed</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                            <select id="cyclones_frq">
+                                <option value="0">  </option>
+                                <option value="1">1. Has not occurred in last 100 years </option>
+                                <option value="2">2. Happens at least once every fifty years</option>
+                                <option value="3">3. Happens at least once every ten years</option>
+                                <option value="4">4. Happens at least once every five years</option>
+                                <option value="5">5. Annual event, or more often</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                            <select id="cyclones_SP">
+                                <option value="0">  </option>
+                                <option value="1">1. No secondary effects or problems likely</option>
+                                <option value="2">2. At least one secondary effect, short-term in nature</option>
+                                <option value="3">3. Multiple secondary effect(s). May last 2 or 3 days</option>
+                                <option value="4">4. Significant secondary effect(s). May last a week</option>
+                                <option value="5">5. Significant secondary effects last more than a week</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td id="t_cyclones"></td>
+                    </tr>
+                    <tr>
+                        <td> Tsunami </td>
+                        <td>
+                            <form>
+                            <select id="tsunami_poten">
+                                <option value="0">  </option>
+                                <option value="1">1. No damage</option>
+                                <option value="2">2. Minor damage</option>
+                                <option value="3">3. Moderate damage</option>
+                                <option value="4">4. Significant damage</option>
+                                <option value="5">5. Destroyed or nearly destroyed</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                            <select id="tsunami_frq">
+                                <option value="0">  </option>
+                                <option value="1">1. Has not occurred in last 100 years </option>
+                                <option value="2">2. Happens at least once every fifty years</option>
+                                <option value="3">3. Happens at least once every ten years</option>
+                                <option value="4">4. Happens at least once every five years</option>
+                                <option value="5">5. Annual event, or more often</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form>
+                            <select id="tsunami_SP">
+                                <option value="0">  </option>
+                                <option value="1">1. No secondary effects or problems likely</option>
+                                <option value="2">2. At least one secondary effect, short-term in nature</option>
+                                <option value="3">3. Multiple secondary effect(s). May last 2 or 3 days</option>
+                                <option value="4">4. Significant secondary effect(s). May last a week</option>
+                                <option value="5">5. Significant secondary effects last more than a week</option>
+                            </select>
+                            </form>
+                        </td>
+                        <td id="t_tsunami"></td>
+                    </tr>
+                    </table>';
 
 
     $editControlHtml = '
@@ -315,6 +523,7 @@ function pa_load_hazard(){
     $global['xajax_res']->addAssign('paControl', 'innerHTML', $editControlHtml);
     $global['xajax_res']->addAppend('paLog','innerHTML',$htmlLog);
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'paLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
+    $global['xajax_res']->addScript("cal()");
     return $global['xajax_res']->getXML();
 }
 
