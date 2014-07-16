@@ -19,7 +19,7 @@ $(document).ready(function(){
         target: 'the-map',
         layers: [],
 		interactions: ol.interaction.defaults().extend([dragAndDropInteraction]),
-        view: new ol.View2D({
+        view: new ol.View({
           center: [0,0],
           zoom: 2
         })
