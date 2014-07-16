@@ -28,6 +28,7 @@ shn_xajax_registerFunction('gis_get_layer_data');
 shn_xajax_registerFunction('gis_get_Vector_layer_data');
 shn_xajax_registerFunction('gis_create_vector_layer');
 shn_xajax_registerFunction('gis_vector_layer_options');
+shn_xajax_registerFunction('gis_image_layer_options');
 
 /** Displays the Resources pages' content on the front end of the site. */
 function shn_gis_default()

@@ -26,6 +26,7 @@ array_push($global['xajax_functions'],'gis_get_layer_data');
 array_push($global['xajax_functions'],'gis_get_Vector_layer_data');
 array_push($global['xajax_functions'],'gis_create_vector_layer');
 array_push($global['xajax_functions'],'gis_vector_layer_options');
+array_push($global['xajax_functions'],'gis_image_layer_options');
 
 
 //Maps
@@ -56,7 +57,7 @@ function gis_update_map() {
 function gis_add_layer() {
 	global $global;
 	$output = '<table class="emTable" id="add-layer-options"><tbody> <tr> <td class="mainRowEven"><b style="line-height: 28px;">Add layer</b> <input type="button" style="float: right; margin-left:3px;" class="styleTehButton" onclick="cancle_add_layer();" value="Cancel"><input type="button" style="float: right;" class="styleTehButton" onclick="save_layer();" value="Save"></td></tr>
-<tr><td>Name: <input type="text" id="name"/> </td></tr><tr><td>Type: <label for="Tile" > <input type="radio" name="layer-type" value="Tile" id="Tile" onclick="showAddTileLayerOptions()"/> Tile Layer</label><label for="Vector"> <input type="radio" name="layer-type" value="Vector" id="Vector" onclick="showAddVectorLayerOptions()"/> Vector Layer</label><div id="layer-options"></div></td></tr><tr><td></td></tr></tbody></table>';
+<tr><td>Name: <input type="text" id="name"/> </td></tr><tr><td>Type: <label for="Tile" > <input type="radio" name="layer-type" value="Tile" id="Tile" onclick="showAddTileLayerOptions()"/> Tile Layer</label><label for="Vector"> <input type="radio" name="layer-type" value="Vector" id="Vector" onclick="showAddVectorLayerOptions()"/> Vector Layer</label> <input type="radio" name="layer-type" value="Image" id="Image" onclick="showAddImageLayerOptions()"/> Image Layer</label><div id="layer-options"></div></td></tr><tr><td></td></tr></tbody></table>';
 	$global['xajax_res']->addAssign('add-layer','innerHTML',$output);
 	$global['xajax_res']->addScript("");
 	return $global['xajax_res']->getXML();
@@ -330,6 +331,16 @@ function gis_get_Vector_layer_data($layer_id) {
 function gis_vector_layer_options(){
 	global $global;
 	$output = '<br/>GeoJSON:<br/><textarea id="GeoJSON-data" style="width: 95%;"></textarea>';
+	$global['xajax_res']->addAssign('layer-options','innerHTML',$output);
+	return $global['xajax_res']->getXML();
+}
+function gis_image_layer_options(){
+	global $global;
+	$output = '<hr/><table><tr><td>URL: <input type="text" id="url"/> </td></tr>';
+	$output .= '<tr><td>Top-left long: <input type="text" id="tlln"/> </td></tr>';
+	$output .= '<tr><td>Top-left lat: <input type="text" id="tllt"/> </td></tr>';
+	$output .= '<tr><td>Bottom-right long: <input type="text" id="brln"/> </td></tr>';
+	$output .= '<tr><td>Bottom-right lat: <input type="text" id="brlt"/> </td></tr></table>';
 	$global['xajax_res']->addAssign('layer-options','innerHTML',$output);
 	return $global['xajax_res']->getXML();
 }
