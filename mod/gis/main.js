@@ -19,6 +19,7 @@ $(document).ready(function(){
         target: 'the-map',
         layers: [],
 		interactions: ol.interaction.defaults().extend([dragAndDropInteraction]),
+
         view: new ol.View({
           center: [0,0],
           zoom: 2
@@ -34,7 +35,6 @@ $(document).ready(function(){
 	
 	dragAndDropInteraction.on('addfeatures', function(event) {
 		
-		test2  = event.features;
 	  var vectorSource = new ol.source.Vector({
 		features: event.features,
 		projection: event.projection
@@ -127,6 +127,7 @@ function save_layer(){
 			alert('Please, enter a name for the layer!');
 		}
 	}
+
 	else if($('#add-layer-options #Image').is(':checked')){
 		if($('#add-layer-options #name').val()){
 			//gis_create_vector_layer(app.map_id, $('#add-layer-options #name').val(), '', $('#add-layer-options #GeoJSON-data').val());
@@ -142,6 +143,7 @@ function save_layer(){
 			alert('Please, enter a name for the layer!');
 		}
 	}
+
 	else{
 		alert('Please, select a layer type!')
 	}
@@ -211,9 +213,11 @@ function showAddVectorLayerOptions(){
     //$('#layer-options').html('<p>Loading...</P>');
 	gis_vector_layer_options();
 }
+
 function showAddImageLayerOptions(){
 	gis_image_layer_options();
 }
+
 function test(){
     
     gis_create_vector_layer(2, 'Central Hospitals', '', '{"type":"FeatureCollection","features":[{"type":"Feature","id":"LKA","properties":{"name":"Sri Lanka"},"geometry":{"type":"Polygon","coordinates":[[[81.787959,7.523055],[81.637322,6.481775],[81.21802,6.197141],[80.348357,5.96837],[79.872469,6.763463],[79.695167,8.200843],[80.147801,9.824078],[80.838818,9.268427],[81.304319,8.564206],[81.787959,7.523055            ]] ]}}]}');

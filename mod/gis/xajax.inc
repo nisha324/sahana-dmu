@@ -29,6 +29,7 @@ array_push($global['xajax_functions'],'gis_vector_layer_options');
 array_push($global['xajax_functions'],'gis_image_layer_options');
 
 
+
 //Maps
 function gis_create_new() {
 	global $global;
@@ -334,6 +335,7 @@ function gis_vector_layer_options(){
 	$global['xajax_res']->addAssign('layer-options','innerHTML',$output);
 	return $global['xajax_res']->getXML();
 }
+
 function gis_image_layer_options(){
 	global $global;
 	$output = '<hr/><table><tr><td>URL: <input type="text" id="url"/> </td></tr>';
