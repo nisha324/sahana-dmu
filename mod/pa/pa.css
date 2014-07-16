@@ -1,0 +1,19 @@
+.checkBox label{
+    text-align: left !important;
+    width: 1em !important;
+}
+
+#pa, #drill
+{
+    text-align: left !important;
+    width: 4em !important;
+}
+
+#pa_date, #drill_date
+{
+    margin: 3px;
+}
+ #emp
+ {
+     text-align: left;
+ }

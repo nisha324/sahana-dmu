@@ -158,14 +158,122 @@ function pa_load_capacity(){
     $htmlMain .=
         '<fieldset>
          <legend>Public Awareness</legend>
-         <p>Select one</p>
-         <form id="marks">
-         <input type="radio" name="pub_aware" value="Complete"> Yes<br>
-         <input type="radio" name="pub_aware" value="Partially complete"> No<br>
-         <input type="radio" name="pub_aware" value="Not Done"> Difficult to assess<br>
-         </form>
+         <p>Identifying possible risk groups</p>
+         <div class="checkBox">
+         <input type="radio" name="pA" id="pA_yes">Yes<br>
+         <input type="radio" name="pA" id="pA_no">No
+         <br><br>
+         </div>
+         <fieldset id="pA_field" disabled>
+         <legend>If yes</legend>
+         <label id="pa">Date/s</label><input type="text" id="pa_date"><br>
+         <label id="pa">Place/s</label><input type="text" id="pa_Partially complete"><br>
+         <div class="checkBox">
+         <input type="checkbox" id="pa_not_plan">Not Planned
+         </div>
+         </fieldset>
 
          </fieldset>';
+
+    $htmlMain .=
+        '<fieldset>
+         <legend>Mechanism for community-based early warning system</legend>
+         <p>Mechanism in place</p>
+         <div class="checkBox">
+         <input type="radio" name="eW" id="eW_yes">Yes<br>
+         <input type="radio" name="eW" id="eW_no">No
+         <br><br>
+         </div>
+         <fieldset id="eW_field" disabled>
+         <legend>If yes</legend>
+         <input type="radio" name="eW2" id="eW_complete">Complete<br>
+         <input type="radio" name="eW2" id="eW_not_complete">Partial or non-functional
+         </fieldset>
+
+         </fieldset>';
+
+    $htmlMain .=
+        '<fieldset>
+         <legend>Management of Self areas</legend>
+         <p>Identification</p>
+         <div class="checkBox">
+         <input type="radio" name="sA" id="sA_yes">Yes<br>
+         <input type="radio" name="sA" id="sA_no">No
+         <br><br>
+         </div>
+         <fieldset id="sA_field" disabled>
+         <legend>If yes</legend>
+         <p>Mapping</p>
+         <input type="radio" name="sA2" id="sA_satisfactory">Satisfactory<br>
+         <input type="radio" name="sA2" id="sA_unsatisfactory">Unsatisfactory
+         </fieldset>
+         <p>GIS coordinates</p>
+         <div class="checkBox">
+         <input type="radio" name="sA3" id="sA3_yes">Yes<br>
+         <input type="radio" name="sA3" id="sA3_no">No
+         <br><br>
+         </div>
+
+         </fieldset>';
+
+    $htmlMain .=
+        '<fieldset>
+         <legend>Disaster Management Staff</legend>
+         <label id="emp">Number of employees</label><br><br>
+         <input type="radio" name="employees" id="emp_adequate">Adequate<br>
+         <input type="radio" name="employees" id="emp_Inadequate">Inadequate<br><br>
+         <label id="emp">Training of Staff</label><br><br>
+         <input type="radio" name="staff" id="staff_satisfactory">Satisfactory<br>
+         <input type="radio" name="staff" id="staff_unsatisfactory">Unsatisfactory<br>
+         </fieldset>';
+
+    $htmlMain .=
+        '<fieldset>
+         <legend>Stockpiling of emergency relief materials</legend>
+         <input type="radio" name="eRM" id="eRM_satisfactory">Satisfactory<br>
+         <input type="radio" name="eRM" id="eRM_unsatisfactory">Unsatisfactory<br>
+         </fieldset>';
+
+    $htmlMain .=
+        '<fieldset>
+         <legend>Conducting drills and rehearsals</legend>
+         <p>Planned</p>
+         <div class="checkBox">
+         <input type="radio" name="drill" id="drill_yes">Yes<br>
+         <input type="radio" name="drill" id="drill_no">No
+         <br><br>
+         </div>
+         <fieldset id="drill_field" disabled>
+         <legend>If yes</legend>
+         <label id="drill">Date/s</label><input type="text" id="drill_date"><br><br>
+         <div class="checkBox">
+         <input type="checkbox" id="drill_not_plan">Not Planned
+         </div>
+         </fieldset>
+
+         </fieldset>';
+
+    $htmlMain .=
+        '<fieldset>
+         <legend>Disaster Preparedness Plan for the Fiscal Year<br>(according to the format proposedby DPRD)</legend>
+         <p>Complete</p>
+         <div class="checkBox">
+         <input type="radio" name="plan" id="plan_yes">Yes<br>
+         <input type="radio" name="plan" id="plan_no">No
+         <br><br>
+         </div>
+         <fieldset id="plan_field" disabled>
+         <legend>If yes</legend>
+         <p>Uploaded or emailed a copy to DPRD</p>
+         <div class="checkBox">
+         <input type="radio" name="plan2" id="plan2_yes">Yes<br>
+         <input type="radio" name="plan2" id="plan2_no">No
+         <br><br>
+         </div>
+         </fieldset>
+
+         </fieldset>';
+
     $htmlMain .= shn_form_fsclose_return();
 
 
@@ -180,7 +288,7 @@ function pa_load_capacity(){
     $global['xajax_res']->addAssign('paControl', 'innerHTML', $editControlHtml);
     $global['xajax_res']->addAppend('paLog','innerHTML',$htmlLog);
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'paLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
-    $global['xajax_res']->addScript("initCalendar();");
+    $global['xajax_res']->addScript("tempCheckBox()");
     return $global['xajax_res']->getXML();
 
 }
@@ -207,7 +315,6 @@ function pa_load_hazard(){
     $global['xajax_res']->addAssign('paControl', 'innerHTML', $editControlHtml);
     $global['xajax_res']->addAppend('paLog','innerHTML',$htmlLog);
     $global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'paLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
-    $global['xajax_res']->addScript("initCalendar();");
     return $global['xajax_res']->getXML();
 }
 
