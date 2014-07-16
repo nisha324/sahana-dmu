@@ -38,18 +38,22 @@ function gis_create_new() {
 	$global['xajax_res']->addScript("");
 	return $global['xajax_res']->getXML();
 }
-function gis_save_map() {
+function gis_save_map($name) {
 	global $global;
-	
-	$global['xajax_res']->addAppend('rezLog','innerHTML',$message);
-	$global['xajax_res']->addScript("");
+	$q = "
+		INSERT INTO map(name,thumbnail)
+		VALUES ('$name','http://placehold.it/150x150');
+	";
+	$result = $global['db']->Execute($q);
+	if($result === false) { daoErrorLog(__FILE__, __LINE__, __METHOD__, __CLASS__, __FUNCTION__, $global['db']->ErrorMsg(), "Inserting map"); }
+	$global['xajax_res']->addScript("window.location='?add&tabid=1&map_id=".mysql_insert_id()."&name=$name'");
 	return $global['xajax_res']->getXML();
 }
 function gis_update_map() {
 	global $global;
 	
 	$global['xajax_res']->addAppend('rezLog','innerHTML',$message);
-	$global['xajax_res']->addScript("");
+	$global['xajax_res']->addScript("window.location='?add&tabid=1&map_id=".$global['db']->Insert_ID()."&name=$name'");
 	return $global['xajax_res']->getXML();
 }
 
