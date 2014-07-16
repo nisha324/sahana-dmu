@@ -463,8 +463,6 @@ function dar_load_shelter() {
     return $global['xajax_res']->getXML();
 }
 
-
-
 function dar_perform_save($dar_id, $rj, $page, $update = false) {
 
     global $global;

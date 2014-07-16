@@ -19,7 +19,8 @@ $(document).ready(function(){
         target: 'the-map',
         layers: [],
 		interactions: ol.interaction.defaults().extend([dragAndDropInteraction]),
-        view: new ol.View2D({
+
+        view: new ol.View({
           center: [0,0],
           zoom: 2
         })
@@ -34,7 +35,6 @@ $(document).ready(function(){
 	
 	dragAndDropInteraction.on('addfeatures', function(event) {
 		
-		test  = event.features;
 	  var vectorSource = new ol.source.Vector({
 		features: event.features,
 		projection: event.projection
@@ -127,6 +127,23 @@ function save_layer(){
 			alert('Please, enter a name for the layer!');
 		}
 	}
+
+	else if($('#add-layer-options #Image').is(':checked')){
+		if($('#add-layer-options #name').val()){
+			//gis_create_vector_layer(app.map_id, $('#add-layer-options #name').val(), '', $('#add-layer-options #GeoJSON-data').val());
+			olmap.addLayer(new ol.layer.Image({
+				source: new ol.source.ImageStatic({
+						url: $('#add-layer-options #url').val(),
+						imageSize: [193, 261],
+						imageExtent:  [7938720, 953570, 8167236, 576900], 
+						projection: 'EPSG:3857'
+					})
+				}));
+		}else{
+			alert('Please, enter a name for the layer!');
+		}
+	}
+
 	else{
 		alert('Please, select a layer type!')
 	}
@@ -166,7 +183,8 @@ function displayFeatureInfo(pixel) {
 
   var info = document.getElementById('properties-panel');
   if (feature) {
-    info.innerHTML = '<table class="emTable" id="properties"> <tr> <td class="mainRowEven"><b style="line-height: 28px;">Properties</b></td></tr></table>';
+	theFeature = feature;
+    info.innerHTML = '<table class="emTable" id="properties"> <tr> <td class="mainRowEven"><b style="line-height: 28px;">Properties</b><input type="button" style="float: right;" class="styleTehButton" onclick="add_property('+feature.getId()+');" value="Add Property"></td></tr></table>';
 	$(feature.getKeys()).each(function(key, element){
 		if( element != 'geometry'){
 			$('#properties').append('<tr><td>' + element + ' : ' + feature.get(element) + ' </td></tr>');
@@ -195,6 +213,26 @@ function showAddTileLayerOptions(){
 function showAddVectorLayerOptions(){
     //$('#layer-options').html('<p>Loading...</P>');
 	gis_vector_layer_options();
+}
+
+function showAddImageLayerOptions(){
+	gis_image_layer_options();
+}
+
+//property
+
+function add_property(featureId){
+	$('#properties-panel').prepend('<table class="emTable" id="add-property"> <tbody><tr> <td class="mainRowEven"><b style="line-height: 28px;">New Property</b><input type="button" style="float: right;" class="styleTehButton" onclick="save_property('+featureId+');" value="Save Property"></td></tr><tr><td>name : <input type="text" name="name"/> </td></tr><tr><td>Value : <input type="text" name="value"/> </td></tr></tbody></table>');
+}
+function save_property(featureId){
+	gis_add_property(featureId, $('#add-property [name=name]').val(), $('#add-property [name=value]').val());
+}
+function update_feature_property(featureId, name, value){
+	$('#add-property').html('');
+	$('#properties').append('<tr><td>'+name+' : '+value+'</td></tr>');
+	var t= theFeature.getProperties();
+	t[''+name]=value;
+	theFeature.setProperties(t);
 }
 function test(){
     

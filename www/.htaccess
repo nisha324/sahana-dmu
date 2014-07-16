@@ -19,7 +19,8 @@ RewriteBase /sahana-dmu/www/
 ##### make mod_rewrite skip the subsequent rules if the file or folder exists already (the number must be incremented each time a new rule is added below)
 RewriteCond %{REQUEST_FILENAME} -d [OR]
 RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule .* - [S=40]
+
+RewriteRule .* - [S=42]
 
 ##### matches /person.XXXXX for the person uuid's as urls
 RewriteRule ^(person.[0-9]+)$ ?mod=eap&val=$1 [L]
@@ -56,7 +57,8 @@ RewriteRule ^(plus|webservices)$               $2?mod=plus [QSA]
 RewriteRule ^(pop|outbound)$                   $2?mod=pop [QSA]
 RewriteRule ^(rap)$                            $2?mod=rap [QSA]
 RewriteRule ^(report)$                         $2?mod=report [QSA]
-RewriteRule ^(rez|resources)$                  $2?mod=rez [QSA]
+
+RewriteRule ^(rat|rapidassessment)$            $2?mod=rat [QSA]
 RewriteRule ^(rat|dar|assessment)$             $2?mod=dar [QSA]
 RewriteRule ^(sepl|searchplus)$                $2?mod=sepl [QSA]
 RewriteRule ^(snap|snapshot)$                  $2?mod=snap [QSA]
@@ -64,7 +66,9 @@ RewriteRule ^(stat|statistics)$                $2?mod=stat [QSA]
 RewriteRule ^(tp|triagepic)$                   $2?mod=tp [QSA]
 RewriteRule ^(pref|settings)$                  $2?mod=pref [QSA]
 RewriteRule ^(xst|xmlstreamer)$                $2?mod=xst [QSA]
+RewriteRule ^(gis)$                            $2?mod=gis [QSA]
 RewriteRule ^(pa|preparedness)$                $2?mod=pa [QSA]
+RewriteRule ^(rs)$                             $2?mod=rs [QSA]
 
 ##### matches /shortname
 RewriteRule ^([^/][a-z0-9]+)$ $2?shortname=$1 [QSA]
@@ -74,3 +78,5 @@ RewriteRule ^([^/][a-z0-9]+)/$ $2?shortname=$1 [QSA]
 
 ##### matches /shortname/index.php?vars=params
 RewriteRule ^([^/][a-z0-9]+)/(.+)$ $2?shortname=$1 [QSA]
+
+php_value short_open_tag 1
