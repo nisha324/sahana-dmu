@@ -29,8 +29,8 @@ array_push($global['xajax_functions'], 'dar_load_food');
 array_push($global['xajax_functions'], 'dar_load_shelter');
 array_push($global['xajax_functions'], 'dar_load_capacity');
 array_push($global['xajax_functions'], 'dar_load_hazard');
-
 array_push($global['xajax_functions'], 'dar_perform_save');
+array_push($global['xajax_functions'], 'dar_show_reports');
 
 
 // adds a message to the log div @ tail
@@ -85,9 +85,9 @@ function dar_show_reports() {
 			";
 
     $q = "
-			SELECT  d.disaster_name, dar.dar_id, dar.date_created, dg.assessor_name
-			FROM disaster AS d, disaster_assessment AS dar, dar_general AS dg
-			WHERE d.disaster_id = dar.disaster_id
+			SELECT  i.name, dar.dar_id, dar.date_created, dg.assessor_name
+			FROM incident AS i, disaster_assessment AS dar, dar_general AS dg
+			WHERE i.incident_id = dar.incident_id
 			AND dar.dar_id = dg.dar_id
 			";
     $result = $global['db']->Execute($q);
@@ -103,9 +103,10 @@ function dar_show_reports() {
     $eo = 0;
     for ( $i = 0; $i < count($reports); $i++ ) {
         $row		=	$reports[$i];
-        $uuid		=	$row['p_uuid'];
-        $name		=	'<b>'.$row['full_name'].'</b>';
-        $disease	=	$row['name'];
+        $date		=	$row['date_created'];
+        $uuid		=	'<b>'.$row['dar_id'].'</b>';
+        $disaster	=	$row['name'];
+        $assessor   =   $row['assessor_name'];
 
         if(($eo % 2) == 0) {
             $evenOddClass = "mainRowEven";
@@ -115,17 +116,17 @@ function dar_show_reports() {
 
         $htmlMain .= "
 				<tr>
-				<td style=\"padding-left: 8px;\" class=\"".$evenOddClass."\">".$name."</td>
-				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\"><a href=\"http://{$uuid}\">".$uuid."</a></td>
-				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\">".$disease."</td>
-				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\"><input class=\"styleTehButton\" type=\"button\" onclick=\"javascript: dar_append_log('Showing monitoring data for patient <b>".$name." </b>...<br>'); dar_show_list_for_patient('".$uuid."');\" value=\"View\"></td>
-				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\"><input class=\"styleTehButton\" type=\"button\" onclick=\"javascript: dar_append_log('Adding Monitoring data for patient <b>".$name." </b>...<br>'); dar_add_data('".$uuid."');\" value=\"Add\"></td>
+				<td style=\"padding-left: 8px;\" class=\"".$evenOddClass."\">".$date."</td>
+				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\">".$uuid."</td>
+				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\">".$disaster."</td>
+				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\">".$assessor."</td>
+				<td style=\"padding-left: 8px; text-align: center;\" class=\"".$evenOddClass."\"><input class=\"styleTehButton\" type=\"button\" onclick=\"javascript: dar_append_log('Showing DAR data for report dated <b>".$date." </b>...<br>'); dar_show_list_for_patient('".$uuid."');\" value=\"View\"></td>
 				</tr>
 				";
         $eo++;
     }
     $htmlMain .= "</table>";
-    $pageControlHtml = '<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_load_general();\', 250);" value="'._t('Add new Data').'">';
+    $pageControlHtml = '<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Adding new data...').'<br>\'); setTimeout(\'dar_load_general();\', 250);" value="'._t('Add new Data').'">';
     $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
     $global['xajax_res']->addAssign('darMain','innerHTML',$htmlMain);
     $global['xajax_res']->addAssign('darControl','style.opacity','1.0');
@@ -138,13 +139,21 @@ function dar_show_reports() {
 /**
  * Function to load the General Information section
  */
-function dar_load_general()
+function dar_load_general($update = false)
 {
     global $global;
-    $dar_id = $global['dar_id'];
+    if(!isset($_SESSION['dar']['dar_id'])) {
+        $_SESSION['dar']['dar_id'] = $dar_id = shn_create_uuid('dar');
+    } else {
+        $dar_id = $_SESSION['dar']['dar_id'];
+    }
+
+    $update = $_SESSION['dar']['update'] = $update;
     $htmlLog = "";
     $htmlMain = "";
+
     $_SESSION['dar_current_page'] = "general";
+
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("General Information");
 	$htmlMain .= shn_form_select_return(array("Flood" => "Flood", "Drought" => "Drought", "Landslide" => "Landslide", "Tsunami" => "Tsunami","Drought"=>"Drought","Storm"=>"Storm/Cyclone","Other"=>"Other. Please Specify"),
@@ -167,9 +176,12 @@ function dar_load_general()
 
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_load_general();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$dar_id.'\', dar_get_general_data(), \'general\');" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\'); dar_perform_save(\''.$dar_id.'\', dar_get_general_data(), \'general\'); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\');
+		setTimeout(\'dar_load_general();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\');
+		dar_perform_save(\''.$dar_id.'\', dar_get_general_data(), \'general\', '.$update.');" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\');
+		dar_perform_save(\''.$dar_id.'\', dar_get_general_data(), \'general\'); " value="'._t('Save Changes and Close').'">
 	';
     //setTimeout(\'dar_perform_save('.$uuid.', dar_get_data());\', 250)
     $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
@@ -185,7 +197,12 @@ function dar_load_general()
 
 function dar_load_popres() {
     global $global;
-    $dar_id = $global['dar_id'];
+    if(!isset($_SESSION['dar']['dar_id'])) {
+        $_SESSION['dar']['dar_id'] = $dar_id = shn_create_uuid('dar');
+    } else {
+        $dar_id = $_SESSION['dar']['dar_id'];
+    }
+
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "popRes";
@@ -299,7 +316,11 @@ function dar_load_popres() {
 
 function dar_load_wash() {
     global $global;
-    $dar_id = $global['dar_id'];
+    if(!isset($_SESSION['dar']['dar_id'])) {
+        $_SESSION['dar']['dar_id'] = $dar_id = shn_create_uuid('dar');
+    } else {
+        $dar_id = $_SESSION['dar']['dar_id'];
+    }
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "wash";
@@ -362,7 +383,11 @@ function dar_load_wash() {
 
 function dar_load_food() {
     global $global;
-    $dar_id = $global['dar_id'];
+    if(!isset($_SESSION['dar']['dar_id'])) {
+        $_SESSION['dar']['dar_id'] = $dar_id = shn_create_uuid('dar');
+    } else {
+        $dar_id = $_SESSION['dar']['dar_id'];
+    }
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "food";
@@ -409,7 +434,11 @@ function dar_load_food() {
 
 function dar_load_shelter() {
     global $global;
-    $dar_id = $global['dar_id'];
+    if(!isset($_SESSION['dar']['dar_id'])) {
+        $_SESSION['dar']['dar_id'] = $dar_id = shn_create_uuid('dar');
+    } else {
+        $dar_id = $_SESSION['dar']['dar_id'];
+    }
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['dar_current_page'] = "shelter";
@@ -436,13 +465,13 @@ function dar_load_shelter() {
 
     $htmlMain .= shn_form_fsopen_return("Temporary shelter availability in the area");
     $htmlMain .= '<div class="checkBox"><form>
-        <label>Schools</label><input type="checkbox" id="schools">
+        <label>Schools</label><input type="checkbox" id="Schools">
         <input type="text" id="schools_list" disabled><br>
-        <label>Temples/Religious Places</label><input type="checkbox" id="temples">
+        <label>Temples/Religious Places</label><input type="checkbox" id="Temples &amp; Religious Places">
         <input type="text" id="temples_list" disabled><br>
-        <label>Government offices</label><input type="checkbox" id="gOffices">
+        <label>Government offices</label><input type="checkbox" id="Government Offices">
         <input type="text" id="gOffices_list" disabled><br>
-        <label>Other</label><input type="checkbox" id="other">
+        <label>Other</label><input type="checkbox" id="Other">
         <input type="text" id="other_list" disabled>
         </form></div>';
     $htmlMain .= shn_form_fsclose_return();

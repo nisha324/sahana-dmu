@@ -117,6 +117,10 @@ function shn_create_uuid($type='person') {
 			$gen_id = _shn_gen_id('hospital');
 			break;
 
+        case 'dar' :
+            $gen_id = _shn_gen_id('dar');
+            break;
+
 		default :
 			$gen_id = null;
 			break;

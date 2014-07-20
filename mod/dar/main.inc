@@ -27,8 +27,8 @@ shn_xajax_registerFunction('dar_load_popres');
 shn_xajax_registerFunction('dar_load_wash');
 shn_xajax_registerFunction('dar_load_food');
 shn_xajax_registerFunction('dar_load_shelter');
-
 shn_xajax_registerFunction('dar_perform_save');
+shn_xajax_registerFunction('dar_show_reports');
 
 
 

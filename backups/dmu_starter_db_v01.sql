@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 23, 2014 at 10:48 PM
+-- Generation Time: Jul 21, 2014 at 12:40 AM
 -- Server version: 5.5.37-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4
+-- PHP Version: 5.5.9-1ubuntu4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `dmu_milindu`
+-- Database: `sahana-dmu`
 --
 
 DELIMITER $$
@@ -162,7 +162,11 @@ INSERT INTO `dao_error_log` (`time`, `file`, `line`, `method`, `class`, `functio
 ('2014-06-15 18:14:27', 'E:\\xampp\\htdocs\\sahana-dmu\\mod\\gis\\xajax.inc', '102', 'gis_create_vector_layer', '', 'gis_create_vector_layer', 'Unknown column ''featur_feature_id'' in ''field list''', 'Inserting feature'),
 ('2014-06-15 18:14:27', 'E:\\xampp\\htdocs\\sahana-dmu\\mod\\gis\\xajax.inc', '102', 'gis_create_vector_layer', '', 'gis_create_vector_layer', 'Unknown column ''featur_feature_id'' in ''field list''', 'Inserting feature'),
 ('2014-06-15 19:13:44', 'E:\\xampp\\htdocs\\sahana-dmu\\mod\\gis\\xajax.inc', '142', 'gis_get_layer_data', '', 'gis_get_layer_data', 'Unknown column ''undefined'' in ''where clause''', 'show events 1'),
-('2014-06-15 19:15:09', 'E:\\xampp\\htdocs\\sahana-dmu\\mod\\gis\\xajax.inc', '142', 'gis_get_layer_data', '', 'gis_get_layer_data', 'Unknown column ''undefined'' in ''where clause''', 'show events 1');
+('2014-06-15 19:15:09', 'E:\\xampp\\htdocs\\sahana-dmu\\mod\\gis\\xajax.inc', '142', 'gis_get_layer_data', '', 'gis_get_layer_data', 'Unknown column ''undefined'' in ''where clause''', 'show events 1'),
+('2014-07-20 02:56:10', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '95', 'dar_show_reports', '', 'dar_show_reports', 'Unknown column ''dg.assessor_name'' in ''field list''', 'show reports'),
+('2014-07-20 02:56:33', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '95', 'dar_show_reports', '', 'dar_show_reports', 'Unknown column ''dg.assessor_name'' in ''field list''', 'show reports'),
+('2014-07-20 02:56:47', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '95', 'dar_show_reports', '', 'dar_show_reports', 'Unknown column ''dg.assessor_name'' in ''field list''', 'show reports'),
+('2014-07-20 02:57:23', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '95', 'dar_show_reports', '', 'dar_show_reports', 'Unknown column ''dg.assessor_name'' in ''field list''', 'show reports');
 
 -- --------------------------------------------------------
 
@@ -185,15 +189,24 @@ CREATE TABLE IF NOT EXISTS `dar_food` (
 
 CREATE TABLE IF NOT EXISTS `dar_general` (
   `dar_id` int(10) NOT NULL,
-  `disaster_type` varchar(120) NOT NULL,
+  `disaster_type` int(20) NOT NULL,
   `disasterDate` date NOT NULL,
   `affected_area` varchar(120) NOT NULL,
   `focal_point_name` varchar(120) NOT NULL,
   `area_type` varchar(120) NOT NULL,
+  `assessor_name` varchar(100) NOT NULL,
   `assessor_designation` varchar(120) NOT NULL,
   `focal_point_coordinator` varchar(200) NOT NULL,
-  PRIMARY KEY (`dar_id`)
+  PRIMARY KEY (`dar_id`),
+  UNIQUE KEY `disaster_type` (`disaster_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tracks general details for assessment';
+
+--
+-- Dumping data for table `dar_general`
+--
+
+INSERT INTO `dar_general` (`dar_id`, `disaster_type`, `disasterDate`, `affected_area`, `focal_point_name`, `area_type`, `assessor_name`, `assessor_designation`, `focal_point_coordinator`) VALUES
+(1, 1, '2014-07-13', 'Galle', 'Galle Base Hospital', 'District', 'Ramindu Deshapriya', 'MO', 'Prasanna Weerakoon');
 
 -- --------------------------------------------------------
 
@@ -249,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `dar_seq` (
 --
 
 INSERT INTO `dar_seq` (`id`) VALUES
-(0);
+(1);
 
 -- --------------------------------------------------------
 
@@ -301,35 +314,22 @@ CREATE TABLE IF NOT EXISTS `dar_wash` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `disaster`
---
-
-CREATE TABLE IF NOT EXISTS `disaster` (
-  `disaster_id` int(11) NOT NULL AUTO_INCREMENT,
-  `disaster_type` int(11) NOT NULL,
-  `assessment_date` date DEFAULT NULL,
-  `disaster_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL,
-  `assessor_id` int(11) NOT NULL,
-  `focal_point_id` int(32) NOT NULL,
-  PRIMARY KEY (`disaster_id`),
-  KEY `fk_disaster_DisasterType_idx` (`disaster_type`),
-  KEY `fk_disaster_assessor1_idx` (`assessor_id`),
-  KEY `fk_disaster_hospital1_idx` (`focal_point_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `disaster_assessment`
 --
 
 CREATE TABLE IF NOT EXISTS `disaster_assessment` (
-  `disaster_id` int(10) NOT NULL,
+  `incident_id` bigint(20) NOT NULL,
   `dar_id` int(10) NOT NULL,
   `date_created` date NOT NULL,
-  PRIMARY KEY (`disaster_id`,`dar_id`)
+  PRIMARY KEY (`incident_id`,`dar_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `disaster_assessment`
+--
+
+INSERT INTO `disaster_assessment` (`incident_id`, `dar_id`, `date_created`) VALUES
+(1, 1, '2014-07-20');
 
 -- --------------------------------------------------------
 
@@ -340,9 +340,7 @@ CREATE TABLE IF NOT EXISTS `disaster_assessment` (
 CREATE TABLE IF NOT EXISTS `disaster_has_affected_area` (
   `disaster_id` int(11) NOT NULL,
   `affected_area_id` int(11) NOT NULL,
-  PRIMARY KEY (`disaster_id`,`affected_area_id`),
-  KEY `fk_disaster_has_affected_area_affected_area1_idx` (`affected_area_id`),
-  KEY `fk_disaster_has_affected_area_disaster1_idx` (`disaster_id`)
+  PRIMARY KEY (`disaster_id`,`affected_area_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -355,7 +353,14 @@ CREATE TABLE IF NOT EXISTS `disaster_type` (
   `disaster_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`disaster_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `disaster_type`
+--
+
+INSERT INTO `disaster_type` (`disaster_type_id`, `name`) VALUES
+(1, 'FLOOD');
 
 -- --------------------------------------------------------
 
@@ -391,7 +396,7 @@ CREATE TABLE IF NOT EXISTS `feature` (
   `layer_layer_id` int(11) NOT NULL,
   PRIMARY KEY (`feature_id`),
   KEY `fk_feature_layer1_idx` (`layer_layer_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `feature`
@@ -682,16 +687,14 @@ CREATE TABLE IF NOT EXISTS `incident` (
   UNIQUE KEY `shortname_idx` (`shortname`),
   KEY `parent_id` (`parent_id`),
   KEY `private_group` (`private_group`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `incident`
 --
 
 INSERT INTO `incident` (`incident_id`, `parent_id`, `search_id`, `name`, `shortname`, `date`, `type`, `latitude`, `longitude`, `default`, `private_group`, `closed`, `description`, `street`, `external_report`) VALUES
-(1, NULL, NULL, 'Test Exercise', 'test', '2000-01-01', 'TEST', 0, 0, 1, NULL, 0, 'for the Test Exercise', '', ''),
-(3, NULL, NULL, 'new event 1507746440', 'x1507746440', '2014-06-08', 'TEST', 39, -77.101, NULL, 1, 0, NULL, NULL, NULL),
-(4, NULL, NULL, 'new event 1047169456', 'x1047169456', '2014-06-08', 'TEST', 39, -77.101, NULL, 1, 0, NULL, NULL, NULL);
+(1, NULL, NULL, 'Test Exercise', 'test', '2000-01-01', 'TEST', 0, 0, 1, NULL, 0, 'for the Test Exercise', '', '');
 
 -- --------------------------------------------------------
 
@@ -902,6 +905,8 @@ INSERT INTO `password_event_log` (`log_id`, `changed_timestamp`, `p_uuid`, `user
 (4, '2014-06-08 04:08:22', '1', 'root', 'Created a new event using Event Manager', 'EVENT CREATE'),
 (5, '2014-06-08 12:16:30', '1', 'root', 'Created a new event using Event Manager', 'EVENT CREATE'),
 (14, '2014-06-14 02:00:59', '1', 'root', 'Login Failed : Invalid Password.', '1');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `person_uuid`
@@ -1164,6 +1169,8 @@ INSERT INTO `sessions` (`session_id`, `sess_key`, `secret`, `inactive_expiry`, `
 ('4fdp9irl0pkhqelb20k7fbbei2', 'd63f5d58bd910a92460b0d5446fb046b', '08425d02bc2604d139cab9169bdbcb1e', 1403517148, 1403515783, NULL),
 ('4m8irk5fhffnrlok2sj18r1a50', 'cca6d5eafb051e849766330a1a9488b8', '6df9b44ff5dc4d54e340e3605614bad4', 1402152185, 1402152173, NULL),
 ('9g7p4tq063tbg3mp2c58htupv5', '077c6d8754c5b44fc70643628d633721', '256afdbaf9fc365d0e542f718fc083e5', 1399889403, 1399882915, NULL),
+('9n5p896ib0dr0e7fvmmft3njt1', 'c9cca24d37bb2230aa66ace41c40bed7', 'de8769eb390d6f7aa0632e3edc33d9bd', 1405825529, 1405822798, NULL),
+('b39hg9lqec1r6gb4tj707g11a7', '09b56b596bcba309975f3102b9c0e677', '0e1c8b1cd77b592d43a55c5e2dddcb3e', 1405878193, 1405878064, NULL),
 ('car72p8ac1uriujktuiulu7k07', 'c27acb38a53e427e333e99e6b929a651', 'f6710accf8ec92a64204cf70f775fce8', 1398977305, 1398975767, NULL),
 ('dnf163vk5f6ibap3ol07i2thi7', 'd41d03b3f642345636cb77deee4b6cb1', '8c6b1645463f100f46e38b98a569c25e', 1400083583, 1400083573, NULL),
 ('e8dtedivl3o74lhtm82740u1h5', '2590cb8f8878b9fbebcb1e7e1fb7fac0', 'd952e9ab85ee72e00a2f6465b29a41c1', 1402335692, 1402334979, NULL),
@@ -1177,6 +1184,7 @@ INSERT INTO `sessions` (`session_id`, `sess_key`, `secret`, `inactive_expiry`, `
 ('ls1n28geve8df0cs5e0tl16tg3', 'e941b418b6c6a820395e8c43bb659a3c', '42a1f1600884ff45e259a130e139f9fc', 1402561452, 1402554167, NULL),
 ('mst531jjes01mnpnrofpmivls1', 'f644204ee35c887d5a0bebde41cac373', '407cc28b8489efd959b567e0b2e33696', 1402567569, 1402539876, NULL),
 ('oq66r3jvj9h14acoqdj1hgr5v2', '023d46b4265b2f48717671b35eb85847', '8ed25ecda0199f7dd1bb1ed909d83ac1', 1402325441, 1402323725, NULL),
+('or9mv7kdo3sqqjmr9r26iac2p5', '8f4b2c9bc1018d674731e640358ccdcd', '8d5eefa5873ea84493af57d3097740bf', 1405883348, 1405880987, NULL),
 ('pb99o6r3qg78gustsh3mq0lod0', '1d33b1e204b1cf5fa1f9ebfb4bf2fa0f', '7f0837b44e17c428e53c2b41e359e132', 1402161875, 1402136797, NULL),
 ('s3si4j4uim0020e9hvtph7cqt2', 'e72194465cf5f382163e5610da4fe1eb', 'ba4648468556675508a441702cc1cca6', 1402416825, 1402391452, NULL),
 ('sqcunrotu9pf0vhuenr3pu05i4', '0af461ab013d4c116716d02a2bde0232', '87c522357412f95082e9b68f91b3259a', 1400771371, 1400771355, NULL),
@@ -1378,19 +1386,16 @@ ALTER TABLE `contact`
   ADD CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`p_uuid`) REFERENCES `person_uuid` (`p_uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `disaster`
+-- Constraints for table `dar_general`
 --
-ALTER TABLE `disaster`
-  ADD CONSTRAINT `fk_disaster_DisasterType` FOREIGN KEY (`disaster_type`) REFERENCES `disaster_type` (`disaster_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_disaster_assessor1` FOREIGN KEY (`assessor_id`) REFERENCES `fp_manager` (`fp_manager_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_disaster_hospital1` FOREIGN KEY (`focal_point_id`) REFERENCES `hospital` (`hospital_uuid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `dar_general`
+  ADD CONSTRAINT `fk_disaster_type_id` FOREIGN KEY (`disaster_type`) REFERENCES `disaster_type` (`disaster_type_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `disaster_has_affected_area`
+-- Constraints for table `disaster_assessment`
 --
-ALTER TABLE `disaster_has_affected_area`
-  ADD CONSTRAINT `fk_disaster_has_affected_area_disaster1` FOREIGN KEY (`disaster_id`) REFERENCES `disaster` (`disaster_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_disaster_has_affected_area_affected_area1` FOREIGN KEY (`affected_area_id`) REFERENCES `affected_area` (`affected_area_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `disaster_assessment`
+  ADD CONSTRAINT `fk_disaster_assessment_incident` FOREIGN KEY (`incident_id`) REFERENCES `incident` (`incident_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `feature`
