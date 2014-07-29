@@ -12,7 +12,7 @@
  */
 
 function initCalendar() {
-    $("#assDate").datepicker({ dateFormat: 'yy-mm-dd' ,maxDate: 0});
+    $("#reportDate").datepicker({ dateFormat: 'yy-mm-dd' ,maxDate: 0});
     $("#disasterDate").datepicker({ dateFormat: 'yy-mm-dd',maxDate: 0 });
 	$("#endDate").datepicker({ dateFormat: 'yy-mm-dd',maxDate: 0 });
 }

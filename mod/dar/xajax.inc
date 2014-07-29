@@ -139,7 +139,7 @@ function dar_show_reports() {
 /**
  * Function to load the General Information section
  */
-function dar_load_general($update = false)
+function dar_load_general($update = 0)
 {
     global $global;
     if(!isset($_SESSION['dar']['dar_id'])) {
@@ -148,7 +148,7 @@ function dar_load_general($update = false)
         $dar_id = $_SESSION['dar']['dar_id'];
     }
 
-    $update = $_SESSION['dar']['update'] = $update;
+    $_SESSION['dar']['update'] = $update;
     $htmlLog = "";
     $htmlMain = "";
 
@@ -160,7 +160,7 @@ function dar_load_general($update = false)
         "Type of Disaster", "disaster_type");
     $htmlMain .= shn_form_text_return("","other_type");
 	$htmlMain .= shn_form_text_return("Disaster Name(if any)","disasterName");
-	$htmlMain .= shn_form_date_return("Date of Disaster", "reportDate",null,array('help'=>'Date the disaster occurred'));
+	$htmlMain .= shn_form_date_return("Date of Disaster", "disasterDate",null,array('help'=>'Date the disaster occurred'));
     $htmlMain .= shn_form_select_return(array("colombo"=>"Colombo","kalutara"=>"Kalutara","galle"=>"Galle","gampaha"=>"Gampaha"),
         "Affected Area", "affected_area",null,
         array('help'=>'Area affected by the disaster. The most accurate geographical area must be selected. The lowest possible area is ‘one GN area’'));
@@ -169,19 +169,18 @@ function dar_load_general($update = false)
     $htmlMain .= shn_form_text_return("Assessor's Name","assessor_name",null,array('help'=>'The person who is conducting the disaster assessment. She/He must be assigned by the focal point administrator'));
     $htmlMain .= shn_form_select_return(array("MOH Admin" => "MOH Admin", "FP Admin" => "FP Admin",
         "HO" => "HO"), "Assessor's Designation", "assessor_designation");
-	$htmlMain .= shn_form_date_return("Date of Assessment", "assDate");
+	$htmlMain .= shn_form_date_return("Date of Assessment", "reportDate");
 	$htmlMain .= shn_form_date_return("Disaster End Date","endDate");
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_fclose_return();
 
+
+
     $editControlHtml = '
 
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\');
-		setTimeout(\'dar_load_general();\', 250);" value="'._t('Cancel Edit / Close').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\');
-		dar_perform_save(\''.$dar_id.'\', dar_get_general_data(), \'general\', '.$update.');" value="'._t('Save Changes').'">
-		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\');
-		dar_perform_save(\''.$dar_id.'\', dar_get_general_data(), \'general\'); " value="'._t('Save Changes and Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Canceling Changes...').'<br>\'); setTimeout(\'dar_load_general();\', 250);" value="'._t('Cancel Edit / Close').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes...').'<br>\'); dar_perform_save(\''.$dar_id.'\', dar_get_general_data(), \'general\', '.$update.');" value="'._t('Save Changes').'">
+		<input class="styleTehButton" type="button" onclick="javascript: dar_append_log(\''._t('Saving Changes and Closing...<br>').'\') ;dar_perform_save(\''.$dar_id.'\', dar_get_general_data(), \'general\'); " value="'._t('Save Changes and Close').'">
 	';
     //setTimeout(\'dar_perform_save('.$uuid.', dar_get_data());\', 250)
     $global['xajax_res']->addAssign('darMain','style.opacity','1.0');
@@ -502,22 +501,18 @@ function dar_perform_save($dar_id, $rj, $page, $update = false) {
 
         $reportDate                 = mysql_real_escape_string($r['reportDate']);
         $affected_area              = mysql_real_escape_string($r['affected_area']);
-        $focal_point_name           = mysql_real_escape_string($r['focal_point_name']);
         $area_type                  = mysql_real_escape_string($r['area_type']);
         $assessor_name              = mysql_real_escape_string($r['assessor_name']);
         $assessor_designation       = mysql_real_escape_string($r['assessor_designation']);
-        $focal_point_coordinator    = mysql_real_escape_string($r['focal_point_coordinator']);
 
         if ( $update ) {
             $q = "
             UPDATE dar_general
             SET reportDate              ='".$reportDate."',
                 affected_area           ='".$affected_area."',
-                focal_point_name        ='".$focal_point_name."',
                 area_type               ='".$area_type."',
                 assessor_name           ='".$assessor_name."',
-                assessor_designation    ='".$assessor_designation."',
-                focal_point_coordinator ='".$focal_point_coordinator."'
+                assessor_designation    ='".$assessor_designation."'
             WHERE dar_id='".$dar_id."'
              ";
         }
@@ -527,13 +522,10 @@ function dar_perform_save($dar_id, $rj, $page, $update = false) {
             VALUES('".$dar_id."',
                    '".$reportDate."',
                    '".$affected_area."',
-                   '".$focal_point_name."',
                    '".$area_type."',
                    '".$assessor_name."',
-                   '".$assessor_designation."',
-                   '".$focal_point_coordinator."'
-
-             )";
+                   '".$assessor_designation."'
+            )";
         }
 
         $result = $global['db']->Execute($q);

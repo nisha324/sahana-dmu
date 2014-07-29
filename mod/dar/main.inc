@@ -45,7 +45,7 @@ function shn_dar_default() {
     shn_tabmenu_close();
 	shn_xajax_printJavascript();
 	echo "
-		<div id=\"darLog\" class=\"logArea\">Loading dar Data...<br><noscript>THIS MODULE REQUIRES THAT YOU ACTIVATE JAVASCRIPT!</noscript></div>
+		<div id=\"darLog\" class=\"logArea\">Loading Disaster Assessment and Response Data...<br><noscript>THIS MODULE REQUIRES THAT YOU ACTIVATE JAVASCRIPT!</noscript></div>
 		<div id=\"darControl\" class=\"controlArea\">&nbsp;</div>
 		<div id=\"darMain\" class=\"mainArea\"></div>
 		<script>".file_get_contents($global['approot']."/mod/dar/dar.js")."</script>
