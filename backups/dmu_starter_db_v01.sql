@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 21, 2014 at 12:40 AM
--- Server version: 5.5.37-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.2
+-- Generation Time: Aug 10, 2014 at 03:07 PM
+-- Server version: 5.5.38-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -166,7 +166,9 @@ INSERT INTO `dao_error_log` (`time`, `file`, `line`, `method`, `class`, `functio
 ('2014-07-20 02:56:10', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '95', 'dar_show_reports', '', 'dar_show_reports', 'Unknown column ''dg.assessor_name'' in ''field list''', 'show reports'),
 ('2014-07-20 02:56:33', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '95', 'dar_show_reports', '', 'dar_show_reports', 'Unknown column ''dg.assessor_name'' in ''field list''', 'show reports'),
 ('2014-07-20 02:56:47', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '95', 'dar_show_reports', '', 'dar_show_reports', 'Unknown column ''dg.assessor_name'' in ''field list''', 'show reports'),
-('2014-07-20 02:57:23', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '95', 'dar_show_reports', '', 'dar_show_reports', 'Unknown column ''dg.assessor_name'' in ''field list''', 'show reports');
+('2014-07-20 02:57:23', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '95', 'dar_show_reports', '', 'dar_show_reports', 'Unknown column ''dg.assessor_name'' in ''field list''', 'show reports'),
+('2014-08-10 09:24:01', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '528', 'dar_perform_save', '', 'dar_perform_save', 'Column count doesn''t match value count at row 1', 'Inserting General Data'),
+('2014-08-10 09:35:10', '/home/ramindu/public_html/sahana-dmu/mod/dar/xajax.inc', '532', 'dar_perform_save', '', 'dar_perform_save', 'Cannot add or update a child row: a foreign key constraint fails (`sahana-dmu`.`dar_general`, CONSTRAINT `fk_disaster_type_id` FOREIGN KEY (`disaster_type`) REFERENCES `disaster_type` (`disaster_type_id`) ON DELETE CASCADE ON UPDATE CASCADE)', 'Inserting General Data');
 
 -- --------------------------------------------------------
 
@@ -189,24 +191,21 @@ CREATE TABLE IF NOT EXISTS `dar_food` (
 
 CREATE TABLE IF NOT EXISTS `dar_general` (
   `dar_id` int(10) NOT NULL,
-  `disaster_type` int(20) NOT NULL,
-  `disasterDate` date NOT NULL,
+  `reportDate` date NOT NULL,
   `affected_area` varchar(120) NOT NULL,
-  `focal_point_name` varchar(120) NOT NULL,
   `area_type` varchar(120) NOT NULL,
   `assessor_name` varchar(100) NOT NULL,
   `assessor_designation` varchar(120) NOT NULL,
-  `focal_point_coordinator` varchar(200) NOT NULL,
-  PRIMARY KEY (`dar_id`),
-  UNIQUE KEY `disaster_type` (`disaster_type`)
+  PRIMARY KEY (`dar_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tracks general details for assessment';
 
 --
 -- Dumping data for table `dar_general`
 --
 
-INSERT INTO `dar_general` (`dar_id`, `disaster_type`, `disasterDate`, `affected_area`, `focal_point_name`, `area_type`, `assessor_name`, `assessor_designation`, `focal_point_coordinator`) VALUES
-(1, 1, '2014-07-13', 'Galle', 'Galle Base Hospital', 'District', 'Ramindu Deshapriya', 'MO', 'Prasanna Weerakoon');
+INSERT INTO `dar_general` (`dar_id`, `reportDate`, `affected_area`, `area_type`, `assessor_name`, `assessor_designation`) VALUES
+(1, '2014-07-13', 'Galle', 'District', 'Ramindu Deshapriya', 'MO'),
+(2, '2014-08-10', 'Galle', '', 'Ramindu Deshapriya', 'MOH Admin');
 
 -- --------------------------------------------------------
 
@@ -262,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `dar_seq` (
 --
 
 INSERT INTO `dar_seq` (`id`) VALUES
-(1);
+(2);
 
 -- --------------------------------------------------------
 
@@ -1183,6 +1182,7 @@ INSERT INTO `sessions` (`session_id`, `sess_key`, `secret`, `inactive_expiry`, `
 ('johbi0g55nt0u25ct0g25at2s4', '8d5d685d8211410ff86bbe1ce45308b8', 'a086c2f69427e5453c65dc95fd3ca0e3', 1402979973, 1402881785, NULL),
 ('ls1n28geve8df0cs5e0tl16tg3', 'e941b418b6c6a820395e8c43bb659a3c', '42a1f1600884ff45e259a130e139f9fc', 1402561452, 1402554167, NULL),
 ('mst531jjes01mnpnrofpmivls1', 'f644204ee35c887d5a0bebde41cac373', '407cc28b8489efd959b567e0b2e33696', 1402567569, 1402539876, NULL),
+('nbnshcdak4p09aocebqc551jb0', '901a458c5242bf951755dc3b5a959075', '9d571ad985cf21ab970f18da5dbd7604', 1407663413, 1407662308, NULL),
 ('oq66r3jvj9h14acoqdj1hgr5v2', '023d46b4265b2f48717671b35eb85847', '8ed25ecda0199f7dd1bb1ed909d83ac1', 1402325441, 1402323725, NULL),
 ('or9mv7kdo3sqqjmr9r26iac2p5', '8f4b2c9bc1018d674731e640358ccdcd', '8d5eefa5873ea84493af57d3097740bf', 1405883348, 1405880987, NULL),
 ('pb99o6r3qg78gustsh3mq0lod0', '1d33b1e204b1cf5fa1f9ebfb4bf2fa0f', '7f0837b44e17c428e53c2b41e359e132', 1402161875, 1402136797, NULL),
@@ -1384,12 +1384,6 @@ INSERT INTO `voice_note_seq` (`id`) VALUES
 --
 ALTER TABLE `contact`
   ADD CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`p_uuid`) REFERENCES `person_uuid` (`p_uuid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `dar_general`
---
-ALTER TABLE `dar_general`
-  ADD CONSTRAINT `fk_disaster_type_id` FOREIGN KEY (`disaster_type`) REFERENCES `disaster_type` (`disaster_type_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `disaster_assessment`

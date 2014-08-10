@@ -156,21 +156,15 @@ function dar_load_general($update = 0)
 
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("General Information");
-	$htmlMain .= shn_form_select_return(array("Flood" => "Flood", "Drought" => "Drought", "Landslide" => "Landslide", "Tsunami" => "Tsunami","Drought"=>"Drought","Storm"=>"Storm/Cyclone","Other"=>"Other. Please Specify"),
-        "Type of Disaster", "disaster_type");
     $htmlMain .= shn_form_text_return("","other_type");
 	$htmlMain .= shn_form_text_return("Disaster Name(if any)","disasterName");
-	$htmlMain .= shn_form_date_return("Date of Disaster", "disasterDate",null,array('help'=>'Date the disaster occurred'));
-    $htmlMain .= shn_form_select_return(array("colombo"=>"Colombo","kalutara"=>"Kalutara","galle"=>"Galle","gampaha"=>"Gampaha"),
+	$htmlMain .= shn_form_date_return("Date of Assessment", "reportDate",null,array('help'=>'Date the report was entered'));
+    $htmlMain .= shn_form_select_return(array("Colombo"=>"Colombo","Kalutara"=>"Kalutara","Galle"=>"Galle","Gampaha"=>"Gampaha"),
         "Affected Area", "affected_area",null,
         array('help'=>'Area affected by the disaster. The most accurate geographical area must be selected. The lowest possible area is ‘one GN area’'));
-   // $htmlMain .= shn_form_select_return(array("GN" => "GN", "MOH" => "MOH", "District" => "District", "Province" => "Province"),
-        //"Affected Area", "area_type");
     $htmlMain .= shn_form_text_return("Assessor's Name","assessor_name",null,array('help'=>'The person who is conducting the disaster assessment. She/He must be assigned by the focal point administrator'));
     $htmlMain .= shn_form_select_return(array("MOH Admin" => "MOH Admin", "FP Admin" => "FP Admin",
         "HO" => "HO"), "Assessor's Designation", "assessor_designation");
-	$htmlMain .= shn_form_date_return("Date of Assessment", "reportDate");
-	$htmlMain .= shn_form_date_return("Disaster End Date","endDate");
     $htmlMain .= shn_form_fsclose_return();
     $htmlMain .= shn_form_fclose_return();
 
@@ -495,10 +489,11 @@ function dar_perform_save($dar_id, $rj, $page, $update = false) {
 
     global $global;
 
-    $r = json_decode($rj);
+    $r = json_decode($rj, true);
 
     if($page == "general"){
 
+        $disaster_type              = mysql_real_escape_string($r['disaster_type']);
         $reportDate                 = mysql_real_escape_string($r['reportDate']);
         $affected_area              = mysql_real_escape_string($r['affected_area']);
         $area_type                  = mysql_real_escape_string($r['area_type']);
@@ -508,7 +503,8 @@ function dar_perform_save($dar_id, $rj, $page, $update = false) {
         if ( $update ) {
             $q = "
             UPDATE dar_general
-            SET reportDate              ='".$reportDate."',
+            SET
+                reportDate              ='".$reportDate."',
                 affected_area           ='".$affected_area."',
                 area_type               ='".$area_type."',
                 assessor_name           ='".$assessor_name."',

@@ -212,11 +212,9 @@ function dar_get_general_data() {
     var r = new Object();
     r.reportDate                     = $("#reportDate").val();
     r.affected_area                  = $("#affected_area").val();
-    //r.focal_point_name               = $("#focal_point_name").val();
     r.area_type                      = $("#area_type").val();
     r.assessor_name                  = $("#assessor_name").val();
     r.assessor_designation           = $("#assessor_designation").val();
-    //r.focal_point_coordinator        = $("#focal_point_coordinator").val();
 
 
     var rj = JSON.stringify(r);
