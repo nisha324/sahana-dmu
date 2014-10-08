@@ -1,15 +1,14 @@
 <?php
 /**
- * @name         Preparedness Assessment and Response
+ * @name         Preparedness Assesment (PA)
  * @version      01
  * @package      pa
- * @author       Ramindu Deshapriya <rdeshapriya@virtusa.com>
+ * @author       Raveen Perera <harith9127@gmail.com>
  * @about        Developed in whole or part by the U.S. National Library of Medicine,the Sahana Foundation and Virtusa Corpodarion
  * @link         https://pl.nlm.nih.gov/about
  * @link         http://sahanafoundation.org
  * @link		 http://www.virtusa.com
  * @license	 	 http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
- * @lastModified 2013.11.21
  */
 
 
@@ -46,6 +45,7 @@ function shn_pa_default() {
 		<script>".file_get_contents($global['approot']."/mod/pa/pa.js")."</script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
+		<script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>
 	";
     echo "<style>".file_get_contents($global['approot']."/mod/pa/pa.css")."</style>";
     if(isset($_GET['loadCap'])){
@@ -62,6 +62,7 @@ function shn_pa_default() {
 		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-autocomplete.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
+		<script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>
 	";
 }
 
