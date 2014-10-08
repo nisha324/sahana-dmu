@@ -1,15 +1,14 @@
 <?php
 /**
- * @name         Disaster Assessment and Response
+ * @name         Preparedness Assesment (PA) 
  * @version      01
  * @package      pa
- * @author       Ramindu Deshapriya <rdeshapriya@virtusa.com>
+ * @author       Raveen Perera <harith9127@gmail.com>
  * @about        Developed in whole or part by the U.S. National Library of Medicine,the Sahana Foundation and Virtusa Corpodarion
  * @link         https://pl.nlm.nih.gov/about
  * @link         http://sahanafoundation.org
  * @link         http://www.virtusa.com
  * @license         http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
- * @lastModified 2013.11.21
  */
 
 require_once($global['approot']."/inc/lib_form_return.inc");
@@ -418,10 +417,11 @@ function pa_load_hazard(){
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['pa_current_page'] = "loadHazard";
+      $htmlMain .= '<div id="chart_div" style="width: 900px; height: 500px;"></div>';
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Hazard Assessment");
 
-    
+  
 
     $htmlMain .= '<table>
                     <tr>
@@ -651,6 +651,7 @@ function pa_load_hazard(){
     //$global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'paLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("cal();");
     $global['xajax_res']->addScript("getToday();");
+    $global['xajax_res']->addScript("hazard_chart();");
     
     return $global['xajax_res']->getXML();
 }
@@ -728,6 +729,7 @@ function pa_hazard_history(){
     }
     
     $global['xajax_res']->addScript("showHistory(".json_encode($marks).")");
+   // $global['xajax_res']->addScript("hazard_chart(".json_encode($marks).")");
 
     return $global['xajax_res']->getXML();
 

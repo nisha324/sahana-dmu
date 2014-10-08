@@ -19,6 +19,30 @@ function disable_fields(){
 
 }
 
+//google charts for hazard history
+function hazard_chart(){
+      google.load("visualization", "1", {packages:["corechart"]});
+      
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Asses Date', 'Tsunami', 'Cyclones','Floods','Droughts','Landslides'],
+          ['2004', 4,5,6,8,9],
+          ['2005', 1,6,8,3,2]
+        ]);
+        google.setOnLoadCallback(drawChart);
+        var options = {
+          title: 'Hazard Assesment',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          vAxis: { ticks: [0,10,20,30,40,50,60,70,80,90,100,110,120,130] }
+        };
+        
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
+}
+
 function tempCheckBox(){
     $("select").change(function(){
 
