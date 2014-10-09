@@ -23,8 +23,10 @@ shn_xajax_registerFunction('pa_prepend_log');
 shn_xajax_registerFunction('pa_show_message');
 shn_xajax_registerFunction('pa_load_capacity');
 shn_xajax_registerFunction('pa_load_hazard');
-
-
+shn_xajax_registerFunction('pa_hazard_perform_save');
+shn_xajax_registerFunction('pa_hazard_history');
+shn_xajax_registerFunction('pa_capacity_perform_save');
+shn_xajax_registerFunction('pa_capacity_history');
 
 
 function shn_pa_default() {
@@ -38,7 +40,7 @@ function shn_pa_default() {
     
 	shn_xajax_printJavascript();
 	echo "
-		<div id=\"paLog\" class=\"logArea\">Loading pa Data...<br><noscript>THIS MODULE REQUIRES THAT YOU ACTIVATE JAVASCRIPT!</noscript></div>
+		<!--<div id=\"paLog\" class=\"logArea\">Loading pa Data...<br><noscript>THIS MODULE REQUIRES THAT YOU ACTIVATE JAVASCRIPT!</noscript></div>-->
 		<div id=\"paControl\" class=\"controlArea\">&nbsp;</div>
 		<div id=\"paMain\" class=\"mainArea\"></div>
 		<script>".file_get_contents($global['approot']."/mod/pa/pa.js")."</script>
@@ -53,7 +55,7 @@ function shn_pa_default() {
         $control = "pa_load_hazard";
     }
     else {
-        $control = "pa_show_reports";
+        $control = "pa_load_capacity";
     }
 	echo "
         <script type=\"text/javascript\">".$control."();</script>
