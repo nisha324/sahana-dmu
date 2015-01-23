@@ -10,7 +10,141 @@
  * @license	 	 http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
  * @lastModified 2013.11.21
  */
+function unknownDisable(){
+    $(":checkbox").click(function(){
+    var myStringArray = [
+        "male_injured",
+        "female_injured",
+        "pregnant_female_injured",
+        "children_injured",
+        "young_children_injured",
+        "infants_injured",
+        "total_injured",
+        "male_displaced",
+        "female_displaced",
+        "pregnant_female_displaced",
+        "children_displaced",
+        "young_children_displaced",
+        "infants_displaced",
+        "total_displaced",
+        "male_missing",
+        "female_missing",
+        "pregnant_female_missing",
+        "children_missing",
+        "young_children_missing",
+        "infants_missing",
+        "total_missing",
+        "res_diseases",
+        "dysentery",
+        "hepatitis",
+        "dengue",
+        "malaria",
+        "measles",
+        "meningitis",
+        "chikenpox",
+        "total_deceased",
+        "total_male",
+        "total_female",
+        "total_pregnant",
+        "total_children",
+        "total_1to5_children",
+        "total_infants",
+        "total_full",
+        "total_families",
+        "fp_hi",
+        "fp_dh",
+        "fp_if",
+        "fp_bs",
+        "ae_hi",
+        "ae_doc",
+        "tenKm_hi",
+        "ae_bs"];
+    var arrayLength = myStringArray.length;
+    for (var i = 0; i < arrayLength; i++) {
 
+        if ($("#"+myStringArray[i]+"box").is(':checked')) {
+            $("#"+myStringArray[i]).prop('disabled', true);
+            // the checkbox was checked
+        } else {
+            $("#"+myStringArray[i]).prop('disabled', false);
+            // the checkbox was unchecked
+        }
+        //Do something
+    }
+    });
+}
+
+function unknownField(){
+    var myStringArray = [
+        "male_injured",
+        "female_injured",
+        "pregnant_female_injured",
+        "children_injured",
+        "young_children_injured",
+        "infants_injured",
+        "total_injured",
+        "male_displaced",
+        "female_displaced",
+        "pregnant_female_displaced",
+        "children_displaced",
+        "young_children_displaced",
+        "infants_displaced",
+        "total_displaced",
+        "male_missing",
+        "female_missing",
+        "pregnant_female_missing",
+        "children_missing",
+        "young_children_missing",
+        "infants_missing",
+        "total_missing",
+        "res_diseases",
+        "dysentery",
+        "hepatitis",
+        "dengue",
+        "malaria",
+        "measles",
+        "meningitis",
+        "chikenpox",
+        "total_deceased",
+        "total_male",
+        "total_female",
+        "total_pregnant",
+        "total_children",
+        "total_1to5_children",
+        "total_infants",
+        "total_full",
+        "total_families",
+        "fp_hi",
+        "fp_dh",
+        "fp_if",
+        "fp_bs",
+        "ae_hi",
+        "ae_doc",
+        "tenKm_hi",
+        "ae_bs"];
+    var arrayLength = myStringArray.length;
+    for (var i = 0; i < arrayLength; i++) {
+        addCheck(myStringArray[i]);
+        //Do something
+    }
+    var array = ["fp_hi",
+        "fp_dh",
+        "fp_if",
+        "fp_bs",
+        "ae_hi",
+        "ae_doc",
+        "tenKm_hi",
+        "ae_bs"]
+    var arrayLength = array.length;
+    for(var i=0; i<arrayLength;i++){
+        var u=array[i];
+        $("label[for="+u+"]").after('<br><br>')
+    }
+}
+
+function addCheck(e){
+    $("#"+e).after('<input type="checkbox" id="'+e+'box">');
+}
 function initCalendar() {
     $("#reportDate").datepicker({ dateFormat: 'yy-mm-dd' ,maxDate: 0});
     $("#disasterDate").datepicker({ dateFormat: 'yy-mm-dd',maxDate: 0 });
@@ -147,6 +281,8 @@ function limit(){
     $("#measles").keyup(function(){checkLimit("#measles")});
     $("#meningitis").keyup(function(){checkLimit("#meningitis")});
     $("#chikenpox").keyup(function(){checkLimit("#chikenpox")});
+
+    
 
 }
 
@@ -330,10 +466,3 @@ function dar_get_shelter_data() {
     return(rj);
 }
 
-function dar_get_capacity_data(){
-
-}
-
-function dar_get_hazard_data(){
-
-}

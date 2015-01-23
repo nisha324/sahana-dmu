@@ -3,6 +3,15 @@
     width: 1em !important;
 }
 
+#label-inline{
+    float: left;
+}
+
+#number-inline{
+    /*float: right;*/
+    width: 60px;
+}
+
 #pa, #drill{
     text-align: left !important;
     width: 4em !important;
@@ -24,5 +33,56 @@ fieldset{
     height: none !important;
     min-height: none !important;
     min-width: none !important;
+    /*width: 100%;*/
+}
+
+.half-left{
+    width: 50%;
+    float: left;
+    /*display: table-cell;*/
+}
+
+.half-right{
+    width: 50%;
+    float: right;
+    /*display: table-cell;*/
+}
+
+.quater-1{
+    float: none;
+    display: table-cell;
+    width: 25%;
+ 
+}
+
+.quater-2{
+    float: none;
+    display: table-cell;
+    width: 25%;
+}
+
+.quater-3{
+    width: 25%;
+    float: none;
+    display: table-cell;
+}
+.quater-4{
+    width: 25%;
+    float: none;
+    display: table-cell; 
+}
+
+.main{
+    left:9px;
+}
+
+.wrapper{
+    width: 100%;
+    display: table;
+}
+
+#fieldset-flat{
+    border-radius: 0px !important;
+    box-shadow: 0px 0px 0px !important;
 }
 

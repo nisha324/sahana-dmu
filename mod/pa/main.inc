@@ -20,8 +20,11 @@ require_once($global['approot'].'/mod/pa/xajax.inc');
 shn_xajax_registerFunction('pa_append_log');
 shn_xajax_registerFunction('pa_prepend_log');
 shn_xajax_registerFunction('pa_show_message');
+
 shn_xajax_registerFunction('pa_load_capacity');
 shn_xajax_registerFunction('pa_load_hazard');
+shn_xajax_registerFunction('pa_load_risk');
+
 shn_xajax_registerFunction('pa_hazard_perform_save');
 shn_xajax_registerFunction('pa_hazard_history');
 shn_xajax_registerFunction('pa_capacity_perform_save');
@@ -34,49 +37,45 @@ function shn_pa_default() {
     shn_tabmenu_open();
     shn_tabmenu_item("loadCap",  _t("pa-Menu|Capacity Assessment"),          "pa");
     shn_tabmenu_item("loadHazard",  _t("pa-Menu|Hazard Assessment"),          "pa");
+		shn_tabmenu_item("loadrisk",  _t("pa-Menu|Risk Assessment"),          "pa");
     shn_tabmenu_close();
     shn_xajax_printJavascript();
-    
+
 	shn_xajax_printJavascript();
 	echo "
 		<!--<div id=\"paLog\" class=\"logArea\">Loading pa Data...<br><noscript>THIS MODULE REQUIRES THAT YOU ACTIVATE JAVASCRIPT!</noscript></div>-->
 		<div id=\"paControl\" class=\"controlArea\">&nbsp;</div>
 		<div id=\"paMain\" class=\"mainArea\"></div>
-		<script>".file_get_contents($global['approot']."/mod/pa/pa.js")."</script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
+		<script type=\"text/javascript\">".file_get_contents($global['approot']."/mod/pa/pa.js")."</script>
+
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
-		<script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>
+
 	";
     echo "<style>".file_get_contents($global['approot']."/mod/pa/pa.css")."</style>";
-    if(isset($_GET['loadCap'])){
+    if(isset($_GET['loadCap']))
+		{
         $control = "pa_load_capacity";
 
-    } elseif(isset($_GET['loadHazard'])){
+    }
+		elseif(isset($_GET['loadHazard']))
+		{
         $control = "pa_load_hazard";
     }
-    else {
+		elseif(isset($_GET['loadrisk']))
+		{
+				$control = "pa_load_risk";
+		}
+    else
+		{
         $control = "pa_load_capacity";
     }
 	echo "
         <script type=\"text/javascript\">".$control."();</script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-1.6.4.min.js\" ></script>
+		<script type=\"text/javascript\" src=\"res/js/jsapi.js\"></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-autocomplete.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
-		<script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>
+
 	";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

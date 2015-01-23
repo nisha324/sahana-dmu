@@ -1,14 +1,13 @@
 <?php
-/**
- * @name         Preparedness Assesment (PA) 
+/*
+ * @name         Preparedness Assesment (PA)
  * @version      01
  * @package      pa
  * @author       Raveen Perera <harith9127@gmail.com>
  * @about        Developed in whole or part by the U.S. National Library of Medicine,the Sahana Foundation and Virtusa Corpodarion
  * @link         https://pl.nlm.nih.gov/about
  * @link         http://sahanafoundation.org
- * @link         http://www.virtusa.com
- * @license         http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
+ * @license      http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
  */
 
 require_once($global['approot']."/inc/lib_form_return.inc");
@@ -23,6 +22,9 @@ array_push($global['xajax_functions'], 'pa_prepend_log');
 array_push($global['xajax_functions'], 'pa_show_message');
 array_push($global['xajax_functions'], 'pa_load_capacity');
 array_push($global['xajax_functions'], 'pa_load_hazard');
+
+array_push($global['xajax_functions'], 'pa_load_risk');
+
 array_push($global['xajax_functions'], 'pa_hazard_perform_save');
 array_push($global['xajax_functions'], 'pa_hazard_history');
 array_push($global['xajax_functions'], 'pa_capacity_perform_save');
@@ -311,11 +313,11 @@ function pa_load_capacity(){
     $htmlMain .= shn_form_fsclose_return();
 
 
- 
+
 
 		$htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_capacity_perform_save(get_capacity())">Save Changes</button>';
         $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_capacity_history()" id="capacity_history">History</button>';
-	
+
     $global['xajax_res']->addAssign('paMain','style.opacity','1.0');
     $global['xajax_res']->addAssign('paMain','innerHTML',$htmlMain);
     $global['xajax_res']->addAssign('paControl', 'innerHTML', $editControlHtml);
@@ -324,7 +326,7 @@ function pa_load_capacity(){
     $global['xajax_res']->addScript("tempCheckBox()");
     $global['xajax_res']->addScript("disable_fields()");
     $global['xajax_res']->addScript("getToday()");
-    
+
     return $global['xajax_res']->getXML();
 }
 
@@ -397,10 +399,10 @@ function pa_capacity_history(){
                 "plan2"             => $row['plan2']
 
             )
-        
+
         );
     }
-    
+
     $global['xajax_res']->addScript("showCapacityHistory(".json_encode($marks).")");
 
     return $global['xajax_res']->getXML();
@@ -417,11 +419,10 @@ function pa_load_hazard(){
     $htmlLog = "";
     $htmlMain = "";
     $_SESSION['pa_current_page'] = "loadHazard";
-      $htmlMain .= '<div id="chart_div" style="width: 900px; height: 500px;"></div>';
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Hazard Assessment");
 
-  
+
 
     $htmlMain .= '<table>
                     <tr>
@@ -634,7 +635,7 @@ function pa_load_hazard(){
                     </table>';
 
     $htmlMain .= shn_form_fsclose_return();
-
+    //$htmlMain .='<div id="chart_div" style="width: 900px; height: 500px;"></div>';
     $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_hazard_perform_save(get_hazard())">Save Changes</button>';
     $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_hazard_history()" id="hazard_history">History</button>';
     $htmlMain .= '<br></br>';
@@ -650,9 +651,8 @@ function pa_load_hazard(){
     //$global['xajax_res']->addAppend('paLog','innerHTML',$htmlLog);
     //$global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'paLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("cal();");
-    $global['xajax_res']->addScript("getToday();");
-    $global['xajax_res']->addScript("hazard_chart();");
-    
+    //$global['xajax_res']->addScript("getToday();");
+
     return $global['xajax_res']->getXML();
 }
 
@@ -683,7 +683,7 @@ function pa_hazard_perform_save($rj) {
         $tsunami_SP        =mysql_real_escape_string($r["tsunami_SP"]);
 
         $q = "INSERT INTO pa_hazard VALUES('','".$today."','".$hazard_user."','".$flood_poten."','".$flood_frq."','".$flood_SP."','".$landslide_poten."','".$landslide_frq."','".$landslide_SP."','".$drought_poten."','".$drought_frq."','".$drought_SP."','".$cyclones_poten."','".$cyclones_frq."','".$cyclones_SP."','".$tsunami_poten."','".$tsunami_frq."','".$tsunami_SP."')";
-        
+
 
     $result = $global['db']->Execute($q);
     return $global['xajax_res']->getXML();
@@ -724,19 +724,110 @@ function pa_hazard_history(){
                 "tsunami_frq"       => $row['tsunami_frq'],
                 "tsunami_SP"        => $row['tsunami_SP']
             )
-        
+
         );
     }
-    
+
     $global['xajax_res']->addScript("showHistory(".json_encode($marks).")");
    // $global['xajax_res']->addScript("hazard_chart(".json_encode($marks).")");
+    $global['xajax_res']->addScript("hazard_chart();");
+
 
     return $global['xajax_res']->getXML();
+
 
 }
 
 
+Function pa_load_risk(){
+
+    global $global;
+    //$pa_id = $global['pa_id'];
+    $htmlLog = "";
+    $htmlMain = "";
+    $_SESSION['pa_current_page'] = "loadrisk";
+    $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => false));
+    
+    $htmlMain .=
+    '<div class="main">
+        <h1>Susceptibility</h1>
+        <fieldset id="fieldset-flat">
+            <h3>Public Infrastructure</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Population without access to improved sanitation facilities</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Population with access to an improved water source</b></p></div>
+                        <input id="number-inline" ></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+            <h3>Housing Conditions</h3>
+            <div class="full">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Population without access to improved sanitation facilities</b></p></div>
+                    <input id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <h3>Poverty and Dependencies</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Proportion of people below local poverty line</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Proportion of households receiving direct cash-transfer assistance</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>         
+                </div>
+            </div>    
+                
+                <div class="quater-3">
+                    <fieldset id="fieldset-flat">
+                         <p><b>Dependency Ratio</b></p>
+                         <input type="text">%</input>
+                    </fieldset>
+                </div>
+                <div class="quater-4">
+                    <fieldset id="fieldset-flat">
+                         <p><b>Proportion of female headed households</b></p>
+                         <input type="text">%</input>
+                    </fieldset>
+                </div>
+            </div>
 
 
+            <h3>Economic Capacity and Income</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                         <p><b>Gross regional product per capita</b></p>
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                         <p><b>Income distribution</b></p>
+                    </fieldset>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>';
 
 
+    $global['xajax_res']->addAssign('paMain','style.opacity','1.0');
+    $global['xajax_res']->addAssign('paMain','innerHTML',$htmlMain);
+
+    return $global['xajax_res']->getXML();
+  
+}
