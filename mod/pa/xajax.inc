@@ -728,9 +728,15 @@ function pa_hazard_history(){
         );
     }
 
+    /*include_once('../inc/dompdf/dompdf_config.inc.php');
+    $dompdf = new DOMPDF();
+    $dompdf->load_html("sdfsdfd");
+    $dompdf->render();
+    $dompdf->stream('sample.php');*/
+
     $global['xajax_res']->addScript("showHistory(".json_encode($marks).")");
    // $global['xajax_res']->addScript("hazard_chart(".json_encode($marks).")");
-    $global['xajax_res']->addScript("hazard_chart();");
+   // $global['xajax_res']->addScript("hazard_chart();");
 
 
     return $global['xajax_res']->getXML();
@@ -747,10 +753,47 @@ Function pa_load_risk(){
     $htmlMain = "";
     $_SESSION['pa_current_page'] = "loadrisk";
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => false));
+
+    $htmlMain .=
+
+    '<a onclick="show_risk(\'exposure\')"><h1>Exposure</h1></a>
+    <div class="main" id="exposure">
+        <fieldset id="fieldset-flat">
+            <h3>Exposed population in regard to</h3>
+            <div class="half-left">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Earthquakes</b></p></div>
+                    <input id="number-inline"></input>%
+                </fieldset>
+            </div>
+            <div class="half-right">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Cyclones</b></p></div>
+                    <input id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <div class="half-left">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Floods</b></p></div>
+                    <input id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <div class="half-right">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Droughts</b></p></div>
+                    <input id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+
+        </fieldset>
+    </div>';
     
     $htmlMain .=
-    '<div class="main">
-        <h1>Susceptibility</h1>
+    '<a onclick="show_risk(\'susceptibility\')"><h1>Susceptibility</h1></a>
+    <div class="main" id="susceptibility">
         <fieldset id="fieldset-flat">
             <h3>Public Infrastructure</h3>
             <div class="wrapper">
@@ -790,18 +833,20 @@ Function pa_load_risk(){
                         <input id="number-inline"></input>%
                     </fieldset>         
                 </div>
-            </div>    
-                
-                <div class="quater-3">
+            </div>
+
+            <div class="wrapper">    
+                <div class="half-left">
                     <fieldset id="fieldset-flat">
-                         <p><b>Dependency Ratio</b></p>
-                         <input type="text">%</input>
+                        <div id="label-inline"/><p><b>Dependency Ratio</b></p></div>
+                        <input id="number-inline"></input>%
                     </fieldset>
                 </div>
-                <div class="quater-4">
+
+                <div class="half-right">
                     <fieldset id="fieldset-flat">
-                         <p><b>Proportion of female headed households</b></p>
-                         <input type="text">%</input>
+                        <div id="label-inline"/><p><b>Proportion of female headed households</b></p></div>
+                        <input id="number-inline"></input>%
                     </fieldset>
                 </div>
             </div>
@@ -811,15 +856,139 @@ Function pa_load_risk(){
             <div class="wrapper">
                 <div class="half-left">
                     <fieldset id="fieldset-flat">
-                         <p><b>Gross regional product per capita</b></p>
+                        <div id="label-inline"/><p><b>Gross regional product per capita</b></p></div>
+                        <input id="number-inline"></input>%
                     </fieldset>
                 </div>
                 <div class="half-right">
                     <fieldset id="fieldset-flat">
-                         <p><b>Income distribution</b></p>
+                        <div id="label-inline"/><p><b>Income distribution</b></p></div>
+                        <input id="number-inline"></input>%
                     </fieldset>
                 </div>
             </div>
+
+        </fieldset>
+    </div>';
+
+    $htmlMain .=
+    '<a onclick="show_risk(\'coping_capacity\')"><h1>Coping Capacity</h1></a>
+    <div class="main" id="coping_capacity">
+        <fieldset id="fieldset-flat">
+            <h3>Government and Authorities</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Proportion of villages with at least one riot</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Unemployment rate</b></p></div>
+                        <input id="number-inline" ></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+            <h3>Social Networks: Neighborhood, Family and Self-Help</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Number of cooperative and social organizations per 1000 inhabitants</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>NGOs active per village</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>         
+                </div>
+            </div>
+
+            <h3>Economic Coverage</h3>
+
+            <div class="wrapper">
+            <h4>Diversification of household income</h4>    
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Job sectors per household</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>
+                </div>
+
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Number of jobs per household</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Landownership</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Household income per capita</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>';
+
+     $htmlMain .=
+
+    '<a onclick="show_risk(\'adaptive_capacity\')"><h1>Adaptive Capacity</h1></a>
+    <div class="main" id="adaptive_capacity">
+        <fieldset id="fieldset-flat">
+            <h3>Education and Research</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Gross school enrollment</b></p></div>
+                        <input id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Educational Achievement</b></p></div>
+                        <input id="number-inline" ></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+            <h3>Gender Equality</h3>
+            <div class="full">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Propotion of female headed villages</b></p></div>
+                    <input id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <h3>Enrollment Status/ Ecosystem Protection</h3>
+            <div class="full">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Ecological footprint</b></p></div>
+                    <input id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <h3>Adaptation Strategies</h3>
+            <div class="full">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Economic diversificaion</b></p></div>
+                    <input id="number-inline"></input>%
+                </fieldset>
+            </div>
+
 
         </fieldset>
     </div>';
