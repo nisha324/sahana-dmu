@@ -24,6 +24,8 @@ array_push($global['xajax_functions'], 'pa_load_capacity');
 array_push($global['xajax_functions'], 'pa_load_hazard');
 
 array_push($global['xajax_functions'], 'pa_load_risk');
+array_push($global['xajax_functions'], 'pa_risk_perform_save');
+array_push($global['xajax_functions'], 'pa_risk_history');
 
 array_push($global['xajax_functions'], 'pa_hazard_perform_save');
 array_push($global['xajax_functions'], 'pa_hazard_history');
@@ -317,6 +319,9 @@ function pa_load_capacity(){
 
 		$htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_capacity_perform_save(get_capacity())">Save Changes</button>';
         $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_capacity_history()" id="capacity_history">History</button>';
+
+        $htmlMain .= '<br></br>';
+    $htmlMain .= '<div id="history_cap"></div>';
 
     $global['xajax_res']->addAssign('paMain','style.opacity','1.0');
     $global['xajax_res']->addAssign('paMain','innerHTML',$htmlMain);
@@ -763,27 +768,34 @@ Function pa_load_risk(){
             <div class="half-left">
                 <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Earthquakes</b></p></div>
-                    <input id="number-inline"></input>%
+                    <input name="ea" id="number-inline"></input>%
                 </fieldset>
             </div>
             <div class="half-right">
                 <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Cyclones</b></p></div>
-                    <input id="number-inline"></input>%
+                    <input name="eb" id="number-inline"></input>%
                 </fieldset>
             </div>
 
             <div class="half-left">
                 <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Floods</b></p></div>
-                    <input id="number-inline"></input>%
+                    <input name="ec" id="number-inline"></input>%
                 </fieldset>
             </div>
 
             <div class="half-right">
                 <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Droughts</b></p></div>
-                    <input id="number-inline"></input>%
+                    <input name="ed" id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <div class="half-left">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Sea-level rise</b></p></div>
+                    <input name="ee" id="number-inline"></input>%
                 </fieldset>
             </div>
 
@@ -800,13 +812,13 @@ Function pa_load_risk(){
                 <div class="half-left">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Population without access to improved sanitation facilities</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="sa" id="number-inline"></input>%
                     </fieldset>
                 </div>
                 <div class="half-right">
                     <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Population with access to an improved water source</b></p></div>
-                        <input id="number-inline" ></input>%
+                        <input name="sb" id="number-inline" ></input>%
                     </fieldset>
                 </div>
             </div>
@@ -815,7 +827,7 @@ Function pa_load_risk(){
             <div class="full">
                 <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Population without access to improved sanitation facilities</b></p></div>
-                    <input id="number-inline"></input>%
+                    <input name="sc" id="number-inline"></input>%
                 </fieldset>
             </div>
 
@@ -824,13 +836,13 @@ Function pa_load_risk(){
                 <div class="half-left">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Proportion of people below local poverty line</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="sd" id="number-inline"></input>%
                     </fieldset>
                 </div>
                 <div class="half-right">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Proportion of households receiving direct cash-transfer assistance</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="se" id="number-inline"></input>%
                     </fieldset>         
                 </div>
             </div>
@@ -839,14 +851,14 @@ Function pa_load_risk(){
                 <div class="half-left">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Dependency Ratio</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="sf" id="number-inline"></input>%
                     </fieldset>
                 </div>
 
                 <div class="half-right">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Proportion of female headed households</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="sg" id="number-inline"></input>%
                     </fieldset>
                 </div>
             </div>
@@ -857,13 +869,13 @@ Function pa_load_risk(){
                 <div class="half-left">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Gross regional product per capita</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="sh" id="number-inline"></input>%
                     </fieldset>
                 </div>
                 <div class="half-right">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Income distribution</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="si" id="number-inline"></input>%
                     </fieldset>
                 </div>
             </div>
@@ -880,13 +892,13 @@ Function pa_load_risk(){
                 <div class="half-left">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Proportion of villages with at least one riot</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="cca" id="number-inline"></input>%
                     </fieldset>
                 </div>
                 <div class="half-right">
                     <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Unemployment rate</b></p></div>
-                        <input id="number-inline" ></input>%
+                        <input name="ccb" id="number-inline" ></input>%
                     </fieldset>
                 </div>
             </div>
@@ -896,13 +908,13 @@ Function pa_load_risk(){
                 <div class="half-left">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Number of cooperative and social organizations per 1000 inhabitants</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="ccc" id="number-inline"></input>%
                     </fieldset>
                 </div>
                 <div class="half-right">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>NGOs active per village</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="ccd" id="number-inline"></input>%
                     </fieldset>         
                 </div>
             </div>
@@ -914,14 +926,14 @@ Function pa_load_risk(){
                 <div class="half-left">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Job sectors per household</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="cce1" id="number-inline"></input>%
                     </fieldset>
                 </div>
 
                 <div class="half-right">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Number of jobs per household</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="cce2" id="number-inline"></input>%
                     </fieldset>
                 </div>
             </div>
@@ -930,13 +942,13 @@ Function pa_load_risk(){
                 <div class="half-left">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Landownership</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="ccf" id="number-inline"></input>%
                     </fieldset>
                 </div>
                 <div class="half-right">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Household income per capita</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="ccg" id="number-inline"></input>%
                     </fieldset>
                 </div>
             </div>
@@ -954,13 +966,13 @@ Function pa_load_risk(){
                 <div class="half-left">
                     <fieldset id="fieldset-flat">
                         <div id="label-inline"/><p><b>Gross school enrollment</b></p></div>
-                        <input id="number-inline"></input>%
+                        <input name="aca" id="number-inline"></input>%
                     </fieldset>
                 </div>
                 <div class="half-right">
                     <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Educational Achievement</b></p></div>
-                        <input id="number-inline" ></input>%
+                        <input name="acb" id="number-inline" ></input>%
                     </fieldset>
                 </div>
             </div>
@@ -969,7 +981,7 @@ Function pa_load_risk(){
             <div class="full">
                 <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Propotion of female headed villages</b></p></div>
-                    <input id="number-inline"></input>%
+                    <input name="acc" id="number-inline"></input>%
                 </fieldset>
             </div>
 
@@ -977,7 +989,7 @@ Function pa_load_risk(){
             <div class="full">
                 <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Ecological footprint</b></p></div>
-                    <input id="number-inline"></input>%
+                    <input name="acd" id="number-inline"></input>%
                 </fieldset>
             </div>
 
@@ -985,7 +997,7 @@ Function pa_load_risk(){
             <div class="full">
                 <fieldset id="fieldset-flat">
                     <div id="label-inline"/><p><b>Economic diversificaion</b></p></div>
-                    <input id="number-inline"></input>%
+                    <input name="ace" id="number-inline"></input>%
                 </fieldset>
             </div>
 
@@ -994,9 +1006,70 @@ Function pa_load_risk(){
     </div>';
 
 
+    $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_risk_perform_save(LRI())">Save Changes</button>';
+    $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_risk_history()" id="risk_history">History</button>';
+    $htmlMain .= '<br></br>';
+    $htmlMain .= '<div id="history_risk"></div>';
+
+
     $global['xajax_res']->addAssign('paMain','style.opacity','1.0');
     $global['xajax_res']->addAssign('paMain','innerHTML',$htmlMain);
+    $global['xajax_res']->addScript("getToday()");
 
     return $global['xajax_res']->getXML();
   
+}
+
+
+function pa_risk_perform_save($rj){
+
+    global $global;
+
+    $r = json_decode($rj,true);
+
+        $exp                =mysql_real_escape_string($r["exp"]);
+        $sus                =mysql_real_escape_string($r["sus"]);
+        $cc                 =mysql_real_escape_string($r["cc"]);
+        $ac                 =mysql_real_escape_string($r["ac"]);
+        $today              =mysql_real_escape_string($r["today"]);
+        $user               =mysql_real_escape_string($r["user"]);
+       
+
+       
+        $q="INSERT INTO pa_risk VALUES('','".$exp."','".$sus."','".$cc."','".$ac."','".$today."','".$user."')";
+
+        $result = $global['db']->Execute($q);
+        return $global['xajax_res']->getXML();
+
+}
+
+
+function pa_risk_history(){
+
+
+    global $global;
+
+    $q = "SELECT * FROM pa_risk";
+
+    $lindex =Array();
+
+    $result = $global['db']->Execute($q);
+
+    while($row = $result->FetchRow() ){
+        Array_push(
+            $lindex,
+            Array(
+                "score_e"     => $row['score_e'],
+                "score_s"     => $row['score_s'],
+                "score_cc"    => $row['score_cc'],
+                "score_ac"    => $row['score_ac'],
+                "date"        => $row['date'],
+            )
+        
+        );
+    }
+    
+    $global['xajax_res']->addScript("show_risk_history(".json_encode($lindex).")");
+
+    return $global['xajax_res']->getXML();
 }

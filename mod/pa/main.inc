@@ -30,6 +30,9 @@ shn_xajax_registerFunction('pa_hazard_history');
 shn_xajax_registerFunction('pa_capacity_perform_save');
 shn_xajax_registerFunction('pa_capacity_history');
 
+shn_xajax_registerFunction('pa_risk_perform_save');
+shn_xajax_registerFunction('pa_risk_history');
+
 
 function shn_pa_default() {
 
@@ -50,6 +53,9 @@ function shn_pa_default() {
 		<script type=\"text/javascript\">".file_get_contents($global['approot']."/mod/pa/pa.js")."</script>
 
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
+
+		
+		<script src=\"//mrrio.github.io/jsPDF/dist/jspdf.debug.js\"></script>
 
 	";
     echo "<style>".file_get_contents($global['approot']."/mod/pa/pa.css")."</style>";
@@ -77,5 +83,7 @@ function shn_pa_default() {
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-autocomplete.min.js\" ></script>
 		<script type=\"text/javascript\" src=\"res/js/jquery-ui-datepicker.min.js\" ></script>
 
+	
+		<script src=\"//mrrio.github.io/jsPDF/dist/jspdf.debug.js\"></script>
 	";
 }

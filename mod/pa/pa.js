@@ -201,7 +201,18 @@ function showAlert(){
 }
 
 function showCapacityHistory(data){
-    alert(data[0]['capacity_user']);
+    
+
+    $('#history_cap').empty();
+    for (var i = 0; i < data.length; i++){
+        var score = data[i]['update_dis_data']*1.0 + data[i]['pA']*data[i]['pa_date']*data[i]['pa_place']*1.0 +
+        data[i]['eW']*1.0*data[i]['eW2'] +
+        data[i]['sA']*1.0*data[i]['sA2']*data[i]['sA3'] + 0+data[i]['emp']*1.0*data[i]['emp2']+data[i]['eRM']*1.0+
+        data[i]['drill']*1.0+data[i]['plan']*1.0*data[i]['plan2'];
+
+        $('#history_cap').append('</br><p>Capacity Assesment on '+data[i]['capacity_date']+'\
+            <a onclick="get_cap_report('+score+','+data[i]['date']+')"> Report</a></p></br>');
+    }
 }
 
 function showHistory(data){
@@ -286,9 +297,13 @@ function showHistory(data){
                             <td>'+parseInt(data[i]['tsunami_poten'])*parseInt(data[i]['tsunami_frq'])*parseInt(data[i]['tsunami_SP'])+'</td>\
                     </tr>\
                     </table></div><br></br>');
-
+        var tsunami = parseInt(data[i]['tsunami_poten'])*parseInt(data[i]['tsunami_frq'])*parseInt(data[i]['tsunami_SP']); 
+        var cyclones = parseInt(data[i]['cyclones_poten'])*parseInt(data[i]['cyclones_frq'])*parseInt(data[i]['cyclones_SP']);
+        var drought = parseInt(data[i]['drought_poten'])*parseInt(data[i]['drought_frq'])*parseInt(data[i]['drought_SP']);
+        var landslides = parseInt(data[i]['landslide_poten'])*parseInt(data[i]['landslide_frq'])*parseInt(data[i]['landslide_SP']);
+        var flood = parseInt(data[i]['flood_poten'])*parseInt(data[i]['flood_frq'])*parseInt(data[i]['flood_SP']);
         
-        $('#history').prepend("<p><b>Hazard Assesment on :</b><a onclick='show_his("+data[i]['hazard_id']+")'> "+data[i]['hazard_date']+"</a> by "+data[i]['hazard_user']+"</p>");
+        $('#history').prepend("<p><b>Hazard Assesment on :</b>"+data[i]['hazard_date']+"<a onclick='get_hazard_report("+flood+","+cyclones+","+landslides+","+drought+","+tsunami+","+data[i]['hazard_date']+")'> Report</a> by "+data[i]['hazard_user']+"</p>");
         
    }     
      
@@ -298,7 +313,373 @@ function showHistory(data){
 }
 
 
+
+
 function show_his(data){
     $('#'+data).toggle();
+}
+
+
+function show_risk_history(data)
+{
+     $('#history_risk').empty();
+    for (var i = 0; i < data.length; i++){
+        $('#history_risk').append('</br><p>Risk Assesment on '+data[i]['date']+'\
+            <a onclick="get_risk_report('+data[i]['score_e']+','+data[i]['score_s']+',\
+            '+data[i]['score_cc']+','+data[i]['score_ac']+','+data[i]['date']+')"> Report</a></p></br>');
+    }
+}
+
+
+function susceptibility(){
+
+    var sa=$("input[name=sa]").val();
+    sa=sa*0.5;
+
+    var sb=$("input[name=sb]").val();
+    sb=sb*0.5;
+
+    var sc=$("input[name=sc]").val();
+    sc=sc*0.125;
+
+    var sd=$("input[name=sd]").val();
+    sd=sd*0.5;
+
+    var se=$("input[name=se]").val();
+    se=se*0.5;
+
+    var poverty=sd+se;
+    poverty=poverty*0.33;
+
+    var sf=$("input[name=sf]").val();
+    sf=sf*0.33;
+
+    var sg=$("input[name=sg]").val();
+    sg=sg*0.33;
+
+    var sh=$("input[name=sh]").val();
+    sh=sh*0.5;
+
+    var si=$("input[name=si]").val();
+    si=si*0.5;
+
+
+
+    var pub_inf=sa+sb;
+    var housing_conditiond=sc;
+    var pov_and_dep=sf+sg+poverty ;
+    var econ_cap= sh+si;
+
+    var sus= 0.25*(econ_cap + pub_inf) + 0.125*housing_conditiond + 0.375*pov_and_dep;
+    return sus;
+
+}
+
+function exposure(){
+    var ea=$("input[name=ea]").val();
+    ea=ea*0.2;
+
+    var eb=$("input[name=eb]").val();
+    eb=eb*0.2;
+
+    var ec=$("input[name=ec]").val();
+    ec=ec*0.2;
+
+    var ed=$("input[name=ed]").val();
+    ed=ed*0.2;
+
+    var ee=$("input[name=ee]").val();
+    ee=ee*0.2;
+
+    var exposure= ea+ eb+ ec+ ed+ ee;
+    return exposure;
+
+}
+
+function coping_capacity(){
+    var cca=$("input[name=cca]").val();
+    cca=cca*0.5;
+
+    var ccb=$("input[name=ccb]").val();
+    ccb=ccb*0.5;
+;
+    var gov = cca+ccb;
+
+    var ccc=$("input[name=ccc]").val();
+    ccc=ccc*0.8;
+
+    var ccd=$("input[name=ccd]").val();
+    ccd=ccd*0.2;
+
+    var soc = ccc+ccd;
+
+    var cce1=$("input[name=cce1]").val();
+    cce1=cce1*0.75;
+
+    var cce2=$("input[name=cce2]").val();
+    cce2=cce2*0.25;
+
+    var cce= cce1+cce2;
+    cce= cce*0.33;
+
+    var ccf=$("input[name=ccf]").val();
+    ccf=ccf*0.33;
+
+    var ccg=$("input[name=ccg]").val();
+    ccg=ccg*0.33;
+
+    var econ = 0.33* (cce+ ccf+ ccg);
+
+    var coping_cap= 0.33*gov + 1.667*soc + 0.5*econ;
+    return coping_cap;
+
+}
+
+function adaptive_capacity(){
+    var aca=$("input[name=aca]").val();
+    aca=aca*0.5;
+
+    var acb=$("input[name=acb]").val();
+    acb=acb*0.5;
+
+    var edu=aca+acb;
+
+    var acc=$("input[name=acc]").val();
+
+    var acd=$("input[name=acd]").val();
+
+    var ace=$("input[name=ace]").val();
+
+    var adaptive_cap= 0.4*edu + 0.2* ( acc+ acd+ ace);
+    return adaptive_cap;
+
+}
+
+
+function LRI(){
+     var l = new Object();
+    l.sus = susceptibility();
+    l.exp =exposure();
+    l.cc=coping_capacity();
+    l.ac=adaptive_capacity();
+
+    l.user="user";
+    l.today = getToday();
+
+    var lj = JSON.stringify(l);
+    return(lj);
+
+}
+
+function get_hazard_report(flood,cyclones,landslides,drought,tsunami,date)
+{
+    var pdf = new jsPDF('p', 'pt', 'a4');
+
+         
+
+        var source = '<html><head>\
+ <div>\
+     <div id="header">\
+    <img src="res/img/Emblem_of_Sri_Lanka.svg.png" width="50px" style="position: relative;left: 300px;">\
+    <h3>Ministry of Health</h3><h1>Disaster Management Information System</h1>\
+    <p>Disaster Preparedness and Response Division <br>Ministry of Health, Sri Lanka</p></div>\
+ <div style="top: 310px; left: 50;"><table>\
+        <tr><td><h3>Preparedness Assesment : <small>Hazard</small></h3></td></tr>\
+        <ul>\
+        <tr><td><li><h4>Date : '+date+'</h4></li></td></tr>\
+         <tr><td><li><h4>Assessor Name : Administrator</h4></li></td></tr>\
+        </ul>\
+        <tr><td><h4>Flood : '+flood+'</h4></td></tr>\
+        <tr><td><h4>Landslide : '+landslides+'</h4></td></tr>\
+        <tr><td><h4>Drought : '+drought+'</h4></td></tr>\
+        <tr><td><h4>Cyclones : '+cyclones+'</h4></td></tr>\
+        <tr><td><h4>Tsunami : '+tsunami+'</h4></td></tr></table></div></div></body></html>';
+
+        //var pdf = new jsPDF('p', 'pt', 'letter');
+
+// source can be HTML-formatted string, or a reference
+// to an actual DOM element from which the text will be scraped.
+
+
+// we support special element handlers. Register them with jQuery-style
+// ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+// There is no support for any other type of selectors
+// (class, of compound) at this time.
+specialElementHandlers = {
+    // element with id of "bypass" - jQuery style selector
+    '#bypassme': function(element, renderer){
+        // true = "handled elsewhere, bypass text extraction"
+        return true;
+    }
+}
+
+margins = {
+    top: 80,
+    bottom: 60,
+    left: 40,
+    width: 522
+  };
+  // all coords and widths are in jsPDF instance's declared units
+  // 'inches' in this case
+pdf.fromHTML(
+    source // HTML string or DOM elem ref.
+    , margins.left // x coord
+    , margins.top // y coord
+    , {
+        'width': margins.width // max width of content on PDF
+        , 'elementHandlers': specialElementHandlers
+    },
+    function (dispose) {
+      // dispose: object with X, Y of the last line add to the PDF
+      //          this allow the insertion of new lines after html
+        pdf.output('dataurlnewwindow'); 
+      },
+    margins
+  );
+}
+
+
+
+function get_risk_report(exp,sus,cc,ac,date)
+{
+    var pdf = new jsPDF('p', 'pt', 'a4');
+
+         var vi = sus+cc+ac;
+         var lri = exp*vi;
+
+        var source = '<html><head>\
+ <div>\
+     <div id="header">\
+    <img src="res/img/Emblem_of_Sri_Lanka.svg.png" width="50px" style="position: relative;left: 300px;">\
+    <h3>Ministry of Health</h3><h1>Disaster Management Information System</h1>\
+    <p>Disaster Preparedness and Response Division <br>Ministry of Health, Sri Lanka</p></div>\
+ <div style="top: 310px; left: 50;"><table>\
+        <tr><td><h3>Risk Assesment</h3></td></tr>\
+        <ul>\
+        <tr><td><li><h4>Date : '+date+'</h4></li></td></tr>\
+         <tr><td><li><h4>Assessor Name : Administrator</h4></li></td></tr>\
+        </ul>\
+        <tr><td><h4>Exposure : '+exp+'</h4></td></tr>\
+        <tr><td><h4>Vulnerability Index : '+vi+'</h4></td></tr>\
+        <tr><td><h4>Local Risk Index : '+lri+'</h4></td></tr></table></div></div></body></html>';
+
+        //var pdf = new jsPDF('p', 'pt', 'letter');
+
+// source can be HTML-formatted string, or a reference
+// to an actual DOM element from which the text will be scraped.
+
+
+// we support special element handlers. Register them with jQuery-style
+// ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+// There is no support for any other type of selectors
+// (class, of compound) at this time.
+specialElementHandlers = {
+    // element with id of "bypass" - jQuery style selector
+    '#bypassme': function(element, renderer){
+        // true = "handled elsewhere, bypass text extraction"
+        return true;
+    }
+}
+
+margins = {
+    top: 80,
+    bottom: 60,
+    left: 40,
+    width: 522
+  };
+  // all coords and widths are in jsPDF instance's declared units
+  // 'inches' in this case
+pdf.fromHTML(
+    source // HTML string or DOM elem ref.
+    , margins.left // x coord
+    , margins.top // y coord
+    , {
+        'width': margins.width // max width of content on PDF
+        , 'elementHandlers': specialElementHandlers
+    },
+    function (dispose) {
+      // dispose: object with X, Y of the last line add to the PDF
+      //          this allow the insertion of new lines after html
+        pdf.output('dataurlnewwindow'); 
+      },
+    margins
+  );
+}
+
+function get_cap_report(score,date)
+{
+    if(score<12) 
+        {
+            var status = 'Satisfactory';
+        }
+    else if(score >12 && score < 20)
+        { 
+            var status = 'Moderate level of planning and execution but need to improve on certain areas';
+        } 
+    else if(score> 20)
+        {
+            var status  =  'Unsatisfactory';
+        }
+
+    var pdf = new jsPDF('p', 'pt', 'a4');
+
+         
+
+        var source = '<html><head>\
+ <div>\
+     <div id="header">\
+    <img src="res/img/Emblem_of_Sri_Lanka.svg.png" width="50px" style="position: relative;left: 300px;">\
+    <h3>Ministry of Health</h3><h1>Disaster Management Information System</h1>\
+    <p>Disaster Preparedness and Response Division <br>Ministry of Health, Sri Lanka</p></div>\
+ <div style="top: 310px; left: 50;"><table>\
+        <tr><td><h3>Capacity Assesment</h3></td></tr>\
+        <ul>\
+        <tr><td><li><h4>Date : '+date+'</h4></li></td></tr>\
+         <tr><td><li><h4>Assessor Name : Administrator</h4></li></td></tr>\
+        </ul>\
+        <tr><td><h4>Full Score : '+score+'</h4></td></tr>\
+        <tr><td><h4>Statement : '+status+'</h4></td></tr></table></div></div></body></html>';
+
+        //var pdf = new jsPDF('p', 'pt', 'letter');
+
+// source can be HTML-formatted string, or a reference
+// to an actual DOM element from which the text will be scraped.
+
+
+// we support special element handlers. Register them with jQuery-style
+// ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+// There is no support for any other type of selectors
+// (class, of compound) at this time.
+specialElementHandlers = {
+    // element with id of "bypass" - jQuery style selector
+    '#bypassme': function(element, renderer){
+        // true = "handled elsewhere, bypass text extraction"
+        return true;
+    }
+}
+
+margins = {
+    top: 80,
+    bottom: 60,
+    left: 40,
+    width: 522
+  };
+  // all coords and widths are in jsPDF instance's declared units
+  // 'inches' in this case
+pdf.fromHTML(
+    source // HTML string or DOM elem ref.
+    , margins.left // x coord
+    , margins.top // y coord
+    , {
+        'width': margins.width // max width of content on PDF
+        , 'elementHandlers': specialElementHandlers
+    },
+    function (dispose) {
+      // dispose: object with X, Y of the last line add to the PDF
+      //          this allow the insertion of new lines after html
+        pdf.output('dataurlnewwindow'); 
+      },
+    margins
+  );
 }
 
