@@ -1,15 +1,13 @@
 <?php
-/**
- * @name         Disaster Assessment and Response
+/*
+ * @name         Preparedness Assesment (PA)
  * @version      01
  * @package      pa
- * @author       Ramindu Deshapriya <rdeshapriya@virtusa.com>
+ * @author       Raveen Perera <harith9127@gmail.com>
  * @about        Developed in whole or part by the U.S. National Library of Medicine,the Sahana Foundation and Virtusa Corpodarion
  * @link         https://pl.nlm.nih.gov/about
  * @link         http://sahanafoundation.org
- * @link         http://www.virtusa.com
- * @license         http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
- * @lastModified 2013.11.21
+ * @license      http://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License (LGPL)
  */
 
 require_once($global['approot']."/inc/lib_form_return.inc");
@@ -24,6 +22,11 @@ array_push($global['xajax_functions'], 'pa_prepend_log');
 array_push($global['xajax_functions'], 'pa_show_message');
 array_push($global['xajax_functions'], 'pa_load_capacity');
 array_push($global['xajax_functions'], 'pa_load_hazard');
+
+array_push($global['xajax_functions'], 'pa_load_risk');
+array_push($global['xajax_functions'], 'pa_risk_perform_save');
+array_push($global['xajax_functions'], 'pa_risk_history');
+
 array_push($global['xajax_functions'], 'pa_hazard_perform_save');
 array_push($global['xajax_functions'], 'pa_hazard_history');
 array_push($global['xajax_functions'], 'pa_capacity_perform_save');
@@ -312,11 +315,14 @@ function pa_load_capacity(){
     $htmlMain .= shn_form_fsclose_return();
 
 
- 
+
 
 		$htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_capacity_perform_save(get_capacity())">Save Changes</button>';
         $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_capacity_history()" id="capacity_history">History</button>';
-	
+
+        $htmlMain .= '<br></br>';
+    $htmlMain .= '<div id="history_cap"></div>';
+
     $global['xajax_res']->addAssign('paMain','style.opacity','1.0');
     $global['xajax_res']->addAssign('paMain','innerHTML',$htmlMain);
     $global['xajax_res']->addAssign('paControl', 'innerHTML', $editControlHtml);
@@ -325,7 +331,7 @@ function pa_load_capacity(){
     $global['xajax_res']->addScript("tempCheckBox()");
     $global['xajax_res']->addScript("disable_fields()");
     $global['xajax_res']->addScript("getToday()");
-    
+
     return $global['xajax_res']->getXML();
 }
 
@@ -398,10 +404,10 @@ function pa_capacity_history(){
                 "plan2"             => $row['plan2']
 
             )
-        
+
         );
     }
-    
+
     $global['xajax_res']->addScript("showCapacityHistory(".json_encode($marks).")");
 
     return $global['xajax_res']->getXML();
@@ -421,7 +427,7 @@ function pa_load_hazard(){
     $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => true));
     $htmlMain .= shn_form_fsopen_return("Hazard Assessment");
 
-    
+
 
     $htmlMain .= '<table>
                     <tr>
@@ -634,7 +640,7 @@ function pa_load_hazard(){
                     </table>';
 
     $htmlMain .= shn_form_fsclose_return();
-
+    //$htmlMain .='<div id="chart_div" style="width: 900px; height: 500px;"></div>';
     $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_hazard_perform_save(get_hazard())">Save Changes</button>';
     $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_hazard_history()" id="hazard_history">History</button>';
     $htmlMain .= '<br></br>';
@@ -650,8 +656,8 @@ function pa_load_hazard(){
     //$global['xajax_res']->addAppend('paLog','innerHTML',$htmlLog);
     //$global['xajax_res']->addScript("setTimeout('e = document.getElementById(\'paLog\'); e.scrollTop = e.scrollHeight+1000;', 500);");
     $global['xajax_res']->addScript("cal();");
-    $global['xajax_res']->addScript("getToday();");
-    
+    //$global['xajax_res']->addScript("getToday();");
+
     return $global['xajax_res']->getXML();
 }
 
@@ -682,7 +688,7 @@ function pa_hazard_perform_save($rj) {
         $tsunami_SP        =mysql_real_escape_string($r["tsunami_SP"]);
 
         $q = "INSERT INTO pa_hazard VALUES('','".$today."','".$hazard_user."','".$flood_poten."','".$flood_frq."','".$flood_SP."','".$landslide_poten."','".$landslide_frq."','".$landslide_SP."','".$drought_poten."','".$drought_frq."','".$drought_SP."','".$cyclones_poten."','".$cyclones_frq."','".$cyclones_SP."','".$tsunami_poten."','".$tsunami_frq."','".$tsunami_SP."')";
-        
+
 
     $result = $global['db']->Execute($q);
     return $global['xajax_res']->getXML();
@@ -723,18 +729,347 @@ function pa_hazard_history(){
                 "tsunami_frq"       => $row['tsunami_frq'],
                 "tsunami_SP"        => $row['tsunami_SP']
             )
-        
+
         );
     }
-    
+
+    /*include_once('../inc/dompdf/dompdf_config.inc.php');
+    $dompdf = new DOMPDF();
+    $dompdf->load_html("sdfsdfd");
+    $dompdf->render();
+    $dompdf->stream('sample.php');*/
+
     $global['xajax_res']->addScript("showHistory(".json_encode($marks).")");
+   // $global['xajax_res']->addScript("hazard_chart(".json_encode($marks).")");
+   // $global['xajax_res']->addScript("hazard_chart();");
+
 
     return $global['xajax_res']->getXML();
+
 
 }
 
 
+Function pa_load_risk(){
+
+    global $global;
+    //$pa_id = $global['pa_id'];
+    $htmlLog = "";
+    $htmlMain = "";
+    $_SESSION['pa_current_page'] = "loadrisk";
+    $htmlMain .= shn_form_fopen_return("", null, array('enctype' => 'enctype="multipart/form-data"', 'req_message' => false));
+
+    $htmlMain .=
+
+    '<a onclick="show_risk(\'exposure\')"><h1>Exposure</h1></a>
+    <div class="main" id="exposure">
+        <fieldset id="fieldset-flat">
+            <h3>Exposed population in regard to</h3>
+            <div class="half-left">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Earthquakes</b></p></div>
+                    <input name="ea" id="number-inline"></input>%
+                </fieldset>
+            </div>
+            <div class="half-right">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Cyclones</b></p></div>
+                    <input name="eb" id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <div class="half-left">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Floods</b></p></div>
+                    <input name="ec" id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <div class="half-right">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Droughts</b></p></div>
+                    <input name="ed" id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <div class="half-left">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Sea-level rise</b></p></div>
+                    <input name="ee" id="number-inline"></input>%
+                </fieldset>
+            </div>
 
 
+        </fieldset>
+    </div>';
+    
+    $htmlMain .=
+    '<a onclick="show_risk(\'susceptibility\')"><h1>Susceptibility</h1></a>
+    <div class="main" id="susceptibility">
+        <fieldset id="fieldset-flat">
+            <h3>Public Infrastructure</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Population without access to improved sanitation facilities</b></p></div>
+                        <input name="sa" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Population with access to an improved water source</b></p></div>
+                        <input name="sb" id="number-inline" ></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+            <h3>Housing Conditions</h3>
+            <div class="full">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Population without access to improved sanitation facilities</b></p></div>
+                    <input name="sc" id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <h3>Poverty and Dependencies</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Proportion of people below local poverty line</b></p></div>
+                        <input name="sd" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Proportion of households receiving direct cash-transfer assistance</b></p></div>
+                        <input name="se" id="number-inline"></input>%
+                    </fieldset>         
+                </div>
+            </div>
+
+            <div class="wrapper">    
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Dependency Ratio</b></p></div>
+                        <input name="sf" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Proportion of female headed households</b></p></div>
+                        <input name="sg" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+            </div>
 
 
+            <h3>Economic Capacity and Income</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Gross regional product per capita</b></p></div>
+                        <input name="sh" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Income distribution</b></p></div>
+                        <input name="si" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>';
+
+    $htmlMain .=
+    '<a onclick="show_risk(\'coping_capacity\')"><h1>Coping Capacity</h1></a>
+    <div class="main" id="coping_capacity">
+        <fieldset id="fieldset-flat">
+            <h3>Government and Authorities</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Proportion of villages with at least one riot</b></p></div>
+                        <input name="cca" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Unemployment rate</b></p></div>
+                        <input name="ccb" id="number-inline" ></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+            <h3>Social Networks: Neighborhood, Family and Self-Help</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Number of cooperative and social organizations per 1000 inhabitants</b></p></div>
+                        <input name="ccc" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>NGOs active per village</b></p></div>
+                        <input name="ccd" id="number-inline"></input>%
+                    </fieldset>         
+                </div>
+            </div>
+
+            <h3>Economic Coverage</h3>
+
+            <div class="wrapper">
+            <h4>Diversification of household income</h4>    
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Job sectors per household</b></p></div>
+                        <input name="cce1" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Number of jobs per household</b></p></div>
+                        <input name="cce2" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Landownership</b></p></div>
+                        <input name="ccf" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Household income per capita</b></p></div>
+                        <input name="ccg" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+        </fieldset>
+    </div>';
+
+     $htmlMain .=
+
+    '<a onclick="show_risk(\'adaptive_capacity\')"><h1>Adaptive Capacity</h1></a>
+    <div class="main" id="adaptive_capacity">
+        <fieldset id="fieldset-flat">
+            <h3>Education and Research</h3>
+            <div class="wrapper">
+                <div class="half-left">
+                    <fieldset id="fieldset-flat">
+                        <div id="label-inline"/><p><b>Gross school enrollment</b></p></div>
+                        <input name="aca" id="number-inline"></input>%
+                    </fieldset>
+                </div>
+                <div class="half-right">
+                    <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Educational Achievement</b></p></div>
+                        <input name="acb" id="number-inline" ></input>%
+                    </fieldset>
+                </div>
+            </div>
+
+            <h3>Gender Equality</h3>
+            <div class="full">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Propotion of female headed villages</b></p></div>
+                    <input name="acc" id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <h3>Enrollment Status/ Ecosystem Protection</h3>
+            <div class="full">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Ecological footprint</b></p></div>
+                    <input name="acd" id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+            <h3>Adaptation Strategies</h3>
+            <div class="full">
+                <fieldset id="fieldset-flat">
+                    <div id="label-inline"/><p><b>Economic diversificaion</b></p></div>
+                    <input name="ace" id="number-inline"></input>%
+                </fieldset>
+            </div>
+
+
+        </fieldset>
+    </div>';
+
+
+    $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_risk_perform_save(LRI())">Save Changes</button>';
+    $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_risk_history()" id="risk_history">History</button>';
+    $htmlMain .= '<br></br>';
+    $htmlMain .= '<div id="history_risk"></div>';
+
+
+    $global['xajax_res']->addAssign('paMain','style.opacity','1.0');
+    $global['xajax_res']->addAssign('paMain','innerHTML',$htmlMain);
+    $global['xajax_res']->addScript("getToday()");
+
+    return $global['xajax_res']->getXML();
+  
+}
+
+
+function pa_risk_perform_save($rj){
+
+    global $global;
+
+    $r = json_decode($rj,true);
+
+        $exp                =mysql_real_escape_string($r["exp"]);
+        $sus                =mysql_real_escape_string($r["sus"]);
+        $cc                 =mysql_real_escape_string($r["cc"]);
+        $ac                 =mysql_real_escape_string($r["ac"]);
+        $today              =mysql_real_escape_string($r["today"]);
+        $user               =mysql_real_escape_string($r["user"]);
+       
+
+       
+        $q="INSERT INTO pa_risk VALUES('','".$exp."','".$sus."','".$cc."','".$ac."','".$today."','".$user."')";
+
+        $result = $global['db']->Execute($q);
+        return $global['xajax_res']->getXML();
+
+}
+
+
+function pa_risk_history(){
+
+
+    global $global;
+
+    $q = "SELECT * FROM pa_risk";
+
+    $lindex =Array();
+
+    $result = $global['db']->Execute($q);
+
+    while($row = $result->FetchRow() ){
+        Array_push(
+            $lindex,
+            Array(
+                "score_e"     => $row['score_e'],
+                "score_s"     => $row['score_s'],
+                "score_cc"    => $row['score_cc'],
+                "score_ac"    => $row['score_ac'],
+                "date"        => $row['date'],
+            )
+        
+        );
+    }
+    
+    $global['xajax_res']->addScript("show_risk_history(".json_encode($lindex).")");
+
+    return $global['xajax_res']->getXML();
+}

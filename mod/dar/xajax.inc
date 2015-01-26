@@ -304,6 +304,8 @@ function dar_load_popres() {
     $global['xajax_res']->addScript("initCalendar();");
     $global['xajax_res']->addScript("limit();");
     $global['xajax_res']->addScript("numericOnly();");
+    $global['xajax_res']->addScript("unknownField();");
+    $global['xajax_res']->addScript("unknownDisable();");
     return $global['xajax_res']->getXML();
 }
 
