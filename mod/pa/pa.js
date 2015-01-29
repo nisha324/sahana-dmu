@@ -330,6 +330,45 @@ function show_risk_history(data)
     }
 }
 
+function cap_save(mzg)
+{   
+    $("#cap_save").empty();
+    if(mzg)
+    {
+        $("#cap_save").append('<p>Changes saved successfuly</p>');
+    }
+    else
+    {
+        $("#cap_save").append('<p>Error saving changes</p>');
+    }
+}
+
+function hazard_save(mzg)
+{   
+    $("#hazard_save").empty();
+    if(mzg)
+    {
+        $("#hazard_save").append('<p>Changes saved successfuly</p>');
+    }
+    else
+    {
+        $("#hazard_save").append('<p>Error saving changes</p>');
+    }
+}
+
+function risk_save(mzg)
+{   
+    $("#risk_save").empty();
+    if(mzg)
+    {
+        $("#risk_save").append('<p>Changes saved successfuly</p>');
+    }
+    else
+    {
+        $("#risk_save").append('<p>Error saving changes</p>');
+    }
+}
+
 
 function susceptibility(){
 

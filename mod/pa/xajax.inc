@@ -319,6 +319,7 @@ function pa_load_capacity(){
 
 		$htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_capacity_perform_save(get_capacity())">Save Changes</button>';
         $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_capacity_history()" id="capacity_history">History</button>';
+        $htmlMain .= '<span id="cap_save"></span>';
 
         $htmlMain .= '<br></br>';
     $htmlMain .= '<div id="history_cap"></div>';
@@ -363,6 +364,7 @@ function pa_capacity_perform_save($rj){
         $q="INSERT INTO pa_capacity VALUES('','".$today."','".$capacity_user."','".$update_dis_data."','".$pA."','".$pa_date."','".$pa_place."','".$eW."','".$eW2."','".$sA."','".$sA2."','".$sA3."','".$emp."','".$emp2."','".$eRM."','".$drill."','".$drill_date."','".$plan."','".$plan2."')";
 
         $result = $global['db']->Execute($q);
+        $global['xajax_res']->addScript("cap_save(".json_encode($result).")");
         return $global['xajax_res']->getXML();
 
 
@@ -643,6 +645,7 @@ function pa_load_hazard(){
     //$htmlMain .='<div id="chart_div" style="width: 900px; height: 500px;"></div>';
     $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_hazard_perform_save(get_hazard())">Save Changes</button>';
     $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_hazard_history()" id="hazard_history">History</button>';
+    $htmlMain .= '<span id="hazard_save"></span>';
     $htmlMain .= '<br></br>';
     $htmlMain .= '<div id="history"></div>';
     //$htmlMain .= '<button class="styleTehButton" type="button" >$properties['flood_poten']</button>';
@@ -691,6 +694,7 @@ function pa_hazard_perform_save($rj) {
 
 
     $result = $global['db']->Execute($q);
+    $global['xajax_res']->addScript("hazard_save(".json_encode($result).")");
     return $global['xajax_res']->getXML();
 
 
@@ -1008,6 +1012,7 @@ Function pa_load_risk(){
 
     $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_risk_perform_save(LRI())">Save Changes</button>';
     $htmlMain .= '<button class="styleTehButton" type="button" onclick="pa_risk_history()" id="risk_history">History</button>';
+    $htmlMain .= '<span id="risk_save"></span>';
     $htmlMain .= '<br></br>';
     $htmlMain .= '<div id="history_risk"></div>';
 
@@ -1039,6 +1044,7 @@ function pa_risk_perform_save($rj){
         $q="INSERT INTO pa_risk VALUES('','".$exp."','".$sus."','".$cc."','".$ac."','".$today."','".$user."')";
 
         $result = $global['db']->Execute($q);
+        $global['xajax_res']->addScript("risk_save(".json_encode($result).")");
         return $global['xajax_res']->getXML();
 
 }
